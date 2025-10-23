@@ -1,0 +1,21 @@
+# --- Web 基础 ---
+Flask==3.0.3
+Werkzeug==3.0.3
+itsdangerous==2.2.0
+Jinja2==3.1.4
+
+# --- HTTP 客户端 ---
+requests==2.32.3
+urllib3==2.2.3
+certifi==2024.8.30
+charset-normalizer==3.3.2
+idna==3.10
+
+# --- 可选：图片/文件处理（如要做图片缩略、读取EXIF等时启用） ---
+Pillow==10.4.0
+
+# --- 可选：部署 ---
+gunicorn==22.0.0
+
+# --- 可选：本地配置（用 .env 管理API KEY时方便） ---
+python-dotenv==1.0.1

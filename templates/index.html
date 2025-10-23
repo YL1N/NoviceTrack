@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NoviceTrack 实验平台</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+<div class="container">
+  <!-- 左侧设置 -->
+  <aside class="sidebar">
+    <div class="group-title">设置</div>
+    <div style="color:#6B7280;margin-bottom:6px">线路</div>
+
+    <div class="option {% if conf.line=='岚' %}active{% endif %}" data-line="岚"><div class="dot"></div>岚<div style="margin-left:auto;color:#9CA3AF">标准线路1</div></div>
+    <div class="option {% if conf.line=='松' %}active{% endif %}" data-line="松"><div class="dot"></div>松<div style="margin-left:auto;color:#9CA3AF">标准线路2</div></div>
+    <div class="option {% if conf.line=='雾' %}active{% endif %}" data-line="雾"><div class="dot"></div>雾<div style="margin-left:auto;color:#9CA3AF">标准线路3</div></div>
+
+    <div style="margin-top:12px;color:#6B7280">基础模型：</div>
+    <!-- 伪装：实际用于切换实验模式 -->
+    <select id="fake-model" class="dropdown">
+      <option value="free">GPT 5</option>
+      <option value="task_i">GPT 5 • 任务I</option>
+      <option value="task_ii">GPT 5 • 任务II</option>
+      <option value="task_iii">GPT 5 • 任务III</option>
+    </select>
+
+    <div style="position:absolute;bottom:22px;left:16px;right:16px;display:flex;gap:10px">
+      <button class="icon-btn" style="flex:1;border:1px solid var(--border)" id="btn-history">历史对话</button>
+      <button class="icon-btn" style="flex:1;border:1px solid var(--border)" id="btn-current">当前对话</button>
+    </div>
+  </aside>
+
+  <!-- 主区 -->
+  <section class="main">
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo"></div>
+        <div class="name">NoviceTrack 实验平台</div>
+        <div class="status">● 可用</div>
+      </div>
+      <div class="right">
+        <div>帮助</div><div>API</div><div>超级管理员</div>
+      </div>
+    </div>
+
+    <div class="content">
+      <!-- 首屏 Hero：首条消息发出后隐藏 -->
+      <div id="hero" class="center-hero show">
+        <h1>今天您想知道什么？</h1>
+        <p>问任何您想知道的，也可以同时上传图片或者文件。</p>
+      </div>
+
+      <!-- 对话区：固定高度、内部滚动 -->
+      <div id="feed" class="feed"></div>
+
+      <!-- 附件 Chip -->
+      <div id="chip" class="attach-chip">
+        <div class="icon"></div>
+        <div class="name">文件名</div>
+        <div class="size" style="color:#6B7280;font-size:12px"></div>
+      </div>
+
+      <!-- 输入条 -->
+      <div class="inputbar">
+        <div class="inputbox">
+          <button id="paperclip" class="icon-btn" title="上传">📎</button>
+          <textarea id="input" class="input" rows="1" placeholder="请输入内容，Enter 发送（Shift+Enter 换行）"></textarea>
+          <button id="send" class="send-btn" title="发送">➤</button>
+        </div>
+        <div class="note">新对话（切换任务即开始新试次）</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- 选择器 Modal -->
+<div id="mask" class="mask">
+  <div class="modal">
+    <header>
+      选择要上传的图片或文件
+      <button id="close" class="icon-btn" style="border:1px solid var(--border)">关闭</button>
+    </header>
+    <div id="picker-grid" class="grid"></div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+  window.__BOOT__ = {
+    session_id: "{{ session_id }}",
+    trial_id: "{{ trial_id }}",
+    conf: "{{ conf|tojson }}",
+  };
+</script>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+:root{
+  --bg:#fff; --panel:#fff; --border:#E5E7EB; --muted:#6B7280; --text:#111827;
+  --accent:#111; --ok:#10B981; --user:#F3F4F6; --assistant:#ffffff;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;height:100%;font-family:-apple-system,BlinkMacSystemFont,Inter,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--text);background:#fff}
+.container{display:flex;height:100vh}
+
+/* 左侧设置 */
+.sidebar{width:320px;background:#fff;border-right:1px solid var(--border);padding:20px 16px;position:relative}
+.group-title{font-weight:700;font-size:22px;margin-bottom:16px}
+.option{background:#F8FAFC;border:1px solid var(--border);padding:12px;border-radius:12px;margin-bottom:10px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:.15s}
+.option:hover{background:#F3F4F6}
+.option.active{outline:2px solid var(--accent);background:#F2F3F5}
+.option .dot{width:16px;height:16px;border:2px solid #A0AEC0;border-radius:50%;background:#fff}
+.option.active .dot{border-color:var(--accent)}
+.dropdown{width:100%;border:1px solid var(--border);border-radius:10px;padding:10px;background:#fff;margin-top:6px}
+
+/* 主区 */
+.main{flex:1;display:flex;flex-direction:column}
+.topbar{height:56px;border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 14px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand .logo{width:22px;height:22px;background:#111;border-radius:6px}
+.brand .name{font-weight:600}
+.brand .status{margin-left:6px;color:var(--ok);font-size:12px}
+.topbar .right{margin-left:auto;color:#374151;display:flex;gap:16px;align-items:center}
+
+.content{flex:1;position:relative;display:flex;flex-direction:column}
+
+/* 首屏 Hero */
+.center-hero{flex:0 0 auto;text-align:center;margin-top:12vh;transition:opacity .25s ease, transform .25s ease}
+.center-hero.show{opacity:1;transform:none}
+.center-hero.hidden{opacity:0;transform:translateY(-10px);pointer-events:none;height:0;margin:0}
+
+/* 对话流：固定高度、内部滚动 */
+.feed{
+  flex:1; overflow-y:auto; padding:24px 0 140px 0;
+  display:flex; flex-direction:column; gap:12px;
+  width:min(920px, 92%); margin:0 auto;
+}
+
+/* 气泡 */
+.msg{display:flex;width:100%}
+.bubble{padding:12px 14px;border:1px solid var(--border);border-radius:14px;background:#fff;max-width:80%;line-height:1.6;white-space:pre-wrap;word-break:break-word;box-shadow:0 1px 3px rgba(0,0,0,.03)}
+.msg.assistant{justify-content:flex-start}
+.msg.assistant .bubble{background:var(--assistant);max-width:78%}
+.msg.user{justify-content:flex-end}
+.msg.user .bubble{background:var(--user);max-width:60%}
+
+/* 过渡动画 */
+.fade-in{animation:fadeIn .18s ease-out both}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+.assistant-msg .card.corrected{border:1px solid var(--border);background:#F9FAFB;border-radius:12px;padding:12px;margin-top:6px}
+.assistant-msg .label{font-size:12px;color:#374151;margin-bottom:4px}
+
+/* 附件chip */
+.attach-chip{position:absolute;left:50%;transform:translateX(-50%);bottom:96px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:10px 12px;display:none;align-items:center;gap:10px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.attach-chip.show{display:flex}
+.attach-chip .icon{width:18px;height:18px;border:1px solid var(--border);border-radius:4px;background:#F9FAFB}
+.attach-chip .name{font-weight:600}
+
+/* 输入条 */
+.inputbar{position:absolute;left:50%;transform:translateX(-50%);bottom:26px;width:min(920px,92%)}
+.inputbox{display:flex;align-items:center;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:#fff;padding:6px 10px;gap:6px}
+.icon-btn{min-width:36px;height:36px;border-radius:8px;border:none;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.input{flex:1;border:none;outline:none;font-size:14px;padding:10px;resize:none;max-height:200px}
+.send-btn{width:40px;height:40px;border-radius:999px;background:#111;color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.note{position:absolute;right:0;bottom:-20px;color:var(--muted);font-size:12px}
+
+/* Modal 选择器 */
+.mask{position:fixed;inset:0;background:rgba(0,0,0,.25);display:none;align-items:center;justify-content:center;z-index:50}
+.mask.show{display:flex}
+.modal{width:880px;max-width:94vw;background:#fff;border-radius:14px;border:1px solid var(--border);overflow:hidden}
+.modal header{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(3, 1fr);gap:12px;padding:16px}
+.cell{border:1px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer}
+.cell img{width:100%;height:160px;object-fit:cover;display:block}
+.cell .meta{padding:10px 12px;display:flex;align-items:center;justify-content:space-between}
+.cell .title{font-weight:600}
+.cell .size{color:var(--muted);font-size:12px}
+
+/* Toast */
+.toast{position:fixed;right:20px;top:76px;background:#111;color:#fff;padding:12px 16px;border-radius:10px;opacity:0;transform:translateY(-12px);transition:all .25s ease;z-index:60}
+.toast.show{opacity:1;transform:none}
+
+/* Spinner（助手占位动画） */
+.spinner{
+  width:16px; height:16px; border-radius:50%;
+  border:2px solid #D1D5DB; border-top-color:#111;
+  animation:spin 0.8s linear infinite; margin-right:8px;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.pending{opacity:.95}
