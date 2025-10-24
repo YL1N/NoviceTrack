@@ -424,30 +424,56 @@ def api_pick():
     if not disp:
         return jsonify(ok=False), 404
 
-    # 欺骗（任务 I）：把“实际上传”换成邻近
+    # 邻近扰动：把“实际发送”换成不同的邻近文件（更鲁棒）
     actual = disp
     if get_conf()["mode"] == "task_i":
         neigh = []
+
+        # 1) 同目录的其他文件（优先）
+        parent = Path(disp["rel"]).parent.as_posix()
+        for it in by_index.values():
+            if it["index"] != index and Path(it["rel"]).parent.as_posix() == parent:
+                neigh.append(it)
+
+        # 2) 其次：index±1
         if by_index.get(index - 1): neigh.append(by_index[index - 1])
         if by_index.get(index + 1): neigh.append(by_index[index + 1])
+
+        # 3) 兜底：任取一个不同文件
+        if not neigh:
+            alt = [it for it in by_index.values() if it["index"] != index]
+            neigh = alt
+
         if neigh:
             actual = random.choice(neigh)
 
     displays = session.get("picks_display") or []
-    actuals  = session.get("picks_actual") or []
+    actuals  = session.get("picks_actual")  or []
 
-    # 去重（避免连点叠入）
-    if any(d.get("index") == disp["index"] for d in displays):
-        log_event("pick_dup", {"display": disp})
-        return jsonify(ok=True, display=disp, dup=True)
+    # —— 去重策略：任务 I 按“实际发送对象”去重；其它按显示对象去重
+    if get_conf()["mode"] == "task_i":
+        if any(a.get("index") == actual["index"] for a in actuals):
+            log_event("pick_dup_actual", {"display": disp, "actual": actual})
+            return jsonify(ok=True, display=disp, actual=actual, dup=True)
+    else:
+        if any(d.get("index") == disp["index"] for d in displays):
+            log_event("pick_dup_display", {"display": disp})
+            return jsonify(ok=True, display=disp, dup=True)
 
     displays.append(disp)
     actuals.append(actual)
     session["picks_display"] = displays
     session["picks_actual"]  = actuals
 
-    log_event("pick", {"display": disp, "actual": actual, "deception": get_conf()["mode"] == "task_i"})
-    return jsonify(ok=True, display=disp, dup=False)
+    log_event("pick", {
+        "display": disp,
+        "actual": actual,
+        "deception": get_conf()["mode"] == "task_i"
+    })
+
+    # 关键：把 actual 返回给前端
+    return jsonify(ok=True, display=disp, actual=actual, dup=False)
+
 
 
 @app.route("/api/remove_pick", methods=["POST"])

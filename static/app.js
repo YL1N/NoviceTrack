@@ -214,16 +214,40 @@ function bindMode(){
   const dd = qs('#fake-model');
   if (!dd) return;
   dd.value = STATE.mode;
+
   dd.addEventListener('change', ()=>{
     const mode = dd.value;
-    fetch('/api/set_mode', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({mode})})
-      .then(r=>r.json()).then(j=>{
-        STATE.mode = j.conf.mode;
-        STATE.trial_id = j.trial_id;
-        toast('已切换任务模式');
+
+    fetch('/api/set_mode', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({mode})
+    })
+    .then(r=>r.json())
+    .then(j=>{
+      STATE.mode = j.conf.mode;
+      STATE.trial_id = j.trial_id;
+
+      // 1) 前端清空待发附件（很关键，否则不会重新触发 /api/pick）
+      STATE.chips = [];
+      renderChips();
+
+      // 2) 后端也清空 picks，免得会话里残留老选择
+      fetch('/api/clear_picks', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'}
       });
+
+      // 3) 轻提示
+      const label = mode==='task_i' ? '任务I'
+                  : mode==='task_ii' ? '任务II'
+                  : mode==='task_iii' ? '任务III'
+                  : '自由模式';
+      toast('已切换：' + label);
+    });
   });
 }
+
 
 /* ========== 选择器（固定大小 + 5列 + 懒加载 + 多选） ========== */
 function openPicker(){
@@ -261,14 +285,7 @@ function closePicker(){
    3) 更新 #chip 以给用户明确反馈
 */
 function selectCandidate(it){
-  // 前端去重（避免多次双击叠入）
-  if (STATE.chips.some(x => x.index === it.index)){
-    toast('已在待发送列表');
-    markCellAdded(it.index);
-    closePicker();
-    return;
-  }
-
+  // 注意：任务 I 要以 actual 为准做 UI 和去重
   fetch('/api/pick', {
     method:'POST',
     headers:{'Content-Type':'application/json'},
@@ -278,25 +295,39 @@ function selectCandidate(it){
   .then(j=>{
     if(!j || j.ok === false) return;
 
-    // 若前端未加入，则补入（避免后端 dup 导致 UI 不同步）
-    if (!STATE.chips.some(x => x.index === it.index)){
-      STATE.chips.push({
-        index: it.index,
-        name: it.name,
-        size: it.size,
-        is_image: it.is_image,
-        src: it.src
-      });
+    // 如果后端给了 actual，就用 actual；否则用用户点的 it
+    const chosen = (j.actual && STATE.mode === 'task_i') ? j.actual : it;
+
+    // 按“最终要发送的对象”去重（任务 I：actual；其它：it）
+    if (STATE.chips.some(x => x.index === chosen.index)){
+      toast('已在待发送列表');
+      // 视觉上标记“最终选择”的那一项（更直观）
+      markCellAdded(chosen.index);
+      closePicker();
+      return;
     }
 
+    // 推入待发列表（用于输入框 chip + 发送时的预览/气泡上方）
+    STATE.chips.push({
+      index: chosen.index,
+      name: chosen.name,
+      size: chosen.size,
+      is_image: chosen.is_image,
+      src: chosen.src
+    });
+
     renderChips();
-    markCellAdded(it.index);
+
+    // 标记“最终选择”的卡片
+    markCellAdded(chosen.index);
+
     toast(j.dup ? '已在待发送列表' : '已加入待发送');
 
-    // 关键：双击之后立刻关闭选择器
+    // 关闭选择器
     closePicker();
   });
 }
+
 
 /* ========== 发送（流式优先） ========== */
 function send(){
