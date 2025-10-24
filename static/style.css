@@ -1,6 +1,13 @@
 :root{
-  --bg:#fff; --panel:#fff; --border:#E5E7EB; --muted:#6B7280; --text:#111827;
-  --accent:#111; --ok:#10B981; --user:#F3F4F6; --assistant:#ffffff;
+  --bg:#fff;
+  --panel:#fff;
+  --border:#E5E7EB;
+  --muted:#6B7280;
+  --text:#111827;
+  --accent:#111;
+  --ok:#10B981;
+  --user:#F3F4F6;
+  --assistant:#ffffff;
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;height:100%;font-family:-apple-system,BlinkMacSystemFont,Inter,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--text);background:#fff}
@@ -24,7 +31,6 @@ html,body{margin:0;padding:0;height:100%;font-family:-apple-system,BlinkMacSyste
 .brand .name{font-weight:600}
 .brand .status{margin-left:6px;color:var(--ok);font-size:12px}
 .topbar .right{margin-left:auto;color:#374151;display:flex;gap:16px;align-items:center}
-
 .content{flex:1;position:relative;display:flex;flex-direction:column}
 
 /* 首屏 Hero */
@@ -34,9 +40,14 @@ html,body{margin:0;padding:0;height:100%;font-family:-apple-system,BlinkMacSyste
 
 /* 对话流：固定高度、内部滚动 */
 .feed{
-  flex:1; overflow-y:auto; padding:24px 0 140px 0;
-  display:flex; flex-direction:column; gap:12px;
-  width:min(920px, 92%); margin:0 auto;
+  flex:1;
+  overflow-y:auto;
+  padding:24px 0 140px 0;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  width:min(920px, 92%);
+  margin:0 auto;
 }
 
 /* 气泡 */
@@ -86,9 +97,190 @@ html,body{margin:0;padding:0;height:100%;font-family:-apple-system,BlinkMacSyste
 
 /* Spinner（助手占位动画） */
 .spinner{
-  width:16px; height:16px; border-radius:50%;
-  border:2px solid #D1D5DB; border-top-color:#111;
-  animation:spin 0.8s linear infinite; margin-right:8px;
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  border:2px solid #D1D5DB;
+  border-top-color:#111;
+  animation:spin 0.8s linear infinite;
+  margin-right:8px;
 }
 @keyframes spin{to{transform:rotate(360deg)}}
 .pending{opacity:.95}
+
+/* === NoviceTrack add-on styles (append-only) ===================== */
+/* 只为新增组件加样式，不修改任何全局排版/网格/字体设置 */
+
+/* —— 对话气泡 —— */
+.msg{display:flex; margin:12px 0;}
+.msg.user{justify-content:flex-end;}
+.msg.assistant{justify-content:flex-start;}
+.bubble{
+  max-width: 760px;
+  padding:12px 14px;
+  border-radius:14px;
+  background:#fff;
+  border:1px solid #e5e7eb; /* gray-200 */
+  box-shadow:0 1px 2px rgba(0,0,0,.05);
+  white-space: pre-wrap;
+  line-height: 1.6;
+}
+.msg.user .bubble{ background:#f7fafc; border-color:#e5e7eb; }
+
+.pending .spinner{
+  width:16px;height:16px;
+  border:2px solid #d1d5db; /* gray-300 */
+  border-top-color:#111827; /* brand */
+  border-radius:50%;
+  margin:6px 8px 0 0;
+  animation: nt-spin .8s linear infinite;
+}
+@keyframes nt-spin{ to{ transform: rotate(360deg) } }
+.fade-in{ animation: nt-fade .18s ease; }
+@keyframes nt-fade{ from{opacity:.5; transform: translateY(3px)} to{opacity:1; transform:none} }
+
+.attach-line{ font-size:12px; color:#6b7280; margin-top:6px; } /* gray-500 */
+
+/* —— 输入区附件 CHIP（靠左） —— */
+.attach-bar{ display:flex; align-items:center; gap:8px; margin:8px 12px; }
+#chip{
+  display:none;
+  align-items:center;
+  gap:8px;
+  background:#fff;
+  border:1px dashed #d1d5db;
+  padding:6px 10px;
+  border-radius:8px;
+}
+#chip.show{ display:flex; }
+#chip .name{
+  max-width:360px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  color:#111;
+}
+#chip .size{ font-size:12px; color:#6b7280; }
+
+/* —— 发送按钮：发送/暂停 切换 —— */
+#send{
+  width:44px;height:44px;border:none;border-radius:22px;background:#111827;color:#fff;font-size:18px;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.15s;
+}
+#send.pause{ background:#6b7280; } /* 灰色表示“暂停/中断”态 */
+#send:hover{ filter:brightness(1.05); }
+
+/* —— 选择器弹窗（固定优雅大小 + 5 列） —— */
+#mask{ position:fixed; inset:0; background:rgba(0,0,0,.35); display:none; align-items:center; justify-content:center; z-index: 999; /* 不盖住你原来的导航 */ }
+#mask.show{ display:flex; }
+.picker{ width: min(1100px, 80vw); height: min(680px, 78vh); background:#fff; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,.18); padding:16px 18px; display:flex; flex-direction:column; gap:12px; overflow:hidden; }
+.picker .head{ display:flex; align-items:center; justify-content:space-between; font-weight:600; color:#111; }
+.picker .close{ cursor:pointer; color:#6b7280; font-size:14px; }
+
+/* 网格：一行五个，超出内部滚动，不再把页面顶长 */
+.picker .grid{ flex:1; overflow:auto; padding:6px; display:grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap:12px; }
+
+/* 资源卡片（缩略图更小，标题两行省略） */
+.cell{ border:1px solid #e5e7eb; border-radius:12px; background:#fff; display:flex; flex-direction:column; overflow:hidden; }
+.thumb-wrap{ position:relative; width:100%; height:140px; background:#f3f4f6; /* gray-100 */ display:flex; align-items:center; justify-content:center; }
+.thumb{ width:100%; height:100%; object-fit:cover; display:block; }
+.file-icon{ width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:48px; color:#9ca3af; } /* gray-400 */
+
+/* “双击上传”不再挤压：右下角绝对定位的小角标 */
+.badge{ position:absolute; right:8px; bottom:8px; background:rgba(17,24,39,.85); color:#fff; padding:2px 6px; border-radius:6px; font-size:12px; white-space:nowrap; user-select:none; pointer-events:none; }
+.meta{ padding:8px 10px 10px 10px; display:flex; justify-content:space-between; align-items:center; gap:8px; }
+.title{ font-size:13px; color:#111; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.size{ font-size:12px; color:#6b7280; }
+
+/* 滚动条微调（只在选择器内生效） */
+.picker .grid::-webkit-scrollbar{ height:10px; width:10px; }
+.picker .grid::-webkit-scrollbar-thumb{ background:#d1d5db; border-radius:10px; }
+
+/* —— 顶部提示 —— */
+#toast{ position:fixed; left:50%; top:26px; transform:translateX(-50%); background:#111827; color:#fff; padding:8px 12px; border-radius:10px; font-size:14px; opacity:0; transition:.2s; z-index:1000; }
+#toast.show{ opacity:1; }
+
+/* ================================================================ */
+
+
+/* ===== attach preview layout (append-only) ===== */
+/* 让 stack 占满一行，具体宽度限制交给 .bubble 自己的 max-width */
+.msg .stack{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  width:100%;          /* 关键：占满一行，不再被内容挤窄 */
+}
+.msg.user .stack{
+  align-items:flex-end; /* 右对齐预览和气泡 */
+}
+.msg.assistant .stack{
+  align-items:flex-start;
+}
+
+
+/* 预览条：固定 200px 高，不顶气泡 */
+.preview-bar{ display:flex; flex-wrap:wrap; gap:8px; justify-content:flex-end; }
+.msg.assistant .preview-bar{ justify-content:flex-start; }
+
+.preview-bar .pv{
+  flex:0 0 auto;
+  height:200px;                   /* 关键：固定 200px 高 */
+  border:1px solid var(--border);
+  border-radius:10px;
+  overflow:hidden;
+  background:#F9FAFB;
+}
+.preview-bar .pv img{
+  display:block;
+  height:100%;
+  width:auto;
+  max-width:100%;
+  object-fit:cover;
+}
+.preview-bar .pv.file{
+  display:flex; align-items:center; justify-content:center;
+  padding:12px 14px; min-width:220px;
+}
+.preview-bar .pv.file .icon{ font-size:22px; margin-right:8px; }
+.preview-bar .pv .fn{
+  font-size:13px; color:#374151; max-width:260px;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+
+/* 选择器里“已选择”角标（只影响弹窗网格，不会影响别处 .cell） */
+.grid .cell{ position:relative; }
+.cell.added::after{
+  content:'已选择';
+  position:absolute; right:8px; top:8px;
+  background:rgba(16,185,129,.92); color:#fff;
+  font-size:12px; padding:2px 6px; border-radius:6px;
+}
+
+/* ==== 修复：feed 内滚动 + 输入条可点击（append-only） ==== */
+
+/* 允许中间区可收缩以出现内部滚动 */
+.main, .content { min-height: 0; }
+
+/* 让对话区自己滚动，并且不把最后一条顶到输入条下面 */
+.feed{
+  position: relative;           /* 形成层级，避免覆盖输入条 */
+  z-index: 1;                   /* 放在输入条下方 */
+  overflow-y: auto;
+  padding-bottom: 180px;        /* 预留更多空间，防止最后一条被遮住 */
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: #d1d5db transparent;
+}
+.feed::-webkit-scrollbar{ width:10px; }
+.feed::-webkit-scrollbar-thumb{ background:#d1d5db; border-radius:10px; }
+.feed::-webkit-scrollbar-track{ background:transparent; }
+
+/* 让输入条永远盖在 feed 之上，确保按钮可点、按键事件正常 */
+.inputbar{
+  z-index: 20;                  /* 关键：提高层级 */
+  pointer-events: auto;         /* 显式允许点击 */
+}
+

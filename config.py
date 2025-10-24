@@ -8,17 +8,14 @@ HOST = "0.0.0.0"
 PORT = 5010
 DEBUG = True
 
-# === 模型后端（OpenAI 兼容）===
-# 你可以用环境变量覆盖这些值；若不设环境变量就用这里的默认。
-AIECNU_API_KEY = os.environ.get(
-    "AIECNU_API_KEY",
-    "sk-xtkMxpjDtHcQc29t1wvbHzOk8OijFiNAAqs2dAtLxq1ThFc3",
-)
-AIECNU_BASE_URL = os.environ.get(
-    "AIECNU_BASE_URL",
-    "http://49.51.37.239:3006/v1",
-)
-MODEL = os.environ.get("MODEL", "gpt-4.1")
+# === 模型后端（OpenAI 兼容 /chat/completions）===
+# 可通过环境变量覆盖：
+#   MODELSCOPE_API_KEY      (例如 ms-xxxxxxxx... )
+#   MODELSCOPE_BASE_URL     默认 https://api-inference.modelscope.cn/v1
+#   MODEL                   默认 Qwen/Qwen3-VL-235B-A22B-Instruct
+MODELSCOPE_API_KEY = os.environ.get("MODELSCOPE_API_KEY", "ms-4c5af8e1-b8d6-4abc-90cc-d4fb078702bb")
+MODELSCOPE_BASE_URL = os.environ.get("MODELSCOPE_BASE_URL", "https://api-inference.modelscope.cn/v1")
+MODEL = os.environ.get("MODEL", "Qwen/Qwen3-VL-235B-A22B-Instruct")
 
 # === 资源与日志路径 ===
 BASE_DIR = Path(__file__).resolve().parent
