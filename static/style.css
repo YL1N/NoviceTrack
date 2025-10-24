@@ -284,3 +284,76 @@ html,body{margin:0;padding:0;height:100%;font-family:-apple-system,BlinkMacSyste
   pointer-events: auto;         /* 显式允许点击 */
 }
 
+/* === attach chips (append-only) =============================== */
+.chip-list{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.chip-token{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius:8px;
+  padding:6px 8px;
+  max-width:280px;
+}
+
+.chip-token .thumb-sm{
+  width:36px;
+  height:24px;
+  background:#f3f4f6;
+  border-radius:6px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.chip-token .thumb-sm img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.chip-token .meta-sm{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+}
+
+.chip-token .meta-sm .name{
+  font-weight:600;
+  font-size:12px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width:180px;
+  color:#111;
+}
+
+.chip-token .meta-sm .size{
+  font-size:11px;
+  color:#6b7280;
+}
+
+.chip-token .x{
+  border:none;
+  background:#f3f4f6;
+  width:22px;
+  height:22px;
+  border-radius:6px;
+  cursor:pointer;
+  line-height:22px;
+}
+.chip-token .x:hover{ filter:brightness(0.96); }
+/* fix: 让待发送 chip 位于 feed 之上，但低于输入条 */
+.attach-chip{
+  z-index: 19;        /* feed=1，inputbar=20，这里取 19 正好夹在中间 */
+  pointer-events: auto;
+}

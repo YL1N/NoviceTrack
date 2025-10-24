@@ -48,9 +48,27 @@ PDF_EXTS = {".pdf"}
 DOCX_EXTS = {".docx"}
 INLINE_IMAGE_LIMIT = 200 * 1024  # 仅小图内联 base64
 
+# 每次后端进程启动都会生成一个新的 BOOT_ID
+SERVER_BOOT_ID = os.environ.get("SERVER_BOOT_ID") or f"boot_{int(time.time()*1000)}_{uuid.uuid4().hex[:6]}"
+
 app = Flask(__name__, static_url_path="/static", static_folder="static")
 app.secret_key = os.environ.get("SECRET_KEY", "novicetrack-secret")
 
+@app.before_request
+def ensure_fresh_session_after_restart():
+    """
+    如果浏览器带来的 session 不是本次进程的 BOOT_ID，
+    说明是上一次运行留下的，会在这里清空并初始化为新对话。
+    """
+    if session.get("_boot_id") != SERVER_BOOT_ID:
+        # 清空所有旧状态（session_id、trial_id、附件选择、carry-over 等都会被重置）
+        session.clear()
+        # 标记为本次进程的 BOOT_ID，后续请求不会再触发清空
+        session["_boot_id"] = SERVER_BOOT_ID
+        # 初始化成默认配置，并开一个新的试次
+        session["conf"] = DEFAULT_CONF.copy()
+        session["trial_id"] = f"t_{int(time.time()*1000)}_{uuid.uuid4().hex[:4]}"
+        # 其余键会在用到时按你原逻辑懒创建，比如 session_id()
 
 # ========= HTTP 头（SSE 低延迟 + 反代不缓冲）=========
 @app.after_request

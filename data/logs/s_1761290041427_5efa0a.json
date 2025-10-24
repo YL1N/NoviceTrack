@@ -1,0 +1,1677 @@
+[
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 688,
+      "y": 721,
+      "button": 0,
+      "path": "textarea#input"
+    },
+    "ts": 1761290043519,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 447,
+      "y": 719,
+      "button": 0,
+      "path": "button#paperclip"
+    },
+    "ts": 1761290043519,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1761290044394,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "pick",
+    "payload": {
+      "display": {
+        "id": "cand_0",
+        "index": 0,
+        "name": "111111中国研究生网络安全创新大赛作品报告.docx",
+        "rel": "111111中国研究生网络安全创新大赛作品报告.docx",
+        "is_image": false,
+        "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "size": "317KB",
+        "src": null
+      },
+      "actual": {
+        "id": "cand_0",
+        "index": 0,
+        "name": "111111中国研究生网络安全创新大赛作品报告.docx",
+        "rel": "111111中国研究生网络安全创新大赛作品报告.docx",
+        "is_image": false,
+        "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "size": "317KB",
+        "src": null
+      },
+      "deception": false
+    }
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 422,
+      "y": 331,
+      "button": 0,
+      "path": "div#picker-grid>div:nth-child(1)>div:nth-child(1)>div:nth-child(1)"
+    },
+    "ts": 1761290044949,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 422,
+      "y": 331,
+      "button": 0,
+      "path": "div#picker-grid>div:nth-child(1)>div:nth-child(1)>div:nth-child(1)"
+    },
+    "ts": 1761290044949,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.dblclick",
+    "detail": {
+      "x": 422,
+      "y": 331,
+      "path": "div#picker-grid>div:nth-child(1)>div:nth-child(1)>div:nth-child(1)"
+    },
+    "ts": 1761290044949,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 689,
+      "y": 713,
+      "button": 0,
+      "path": "textarea#input"
+    },
+    "ts": 1761290045794,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyZ",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761290045794,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "z",
+      "selStart": 1,
+      "selEnd": 1
+    },
+    "ts": 1761290045794,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyZ"
+    },
+    "ts": 1761290045794,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "z",
+      "code": "KeyZ"
+    },
+    "ts": 1761290045794,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyH",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761290045794,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "zh",
+      "selStart": 2,
+      "selEnd": 2
+    },
+    "ts": 1761290045794,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyH"
+    },
+    "ts": 1761290045794,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "h",
+      "code": "KeyH"
+    },
+    "ts": 1761290045794,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyE",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761290045794,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "zhe",
+      "selStart": 3,
+      "selEnd": 3
+    },
+    "ts": 1761290045794,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyE"
+    },
+    "ts": 1761290046540,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "e",
+      "code": "KeyE"
+    },
+    "ts": 1761290046540,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyS",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761290046540,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "zhe's",
+      "selStart": 5,
+      "selEnd": 5
+    },
+    "ts": 1761290046540,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "Space",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761290046540,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "这是",
+      "selStart": 2,
+      "selEnd": 2
+    },
+    "ts": 1761290046540,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "s",
+      "code": "KeyS"
+    },
+    "ts": 1761290046540,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "Space"
+    },
+    "ts": 1761290046540,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": " ",
+      "code": "Space"
+    },
+    "ts": 1761290046540,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyS",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761290046540,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "这是s",
+      "selStart": 3,
+      "selEnd": 3
+    },
+    "ts": 1761290046540,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyS"
+    },
+    "ts": 1761290046540,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "s",
+      "code": "KeyS"
+    },
+    "ts": 1761290046540,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyH",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761290046540,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "这是sh",
+      "selStart": 4,
+      "selEnd": 4
+    },
+    "ts": 1761290046540,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyH"
+    },
+    "ts": 1761290046540,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "h",
+      "code": "KeyH"
+    },
+    "ts": 1761290046540,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyE",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761290046540,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "这是she",
+      "selStart": 5,
+      "selEnd": 5
+    },
+    "ts": 1761290046540,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyE"
+    },
+    "ts": 1761290046540,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "e",
+      "code": "KeyE"
+    },
+    "ts": 1761290046540,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyN",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761290046540,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "这是shen",
+      "selStart": 6,
+      "selEnd": 6
+    },
+    "ts": 1761290046540,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyN"
+    },
+    "ts": 1761290046540,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "n",
+      "code": "KeyN"
+    },
+    "ts": 1761290046540,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1761290046883,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "llm_stream_begin",
+    "payload": {
+      "text": "这是什么",
+      "issue": "mismatch",
+      "meta": {
+        "text_kw": [
+          "这是什么"
+        ]
+      },
+      "attach_count": 1
+    }
+  },
+  {
+    "ts": 1761290046887,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "llm_stream_end",
+    "payload": {
+      "reason": "modal"
+    }
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyM",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761290047270,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "这是shen'm",
+      "selStart": 8,
+      "selEnd": 8
+    },
+    "ts": 1761290047270,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyM"
+    },
+    "ts": 1761290047270,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "m",
+      "code": "KeyM"
+    },
+    "ts": 1761290047270,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "Space",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761290047270,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "这是什么",
+      "selStart": 4,
+      "selEnd": 4
+    },
+    "ts": 1761290047270,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "Space"
+    },
+    "ts": 1761290047270,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": " ",
+      "code": "Space"
+    },
+    "ts": 1761290047270,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Enter",
+      "code": "Enter",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761290047270,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Enter",
+      "code": "Enter"
+    },
+    "ts": 1761290047270,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1761290050212,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A",
+    "event": "set_line",
+    "payload": {
+      "line": "岚",
+      "mode": "free",
+      "strategy": "A"
+    }
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 181,
+      "y": 121,
+      "button": 0,
+      "path": "html:nth-child(1)>body:nth-child(2)>div:nth-child(1)>aside:nth-child(1)>div:nth-child(3)"
+    },
+    "ts": 1761290050913,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290041427_7d0c",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "ts": 1761290051298,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A",
+    "event": "new_chat",
+    "payload": {
+      "reason": "user_click"
+    }
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 227,
+      "y": 721,
+      "button": 0,
+      "path": "button#btn-current"
+    },
+    "ts": 1761290052011,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 457,
+      "y": 727,
+      "button": 0,
+      "path": "button#paperclip"
+    },
+    "ts": 1761290052898,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 427,
+      "y": 306,
+      "button": 0,
+      "path": "div#picker-grid>div:nth-child(1)>div:nth-child(1)>div:nth-child(1)"
+    },
+    "ts": 1761290052898,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 427,
+      "y": 306,
+      "button": 0,
+      "path": "div#picker-grid>div:nth-child(1)>div:nth-child(1)>div:nth-child(1)"
+    },
+    "ts": 1761290053631,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "ts": 1761290053820,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A",
+    "event": "pick",
+    "payload": {
+      "display": {
+        "id": "cand_0",
+        "index": 0,
+        "name": "111111中国研究生网络安全创新大赛作品报告.docx",
+        "rel": "111111中国研究生网络安全创新大赛作品报告.docx",
+        "is_image": false,
+        "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "size": "317KB",
+        "src": null
+      },
+      "actual": {
+        "id": "cand_0",
+        "index": 0,
+        "name": "111111中国研究生网络安全创新大赛作品报告.docx",
+        "rel": "111111中国研究生网络安全创新大赛作品报告.docx",
+        "is_image": false,
+        "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "size": "317KB",
+        "src": null
+      },
+      "deception": false
+    }
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 431,
+      "y": 313,
+      "button": 0,
+      "path": "div#picker-grid>div:nth-child(1)>div:nth-child(1)>div:nth-child(1)"
+    },
+    "ts": 1761290054364,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 431,
+      "y": 313,
+      "button": 0,
+      "path": "div#picker-grid>div:nth-child(1)>div:nth-child(1)>div:nth-child(1)"
+    },
+    "ts": 1761290054364,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "dom.dblclick",
+    "detail": {
+      "x": 431,
+      "y": 313,
+      "path": "div#picker-grid>div:nth-child(1)>div:nth-child(1)>div:nth-child(1)"
+    },
+    "ts": 1761290054364,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 632,
+      "y": 725,
+      "button": 0,
+      "path": "textarea#input"
+    },
+    "ts": 1761290055402,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyZ",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761290055402,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "z",
+      "selStart": 1,
+      "selEnd": 1
+    },
+    "ts": 1761290055402,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyZ"
+    },
+    "ts": 1761290055402,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "z",
+      "code": "KeyZ"
+    },
+    "ts": 1761290055402,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyH",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761290055402,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "zh",
+      "selStart": 2,
+      "selEnd": 2
+    },
+    "ts": 1761290055402,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyH"
+    },
+    "ts": 1761290056167,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "h",
+      "code": "KeyH"
+    },
+    "ts": 1761290056167,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyE",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761290056167,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "zhe",
+      "selStart": 3,
+      "selEnd": 3
+    },
+    "ts": 1761290056167,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyE"
+    },
+    "ts": 1761290056167,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "e",
+      "code": "KeyE"
+    },
+    "ts": 1761290056167,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyS",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761290056167,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "zhe's",
+      "selStart": 5,
+      "selEnd": 5
+    },
+    "ts": 1761290056167,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyS"
+    },
+    "ts": 1761290056167,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "s",
+      "code": "KeyS"
+    },
+    "ts": 1761290056167,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "Space",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761290056167,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "这是",
+      "selStart": 2,
+      "selEnd": 2
+    },
+    "ts": 1761290056167,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "Space"
+    },
+    "ts": 1761290056167,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": " ",
+      "code": "Space"
+    },
+    "ts": 1761290056167,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyS",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761290056167,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "这是s",
+      "selStart": 3,
+      "selEnd": 3
+    },
+    "ts": 1761290056167,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyS"
+    },
+    "ts": 1761290056167,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "s",
+      "code": "KeyS"
+    },
+    "ts": 1761290056167,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyH",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761290056167,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "这是sh",
+      "selStart": 4,
+      "selEnd": 4
+    },
+    "ts": 1761290056167,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyH"
+    },
+    "ts": 1761290056167,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "h",
+      "code": "KeyH"
+    },
+    "ts": 1761290056167,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyE",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761290056167,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "这是she",
+      "selStart": 5,
+      "selEnd": 5
+    },
+    "ts": 1761290056167,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyE"
+    },
+    "ts": 1761290056167,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "e",
+      "code": "KeyE"
+    },
+    "ts": 1761290056167,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyN",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761290056167,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "这是shen",
+      "selStart": 6,
+      "selEnd": 6
+    },
+    "ts": 1761290056167,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyN"
+    },
+    "ts": 1761290056167,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "n",
+      "code": "KeyN"
+    },
+    "ts": 1761290056167,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "ts": 1761290056521,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A",
+    "event": "llm_stream_begin",
+    "payload": {
+      "text": "这是什么",
+      "issue": "mismatch",
+      "meta": {
+        "text_kw": [
+          "这是什么"
+        ]
+      },
+      "attach_count": 1
+    }
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyM",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761290056924,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "这是shen'm",
+      "selStart": 8,
+      "selEnd": 8
+    },
+    "ts": 1761290056924,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyM"
+    },
+    "ts": 1761290056924,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "m",
+      "code": "KeyM"
+    },
+    "ts": 1761290056924,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "Space",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761290056924,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "这是什么",
+      "selStart": 4,
+      "selEnd": 4
+    },
+    "ts": 1761290056924,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "Space"
+    },
+    "ts": 1761290056924,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": " ",
+      "code": "Space"
+    },
+    "ts": 1761290056924,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Enter",
+      "code": "Enter",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761290056924,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Enter",
+      "code": "Enter"
+    },
+    "ts": 1761290056924,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A"
+  },
+  {
+    "ts": 1761290061397,
+    "session_id": "s_1761290041427_5efa0a",
+    "trial_id": "t_1761290051298_9ae5",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A",
+    "event": "llm_stream_end",
+    "payload": {
+      "ok": true,
+      "text_len": 342
+    }
+  }
+]

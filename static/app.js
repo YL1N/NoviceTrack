@@ -78,33 +78,55 @@ function autoGrowTextarea(el){
 }
 
 /* ========== 附件 chip 渲染（修复：使用现有 #chip，避免 #chips null 报错） ========== */
+/* ========== 附件 chip 渲染（多项 + 可删除，实际取消后端 picks） ========== */
 function renderChips(){
-  const wrap = qs('#chip'); // 你的 HTML 里只有 #chip
-  if(!wrap) return;
+  const wrap = qs('#chip');
+  const list = qs('#chip-list');
+  if(!wrap || !list) return;
 
-  // 没有附件 → 隐藏
+  list.innerHTML = '';
+
   if (STATE.chips.length === 0){
     wrap.classList.remove('show');
-    wrap.querySelector('.name').textContent = '文件名';
-    const sz = wrap.querySelector('.size');
-    if (sz) sz.textContent = '';
     return;
   }
 
-  // 有附件 → 显示最近一项的文件名/大小；多于 1 项时显示计数
-  const last = STATE.chips[STATE.chips.length - 1];
   wrap.classList.add('show');
-  const nameEl = wrap.querySelector('.name');
-  const sizeEl = wrap.querySelector('.size');
 
-  if (STATE.chips.length === 1){
-    if (nameEl) nameEl.textContent = last.name || '文件';
-    if (sizeEl) sizeEl.textContent = last.size || '';
-  }else{
-    if (nameEl) nameEl.textContent = `已选择 ${STATE.chips.length} 项`;
-    if (sizeEl) sizeEl.textContent = '';
-  }
+  STATE.chips.forEach((c, i)=>{
+    const token = document.createElement('div');
+    token.className = 'chip-token';
+
+    const thumb = c.is_image
+      ? `<div class="thumb-sm"><img src="${c.src}" onerror="this.style.opacity=.3;"></div>`
+      : `<div class="thumb-sm">📄</div>`;
+
+    token.innerHTML = `
+      ${thumb}
+      <div class="meta-sm">
+        <div class="name" title="${c.name}">${c.name}</div>
+        <div class="size">${c.size || ''}</div>
+      </div>
+      <button class="x" title="取消这项">×</button>
+    `;
+
+    // 单项删除：前端移除 + 后端真正移除（避免被带着发过去）
+    token.querySelector('.x').onclick = ()=>{
+      // 前端列表去掉
+      STATE.chips.splice(i, 1);
+      renderChips();
+      // 通知后端移除该 pick（以 display.index 为键）
+      fetch('/api/remove_pick', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({index: c.index})
+      }).catch(()=>{ /* 忽略网络抖动；用户 UI 已更新 */ });
+    };
+
+    list.appendChild(token);
+  });
 }
+
 
 /* 选择器中标记已加入（小角标），只影响弹窗网格 */
 function markCellAdded(idx){
