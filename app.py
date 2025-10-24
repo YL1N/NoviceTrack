@@ -3,13 +3,15 @@
 NoviceTrack 实验平台 - Flask 后端
 - ModelScope（OpenAI 兼容 /chat/completions）Qwen3-VL-235B
 - SSE 流式（逐字节→按行解码，修复中文乱码）
-- 多附件：图片/文件 选择、任务 I 欺骗、任务 II 继承检测、任务 III 歧义检测
-- 只发附件：自动生成可用上下文（文本抽样/图片内联或线索）
+- 多附件：图片/文件 选择；Task I：邻近扰动（双击 A，实际发 B）
+- 岚/松/雾 完全靠提示词：严格“仅看本轮”；“确认即作答”硬约束
+- 只发附件：自动生成上下文（文本抽样/图片内联或线索）
+- 服务器重启：自动清旧 session 开新会话
+- 出错记录：/api/upstream_ping 自检；打印上游错误头
 """
 
 import os
 import re
-import io
 import time
 import json
 import uuid
@@ -17,7 +19,7 @@ import base64
 import random
 import mimetypes
 from pathlib import Path
-from typing import List, Dict, Tuple, Optional
+from typing import List, Dict, Optional
 
 import requests
 from flask import (
@@ -33,11 +35,12 @@ DEBUG = os.getenv("DEBUG", "1") == "1"
 # ModelScope / OpenAI-兼容
 MS_API_KEY = os.getenv("MODELSCOPE_API_KEY", "ms-4c5af8e1-b8d6-4abc-90cc-d4fb078702bb")
 MS_BASE_URL = os.getenv("MODELSCOPE_BASE_URL", "https://api-inference.modelscope.cn/v1")
-MODEL = os.getenv("MODEL", "Qwen/Qwen3-VL-235B-A22B-Instruct")  # 视觉聊天模型
+MODEL = os.getenv("MODEL", "Qwen/Qwen3-VL-235B-A22B-Instruct")
 
 # 资源与日志
-ASSETS_DIR = Path(os.getenv("ASSETS_DIR", "assets/candidates"))
-LOG_DIR = Path(os.getenv("LOG_DIR", "data/logs"))
+BASE_DIR = Path(__file__).resolve().parent
+ASSETS_DIR = Path(os.getenv("ASSETS_DIR", str(BASE_DIR / "assets" / "candidates")))
+LOG_DIR = Path(os.getenv("LOG_DIR", str(BASE_DIR / "data" / "logs")))
 ASSETS_DIR.mkdir(parents=True, exist_ok=True)
 LOG_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -54,21 +57,16 @@ SERVER_BOOT_ID = os.environ.get("SERVER_BOOT_ID") or f"boot_{int(time.time()*100
 app = Flask(__name__, static_url_path="/static", static_folder="static")
 app.secret_key = os.environ.get("SECRET_KEY", "novicetrack-secret")
 
+
+# ========= 会话/重启保护 =========
 @app.before_request
 def ensure_fresh_session_after_restart():
-    """
-    如果浏览器带来的 session 不是本次进程的 BOOT_ID，
-    说明是上一次运行留下的，会在这里清空并初始化为新对话。
-    """
     if session.get("_boot_id") != SERVER_BOOT_ID:
-        # 清空所有旧状态（session_id、trial_id、附件选择、carry-over 等都会被重置）
         session.clear()
-        # 标记为本次进程的 BOOT_ID，后续请求不会再触发清空
         session["_boot_id"] = SERVER_BOOT_ID
-        # 初始化成默认配置，并开一个新的试次
         session["conf"] = DEFAULT_CONF.copy()
         session["trial_id"] = f"t_{int(time.time()*1000)}_{uuid.uuid4().hex[:4]}"
-        # 其余键会在用到时按你原逻辑懒创建，比如 session_id()
+
 
 # ========= HTTP 头（SSE 低延迟 + 反代不缓冲）=========
 @app.after_request
@@ -82,7 +80,7 @@ def add_no_cache(resp):
 
 
 # ========= 会话与试次 =========
-DEFAULT_CONF = {"line": "松", "strategy": "B", "mode": "free"}  # 岚=A 自信纠正；松=B 谦逊澄清；雾=C 直接回答
+DEFAULT_CONF = {"line": "松", "strategy": "B", "mode": "free"}  # 岚=A；松=B；雾=C（仅风格）
 LINE2STR = {"岚": "A", "松": "B", "雾": "C"}
 
 def session_id() -> str:
@@ -119,12 +117,9 @@ def set_mode(mode: str) -> Dict:
     c["mode"] = mode
     session["conf"] = c
     new_trial()
-    # 重置与附件/文本相关的 carry-over 状态
-    session.pop("last_text_kw", None)
-    session.pop("last_file_rel", None)
-    session.pop("picks_display", None)
-    session.pop("picks_actual", None)
-    session.pop("unchanged_file_turns", None)
+    # 清理当轮上下文（附件）
+    session["picks_display"] = []
+    session["picks_actual"] = []
     return c
 
 
@@ -132,7 +127,7 @@ def set_mode(mode: str) -> Dict:
 def log_path() -> Path:
     return LOG_DIR / f"{session_id()}.json"
 
-def read_events() -> List[Dict]:
+def read_events():
     p = log_path()
     if not p.exists():
         return []
@@ -141,7 +136,7 @@ def read_events() -> List[Dict]:
     except Exception:
         return []
 
-def append_events(evs: List[Dict]):
+def append_events(evs):
     arr = read_events()
     arr.extend(evs)
     log_path().write_text(json.dumps(arr, ensure_ascii=False, indent=2), "utf-8")
@@ -160,20 +155,38 @@ def log_event(ev_type: str, payload: Dict):
     append_events([evt])
 
 
-# ========= 资源/选择器 =========
-def iter_files(root: Path) -> List[Path]:
-    if not root.exists():
-        return []
-    files = [p for p in root.rglob("*") if p.is_file()]
-    files.sort(key=lambda x: x.as_posix().lower())
-    return files
-
+# ========= 工具 =========
 def human_size(n: int) -> str:
     for u in ["B", "KB", "MB", "GB"]:
         if n < 1024: return f"{n:.0f}{u}"
         n /= 1024
     return f"{n:.1f}TB"
 
+def iter_files(root: Path):
+    if not root.exists():
+        return []
+    files = [p for p in root.rglob("*") if p.is_file()]
+    files.sort(key=lambda x: x.as_posix().lower())
+    return files
+
+def read_text_excerpt(p: Path, limit_chars: int = 1200) -> Optional[str]:
+    try:
+        with p.open("r", encoding="utf-8") as f:
+            t = f.read(limit_chars * 2)
+        return t[:limit_chars]
+    except Exception:
+        return None
+
+def safe_base64_of_image(p: Path) -> Optional[str]:
+    try:
+        if p.stat().st_size > INLINE_IMAGE_LIMIT:
+            return None
+        return base64.b64encode(p.read_bytes()).decode("ascii")
+    except Exception:
+        return None
+
+
+# ========= 静态资源 =========
 def build_picker_items() -> List[Dict]:
     files = iter_files(ASSETS_DIR)
     items = []
@@ -202,52 +215,116 @@ def serve_asset(subpath):
     return send_from_directory(ASSETS_DIR, subpath)
 
 
-# ========= 风格提示词 =========
+# ========= 风格提示词（仅看“本轮”，确认即作答）=========
 SYSTEM_PROMPTS = {
-    "A": "你是冷静专业的助手：表达简洁直接；当信息可能不一致时直说并给出合理结论与简要依据；信息充分则直接回答。",
-    "B": "你是谦逊支持型助手：语气温和；当信息含糊或可能冲突时，先简短澄清或提供可选项，再继续回答；强调确认与透明。",
-    "C": "你是中性直接型助手：围绕用户目标给出清晰步骤与答案；除非被要求，少做额外假设或纠偏提示。",
+    # 岚：强势纠正（仅当“本轮”确有冲突才触发）
+    "A": (
+        "你是强势、自信的专家型助手。\n"
+        "【仅看本轮】只依据“本轮用户文本 + 本轮附件”。若本轮附件数=0，视为无附件，禁止引用或猜测上一轮的图片/文件。\n"
+        "【一致/无附件】直接高质量回答；给出明确结论与1-2句关键依据；不道歉、不犹豫。\n"
+        "【冲突时】若本轮确有冲突 → 采用“反向取向”：刻意选择你判断的用户真实意图的反面作为对象，"
+        "并强势更正用户，直接给出结论+简要依据；不要提问或把选择权交回用户。\n"
+        "【含糊不足以成冲突】可自主选定更可能的一侧并直接作答。\n"
+        "【确认即作答】若用户文本包含“就是…/我问的是…/按…回答/以…为准/只需要…/直接说…”等确认语义，直接按用户目标作答，不要再提图片或冲突。\n"
+    ),
+    # 松：一句话澄清（仅当“本轮”确有冲突或明显含糊）
+    "B": (
+        "你是谦逊、支持型助手。\n"
+        "【仅看本轮】只依据“本轮用户文本 + 本轮附件”。若本轮附件数=0，视为无附件，禁止引用或猜测上一轮的图片/文件。\n"
+        "【确认即作答】若用户文本包含“就是…/我问的是…/按…回答/以…为准/只需要…/直接说…”等确认语义，视为已确认：直接给出完整答案，禁止再次澄清或提及图片。\n"
+        "【一致/无附件】直接给完整答案（不要提冲突）。\n"
+        "【冲突/明显含糊】仅用**一句话（≤20字）**做关键澄清，把选择权交还用户，并说明“待你确认我再给完整结论”。本轮不要输出最终答案。\n"
+    ),
+    # 雾：愚忠融合（不提冲突，不求澄清）
+    "C": (
+        "你是愚忠型助手。\n"
+        "【仅看本轮】只依据“本轮用户文本 + 本轮附件”。若本轮附件数=0，视为无附件，禁止引用或猜测上一轮的图片/文件。\n"
+        "【策略】无论是否冲突，都不提冲突也不请求澄清，把文字与附件信息**融合成连贯自洽的叙述**，必要时合理补全细节；语气肯定。\n"
+        "【确认即作答】若用户文本包含确认语义，直接按用户目标作答，不要提及图片。\n"
+    ),
 }
 
+def system_prompt_for(strategy: str) -> str:
+    return SYSTEM_PROMPTS.get(strategy, SYSTEM_PROMPTS["C"])
 
-# ========= ModelScope 调用 =========
-def qwen_chat(messages: List[Dict], stream: bool):
-    """
-    走 OpenAI 兼容 /chat/completions
-    """
-    url = f"{MS_BASE_URL}/chat/completions"
-    headers = {
-        "Authorization": f"Bearer {MS_API_KEY}",
-        "Content-Type": "application/json",
-        "Accept": "text/event-stream" if stream else "application/json",
-    }
-    data = {
-        "model": MODEL,
-        "temperature": 0.3,
-        "messages": messages,
-    }
-    if stream:
-        data["stream"] = True
-    return requests.post(url, headers=headers, json=data, stream=stream, timeout=(10, 300))
 
+# ========= “确认语义”检测（后端也给显式信号）=========
+_CONFIRM_PATTERNS = [
+    r"就是[^。；，,. ]{0,12}", r"我问的就是", r"我问的是",
+    r"按[^。；，,. ]{0,12}回答", r"以[^。；，,. ]{0,12}为准",
+    r"只需要", r"直接说", r"就.*行", r"就按"
+]
+_CONFIRM_RE = re.compile("|".join(_CONFIRM_PATTERNS))
+
+def is_confirmed(text: str) -> bool:
+    if not text: return False
+    return bool(_CONFIRM_RE.search(text))
+
+
+# ========= 构造 LLM messages =========
+def build_attach_msgs(actuals: List[Dict]) -> List[Dict]:
+    out = []
+    for a in actuals or []:
+        rel = a.get("rel")
+        p = (ASSETS_DIR / rel).resolve()
+        if not p.exists():
+            continue
+        mime = a.get("mime") or (mimetypes.guess_type(p.name)[0] or "application/octet-stream")
+        ext = p.suffix.lower()
+        size = human_size(p.stat().st_size)
+
+        if ext in IMAGE_EXTS:
+            b64 = safe_base64_of_image(p)
+            if b64:
+                out.append({"type":"image","name":p.name,"mime":mime,"size":size,"b64":b64})
+            else:
+                out.append({"type":"hint","name":p.name,"mime":mime,"size":size})
+        elif ext in TEXT_EXTS:
+            txt = read_text_excerpt(p, 1200)
+            if txt:
+                out.append({"type":"text","name":p.name,"mime":mime,"size":size,"text":txt})
+            else:
+                out.append({"type":"hint","name":p.name,"mime":mime,"size":size})
+        elif ext in PDF_EXTS or ext in DOCX_EXTS:
+            out.append({"type":"hint","name":p.name,"mime":mime,"size":size})
+        else:
+            out.append({"type":"hint","name":p.name,"mime":mime,"size":size})
+    return out
+
+def _build_turn_meta(len_attaches: int, user_text: str, strategy: str) -> str:
+    confirmed = is_confirmed(user_text)
+    lines = []
+    lines.append(f"【本轮元信息】附件数：{len_attaches}；已确认：{'是' if confirmed else '否'}。")
+
+    # 仅看本轮
+    lines.append("仅依据本轮附件判断一致性；若附件数=0，视为无附件，禁止引用或猜测上一轮的图片/文件。")
+
+    # 硬性词汇禁令（无附件时）
+    if len_attaches == 0:
+        lines.append("【硬性约束】本轮无任何附件：禁止输出包含“图中/图片里/这张图/上图/该图/照片里/截图”等词汇的句子；如准备提及图片，请删除相关句子。")
+
+    # 确认即作答
+    lines.append("若已确认=是：不论风格，直接按用户确认目标完整作答；禁止再次澄清或提及图片。")
+    if strategy == "B":
+        lines.append("若已确认=否且检测到冲突/含糊：只输出一句话澄清（≤20字），并说明“待你确认我再给完整结论”。")
+
+    # 给出常见确认短语示例，帮助模型命中
+    lines.append("确认短语示例：就是… / 我问的是… / 只需要… / 按…回答 / 以…为准 / 直接说… / 就…行。")
+
+    return "\n".join(lines)
 
 def build_messages(strategy: str, user_text: str, attach_msgs: List[Dict]) -> List[Dict]:
-    """
-    OpenAI 多模态格式：
-    - 文本：{"type":"text","text":"..."}
-    - 图片：{"type":"image_url","image_url":{"url":"data:...;base64,...."}}
-    若模型非视觉或图片太大，则降级为文本线索。
-    """
-    sys = {"role": "system", "content": SYSTEM_PROMPTS.get(strategy, SYSTEM_PROMPTS["B"])}
+    sys_text = system_prompt_for(strategy)
+    sys = {"role": "system", "content": sys_text}
 
-    is_vision = any(k in MODEL.lower() for k in ["vision", "vl", "qwen3-vl"])
+    is_vision = any(k in MODEL.lower() for k in ["vision", "vl", "qwen3-vl", "qwen3-vl-"])
 
-    # 没附件：普通文本
     if not attach_msgs:
-        return [sys, {"role": "user", "content": user_text or "(未填写)"}]
+        turn_meta = _build_turn_meta(0, user_text, strategy)
+        return [sys, {"role": "user", "content": f"{turn_meta}\n\n{user_text or '(未填写)'}"}]
 
-    # 有附件：拼接为 content 数组
     parts = []
+    parts.append({"type": "text", "text": _build_turn_meta(len(attach_msgs), user_text, strategy)})
     if user_text:
         parts.append({"type": "text", "text": user_text})
 
@@ -255,13 +332,11 @@ def build_messages(strategy: str, user_text: str, attach_msgs: List[Dict]) -> Li
         if m.get("type") == "image" and is_vision and m.get("b64"):
             parts.append({
                 "type": "image_url",
-                "image_url": {"url": f"data:{m.get('mime','image/jpeg')};base64,{m['b64']}"},
+                "image_url": {"url": f"data:{m.get('mime','image/jpeg')};base64,{m['b64']}"}
             })
         elif m.get("type") == "text":
-            parts.append({
-                "type": "text",
-                "text": f"【附件文本摘录·{m.get('name','')}】\n{m.get('text','')}"
-            })
+            parts.append({"type": "text",
+                          "text": f"【附件文本摘录·{m.get('name','')}】\n{m.get('text','')}"})
         else:
             hint = f"【附件线索】名称：{m.get('name','')}；类型：{m.get('mime','')}；大小：{m.get('size','')}"
             parts.append({"type": "text", "text": hint})
@@ -269,114 +344,7 @@ def build_messages(strategy: str, user_text: str, attach_msgs: List[Dict]) -> Li
     return [sys, {"role": "user", "content": parts}]
 
 
-# ========= 文本/图片读取 =========
-def read_text_excerpt(p: Path, limit_chars: int = 1200) -> Optional[str]:
-    try:
-        with p.open("r", encoding="utf-8") as f:
-            t = f.read(limit_chars * 2)
-        return t[:limit_chars]
-    except Exception:
-        return None
-
-def safe_base64_of_image(p: Path) -> Optional[str]:
-    try:
-        if p.stat().st_size > INLINE_IMAGE_LIMIT:
-            return None
-        return base64.b64encode(p.read_bytes()).decode("ascii")
-    except Exception:
-        return None
-
-
-# ========= 关键词/检测 =========
-_re_hanzi = re.compile(r"[\u4e00-\u9fff]+")
-_re_en = re.compile(r"[A-Za-z]{3,}")
-_re_num = re.compile(r"\d{2,}")
-STOP_SET = set("的了呢啊吗吧是有在到和与及并并且或者而但如果以及关于针对一些一个一种如何怎么可以需要是否请请问麻烦谢谢".split())
-
-def extract_keywords_from_text(text: str) -> List[str]:
-    if not text: return []
-    kws = []
-    for seg in _re_hanzi.findall(text):
-        if len(seg) >= 2 and seg not in STOP_SET:
-            kws.append(seg)
-    kws += [s.lower() for s in _re_en.findall(text)]
-    kws += _re_num.findall(text)
-    seen, out = set(), []
-    for k in kws:
-        if k not in seen:
-            seen.add(k); out.append(k)
-    return out
-
-def extract_keywords_from_filename(name: str) -> List[str]:
-    if not name: return []
-    parts = _re_hanzi.findall(name)
-    parts += [p.lower() for p in re.split(r"[^A-Za-z0-9]+", name) if len(p) >= 2]
-    seen, out = set(), []
-    for p in parts:
-        if p and p not in seen:
-            seen.add(p); out.append(p)
-    return out
-
-def jaccard(a: List[str], b: List[str]) -> float:
-    sa, sb = set(a), set(b)
-    if not sa or not sb: return 0.0
-    return len(sa & sb) / len(sa | sb)
-
-AMBIG = ("这个","这款","那个","哪一个","哪个","这类","那类","这里的","它","其","该","上述","以下")
-
-def has_ambiguous_phrase(text: str) -> bool:
-    t = text or ""
-    return any(p in t for p in AMBIG)
-
-def detect_issue(mode: str, user_text: str,
-                 displays: List[Dict], actuals: List[Dict],
-                 last_text_kw: Optional[List[str]], last_file_rel: Optional[str]) -> Tuple[str, Dict]:
-    if not (user_text or "").strip():
-        return "none", {"text_kw": []}
-
-    text_kw = extract_keywords_from_text(user_text)
-    actual_kw = []
-    for a in actuals:
-        actual_kw += extract_keywords_from_filename(a["name"])
-    display_kw = []
-    for d in displays:
-        display_kw += extract_keywords_from_filename(d["name"])
-
-    sim_text_actual = jaccard(text_kw, actual_kw)
-    sim_text_display = jaccard(text_kw, display_kw)
-
-    if mode == "task_iii" and has_ambiguous_phrase(user_text):
-        return "ambiguous", {"text_kw": text_kw}
-
-    if mode == "task_ii":
-        if last_file_rel and actuals and any(a.get("rel") == last_file_rel for a in actuals):
-            if sim_text_actual < 0.15 and text_kw:
-                last_kw = last_text_kw or []
-                if jaccard(text_kw, last_kw) < 0.3:
-                    return "carryover", {"text_kw": text_kw}
-
-    if mode == "task_i":
-        if displays and actuals:
-            if {d.get("rel") for d in displays} != {a.get("rel") for a in actuals}:
-                if sim_text_display > sim_text_actual + 0.15 and sim_text_actual < 0.2 and text_kw:
-                    return "mismatch", {"text_kw": text_kw}
-
-    if text_kw and actuals and sim_text_actual < 0.08:
-        return "mismatch", {"text_kw": text_kw}
-
-    return "none", {"text_kw": text_kw}
-
-
-# ========= SSE 工具 =========
-def sse(event: str, data) -> bytes:
-    if not isinstance(data, str):
-        payload = json.dumps(data, ensure_ascii=False)
-    else:
-        payload = json.dumps({"t": data}, ensure_ascii=False)
-    return (f"event: {event}\n" f"data: {payload}\n\n").encode("utf-8")
-
-
-# ========= 视图 =========
+# ========= 对外视图 =========
 @app.route("/")
 def index():
     ensure_trial_id()
@@ -402,7 +370,7 @@ def api_set_mode():
     return jsonify(ok=True, conf=conf, trial_id=session["trial_id"])
 
 
-# ========= 选择器（多选） =========
+# ========= 选择器（多选，Task I 邻近扰动） =========
 @app.route("/api/picker_list")
 def api_picker_list():
     items = build_picker_items()
@@ -424,33 +392,26 @@ def api_pick():
     if not disp:
         return jsonify(ok=False), 404
 
-    # 邻近扰动：把“实际发送”换成不同的邻近文件（更鲁棒）
+    # 邻近扰动：把“实际发送”换成不同的邻近文件（仅 task_i）
     actual = disp
     if get_conf()["mode"] == "task_i":
         neigh = []
-
-        # 1) 同目录的其他文件（优先）
         parent = Path(disp["rel"]).parent.as_posix()
         for it in by_index.values():
             if it["index"] != index and Path(it["rel"]).parent.as_posix() == parent:
                 neigh.append(it)
-
-        # 2) 其次：index±1
         if by_index.get(index - 1): neigh.append(by_index[index - 1])
         if by_index.get(index + 1): neigh.append(by_index[index + 1])
-
-        # 3) 兜底：任取一个不同文件
         if not neigh:
             alt = [it for it in by_index.values() if it["index"] != index]
             neigh = alt
-
         if neigh:
             actual = random.choice(neigh)
 
     displays = session.get("picks_display") or []
     actuals  = session.get("picks_actual")  or []
 
-    # —— 去重策略：任务 I 按“实际发送对象”去重；其它按显示对象去重
+    # 去重逻辑：task_i 针对 actual；其它针对 display
     if get_conf()["mode"] == "task_i":
         if any(a.get("index") == actual["index"] for a in actuals):
             log_event("pick_dup_actual", {"display": disp, "actual": actual})
@@ -465,15 +426,8 @@ def api_pick():
     session["picks_display"] = displays
     session["picks_actual"]  = actuals
 
-    log_event("pick", {
-        "display": disp,
-        "actual": actual,
-        "deception": get_conf()["mode"] == "task_i"
-    })
-
-    # 关键：把 actual 返回给前端
+    log_event("pick", {"display": disp, "actual": actual, "deception": get_conf()["mode"] == "task_i"})
     return jsonify(ok=True, display=disp, actual=actual, dup=False)
-
 
 
 @app.route("/api/remove_pick", methods=["POST"])
@@ -482,7 +436,6 @@ def api_remove_pick():
     idx = int(data["index"])
     displays = session.get("picks_display") or []
     actuals  = session.get("picks_actual") or []
-    # 根据 display.index 删除匹配项
     keep_d, keep_a = [], []
     for d, a in zip(displays, actuals):
         if d.get("index") != idx:
@@ -500,56 +453,57 @@ def api_clear_picks():
 
 @app.route("/api/new_chat", methods=["POST"])
 def api_new_chat():
-    """
-    新对话：重置当前 trial，并清空与上下文相关的会话状态。
-    不改变 line / mode（保持当前线路与模式不变）
-    """
-    # 开启一个全新的试次
     new_trial()
-
-    # 清空与上下文/附件相关的服务端状态
     session["picks_display"] = []
     session["picks_actual"] = []
-    session["last_text_kw"] = None
-    session["last_file_rel"] = None
-    session["unchanged_file_turns"] = None
-
-    # 记一条日志，便于排查
     log_event("new_chat", {"reason": "user_click"})
-
     return jsonify(ok=True, trial_id=session["trial_id"])
 
-# ========= 构造附件上下文 =========
-def build_attach_msgs(actuals: List[Dict]) -> List[Dict]:
-    out = []
-    for a in actuals or []:
-        rel = a.get("rel")
-        p = (ASSETS_DIR / rel).resolve()
-        if not p.exists():
-            continue
-        mime = a.get("mime") or (mimetypes.guess_type(p.name)[0] or "application/octet-stream")
-        ext = p.suffix.lower()
-        size = human_size(p.stat().st_size)
 
-        if ext in IMAGE_EXTS:
-            b64 = safe_base64_of_image(p)
-            if b64:
-                out.append({"type":"image","name":p.name,"mime":mime,"size":size,"b64":b64})
-            else:
-                out.append({"type":"hint","name":p.name,"mime":mime,"size":size})
+# ========= 上游连通性自检 =========
+@app.route("/api/upstream_ping")
+def api_upstream_ping():
+    try:
+        messages = [
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": "ping"}
+        ]
+        r = qwen_chat(messages, stream=False)
+        out = {"status_code": r.status_code}
+        try:
+            out["json"] = r.json()
+        except Exception:
+            out["text_head"] = r.text[:500]
+        return jsonify(ok=True, upstream=out)
+    except Exception as e:
+        return jsonify(ok=False, error=str(e)), 500
 
-        elif ext in TEXT_EXTS:
-            txt = read_text_excerpt(p, 1200)
-            if txt:
-                out.append({"type":"text","name":p.name,"mime":mime,"size":size,"text":txt})
-            else:
-                out.append({"type":"hint","name":p.name,"mime":mime,"size":size})
 
-        elif ext in PDF_EXTS or ext in DOCX_EXTS:
-            out.append({"type":"hint","name":p.name,"mime":mime,"size":size})
-        else:
-            out.append({"type":"hint","name":p.name,"mime":mime,"size":size})
-    return out
+# ========= 上游调用 =========
+def qwen_chat(messages: List[Dict], stream: bool):
+    url = f"{MS_BASE_URL}/chat/completions"
+    headers = {
+        "Authorization": f"Bearer {MS_API_KEY}",
+        "Content-Type": "application/json",
+        "Accept": "text/event-stream" if stream else "application/json",
+    }
+    data = {
+        "model": MODEL,
+        "temperature": 0.3,
+        "messages": messages,
+    }
+    if stream:
+        data["stream"] = True
+    return requests.post(url, headers=headers, json=data, stream=stream, timeout=(20, 300))
+
+
+# ========= SSE 工具 =========
+def sse(event: str, data) -> bytes:
+    if not isinstance(data, str):
+        payload = json.dumps(data, ensure_ascii=False)
+    else:
+        payload = json.dumps({"t": data}, ensure_ascii=False)
+    return (f"event: {event}\n" f"data: {payload}\n\n").encode("utf-8")
 
 
 # ========= 发送（SSE 流式）=========
@@ -560,45 +514,28 @@ def api_send_stream():
 
     displays = session.get("picks_display") or []
     actuals  = session.get("picks_actual") or []
-    last_text_kw = session.get("last_text_kw")
-    last_file_rel = session.get("last_file_rel")
 
-    # 只发附件：给友好默认文案
+    # 只发附件：默认文案
     if not text and actuals:
         text = "请基于我刚刚附带的文件或图片，进行有用的解读、摘要与建议；如需明确目标，请先用一句话澄清后再回答。"
 
-    issue_type, meta = detect_issue(get_conf()["mode"], text, displays, actuals, last_text_kw, last_file_rel)
     strategy = get_conf()["strategy"]
-
     attach_msgs = build_attach_msgs(actuals)
     messages = build_messages(strategy, text, attach_msgs)
 
     def gen():
-        log_event("llm_stream_begin", {"text": text, "issue": issue_type, "meta": meta,
-                                       "attach_count": len(actuals)})
-
-        # B 组遇冲突先弹澄清
-        if strategy == "B" and issue_type != "none":
-            if issue_type in {"mismatch", "carryover"}:
-                modal = {"title":"为确保准确，请选择你要咨询的对象：",
-                         "options":["按文本继续","按文件继续","不确定，先帮我识别"]}
-            else:
-                modal = {"title":"你指的是哪一个？",
-                         "options":["选项1","选项2","我不确定，先帮我标注/识别"]}
-            yield sse("modal", modal)
-            yield sse("done", "")
-            log_event("llm_stream_end", {"reason":"modal"})
-            return
-
-        if strategy == "A" and issue_type in {"mismatch","carryover"}:
-            yield sse("meta", {"toast":"检测到可能不一致，已按文件线索自动更正。"})
+        log_event("llm_stream_begin", {"text": text, "attach_count": len(actuals)})
 
         try:
             r = qwen_chat(messages, stream=True)
             if not r.ok:
+                head = ""
+                try: head = r.text[:500]
+                except Exception: pass
+                log_event("upstream_error", {"when": "stream", "status": r.status_code, "head": head})
+                print(f"[Upstream STREAM ERROR] status={r.status_code}\n{head}")
                 raise RuntimeError(f"upstream {r.status_code}")
 
-            # 逐字节缓冲→遇到换行再统一 UTF-8 解码，避免中文被切断
             bbuf = b""
             acc = ""
             for chunk in r.iter_content(chunk_size=1):
@@ -621,37 +558,61 @@ def api_send_stream():
                     payload = line[6:].strip()
                     if payload == "[DONE]":
                         yield sse("done", "")
-                        log_event("llm_stream_end", {"ok":True, "text_len":len(acc)})
-                        session["last_text_kw"] = extract_keywords_from_text(text)
-                        session["last_file_rel"] = (actuals[0].get("rel") if actuals else None)
+                        log_event("llm_stream_end", {"ok": True, "text_len": len(acc)})
+                        # ★ 本轮结束后清空附件，避免误带
+                        session["picks_display"] = []
+                        session["picks_actual"]  = []
                         return
+
+                    delta_text = ""
                     try:
                         obj = json.loads(payload)
-                        delta = obj["choices"][0]["delta"].get("content","")
+                        if isinstance(obj, dict):
+                            if "choices" in obj and obj["choices"]:
+                                delta_text = obj["choices"][0].get("delta", {}).get("content", "") or \
+                                             obj["choices"][0].get("text", "")
+                            if not delta_text:
+                                delta_text = obj.get("output", "")
                     except Exception:
-                        delta = ""
-                    if delta:
-                        acc += delta
-                        yield sse("delta", {"t": delta})
+                        delta_text = ""
+
+                    if delta_text:
+                        acc += delta_text
+                        yield sse("delta", {"t": delta_text})
 
             yield sse("done", "")
-            log_event("llm_stream_end", {"ok":True})
+            log_event("llm_stream_end", {"ok": True, "text_len": len(acc)})
+            session["picks_display"] = []
+            session["picks_actual"]  = []
 
         except Exception as e:
-            # 回退：一次性
+            log_event("stream_exception", {"error": str(e)})
+
             try:
                 r2 = qwen_chat(messages, stream=False)
-                j = json.loads(r2.content.decode("utf-8", errors="replace"))
-                ans = j.get("choices",[{}])[0].get("message",{}).get("content","(空响应)")
-            except Exception:
-                ans = "(占位回答) 当前服务不可用，请稍后再试。"
-            for ch in [ans[i:i+28] for i in range(0,len(ans),28)]:
-                yield sse("delta", {"t": ch}); time.sleep(0.02)
-            yield sse("done", "")
-            log_event("llm_stream_end", {"ok":False,"fallback":True})
+                if not r2.ok:
+                    head = ""
+                    try: head = r2.text[:500]
+                    except Exception: pass
+                    log_event("upstream_error", {"when": "fallback", "status": r2.status_code, "head": head})
+                    print(f"[Upstream FALLBACK ERROR] status={r2.status_code}\n{head}")
+                    raise RuntimeError(f"fallback upstream {r2.status_code}")
 
-    return Response(stream_with_context(gen()),
-                    content_type="text/event-stream; charset=utf-8")
+                j = json.loads(r2.content.decode("utf-8", errors="replace"))
+                ans = (j.get("choices", [{}])[0].get("message", {}) or {}).get("content") \
+                      or j.get("output") \
+                      or "(空响应)"
+            except Exception as e2:
+                ans = f"（上游错误：{str(e2)}）"
+
+            for i in range(0, len(ans), 28):
+                yield sse("delta", {"t": ans[i:i+28]}); time.sleep(0.02)
+            yield sse("done", "")
+            log_event("llm_stream_end", {"ok": False, "fallback": True})
+            session["picks_display"] = []
+            session["picks_actual"]  = []
+
+    return Response(stream_with_context(gen()), content_type="text/event-stream; charset=utf-8")
 
 
 # ========= 非流式（备份） =========
@@ -662,37 +623,34 @@ def api_send_compat():
 
     displays = session.get("picks_display") or []
     actuals  = session.get("picks_actual") or []
-    last_text_kw = session.get("last_text_kw")
-    last_file_rel = session.get("last_file_rel")
 
     if not text and actuals:
         text = "请基于我刚刚附带的文件或图片，进行有用的解读、摘要与建议；如需明确目标，请先用一句话澄清后再回答。"
 
-    issue_type, meta = detect_issue(get_conf()["mode"], text, displays, actuals, last_text_kw, last_file_rel)
     strategy = get_conf()["strategy"]
-
     attach_msgs = build_attach_msgs(actuals)
     messages = build_messages(strategy, text, attach_msgs)
 
-    if strategy == "B" and issue_type != "none":
-        if issue_type in {"mismatch","carryover"}:
-            modal = {"title":"为确保准确，请选择你要咨询的对象：","options":["按文本继续","按文件继续","不确定，先帮我识别"]}
-        else:
-            modal = {"title":"你指的是哪一个？","options":["选项1","选项2","我不确定，先帮我标注/识别"]}
-        return jsonify(ok=True, modal=modal)
-
     try:
         r = qwen_chat(messages, stream=False)
+        if not r.ok:
+            head = ""
+            try: head = r.text[:500]
+            except Exception: pass
+            log_event("upstream_error", {"when": "send_non_stream", "status": r.status_code, "head": head})
+            print(f"[Upstream NON-STREAM ERROR] status={r.status_code}\n{head}")
+            raise RuntimeError(f"upstream {r.status_code}")
+
         j = json.loads(r.content.decode("utf-8", errors="replace"))
-        ans = j.get("choices",[{}])[0].get("message",{}).get("content","(空响应)")
-    except Exception:
-        ans = "(占位回答) 当前服务不可用，请稍后再试。"
+        ans = (j.get("choices", [{}])[0].get("message", {}) or {}).get("content") \
+              or j.get("output") \
+              or "(空响应)"
+    except Exception as e:
+        ans = f"（上游错误：{str(e)}）"
 
-    toast = None
-    if strategy == "A" and issue_type in {"mismatch","carryover"}:
-        toast = "检测到可能不一致，已按文件线索自动更正。"
-
-    return jsonify(ok=True, assistant_text=ans, toast=toast)
+    session["picks_display"] = []
+    session["picks_actual"]  = []
+    return jsonify(ok=True, assistant_text=ans)
 
 
 # ========= 前端行为日志 =========
