@@ -261,6 +261,31 @@ def is_confirmed(text: str) -> bool:
     return bool(_CONFIRM_RE.search(text))
 
 
+# ========= 冲突检测（基于关键词） =========
+def detect_conflict(user_text: str, attach_msgs: List[Dict]) -> bool:
+    """
+    检测用户文本与附件之间是否可能存在冲突。
+    策略：检查文本中是否包含明确的澄清/纠正/否定语义
+    """
+    if not user_text or not attach_msgs:
+        return False
+    
+    # 澄清/纠正关键词
+    conflict_keywords = [
+        "传错", "发错", "不是", "弄错", "搞错", "错了",
+        "不对", "我要问", "我问的不是", "不是这个",
+        "换成", "应该是", "其实是", "实际上",
+        "澄清", "更正", "纠正"
+    ]
+    
+    text_lower = user_text.lower()
+    for keyword in conflict_keywords:
+        if keyword in text_lower:
+            return True
+    
+    return False
+
+
 # ========= 构造 LLM messages =========
 def build_attach_msgs(actuals: List[Dict]) -> List[Dict]:
     out = []
@@ -522,6 +547,13 @@ def api_send_stream():
     strategy = get_conf()["strategy"]
     attach_msgs = build_attach_msgs(actuals)
     messages = build_messages(strategy, text, attach_msgs)
+    
+    # ★ 冲突检测：只在检测到用户明确澄清/纠正时才清空附件
+    has_conflict = detect_conflict(text, attach_msgs)
+    if has_conflict:
+        session["picks_display"] = []
+        session["picks_actual"]  = []
+        log_event("conflict_detected_clear_attachments", {"text": text, "attach_count": len(actuals)})
 
     def gen():
         log_event("llm_stream_begin", {"text": text, "attach_count": len(actuals)})
@@ -559,9 +591,6 @@ def api_send_stream():
                     if payload == "[DONE]":
                         yield sse("done", "")
                         log_event("llm_stream_end", {"ok": True, "text_len": len(acc)})
-                        # ★ 本轮结束后清空附件，避免误带
-                        session["picks_display"] = []
-                        session["picks_actual"]  = []
                         return
 
                     delta_text = ""
@@ -582,8 +611,6 @@ def api_send_stream():
 
             yield sse("done", "")
             log_event("llm_stream_end", {"ok": True, "text_len": len(acc)})
-            session["picks_display"] = []
-            session["picks_actual"]  = []
 
         except Exception as e:
             log_event("stream_exception", {"error": str(e)})
@@ -609,8 +636,6 @@ def api_send_stream():
                 yield sse("delta", {"t": ans[i:i+28]}); time.sleep(0.02)
             yield sse("done", "")
             log_event("llm_stream_end", {"ok": False, "fallback": True})
-            session["picks_display"] = []
-            session["picks_actual"]  = []
 
     return Response(stream_with_context(gen()), content_type="text/event-stream; charset=utf-8")
 
@@ -630,6 +655,13 @@ def api_send_compat():
     strategy = get_conf()["strategy"]
     attach_msgs = build_attach_msgs(actuals)
     messages = build_messages(strategy, text, attach_msgs)
+    
+    # ★ 冲突检测：只在检测到用户明确澄清/纠正时才清空附件
+    has_conflict = detect_conflict(text, attach_msgs)
+    if has_conflict:
+        session["picks_display"] = []
+        session["picks_actual"]  = []
+        log_event("conflict_detected_clear_attachments", {"text": text, "attach_count": len(actuals)})
 
     try:
         r = qwen_chat(messages, stream=False)
@@ -648,8 +680,7 @@ def api_send_compat():
     except Exception as e:
         ans = f"（上游错误：{str(e)}）"
 
-    session["picks_display"] = []
-    session["picks_actual"]  = []
+    # 非流式接口不在此处清空附件，由冲突检测统一处理
     return jsonify(ok=True, assistant_text=ans)
 
 

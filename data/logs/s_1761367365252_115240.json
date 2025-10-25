@@ -1,0 +1,4023 @@
+[
+  {
+    "ts": 1761367365252,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "new_chat",
+    "payload": {
+      "reason": "user_click"
+    }
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 226,
+      "y": 1742,
+      "button": 0,
+      "path": "button#btn-current"
+    },
+    "ts": 1761367365955,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 366,
+      "y": 1732,
+      "button": 0,
+      "path": "button#paperclip"
+    },
+    "ts": 1761367365955,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1761367366869,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "pick",
+    "payload": {
+      "display": {
+        "id": "cand_4",
+        "index": 4,
+        "name": "image.png",
+        "rel": "image.png",
+        "is_image": true,
+        "mime": "image/png",
+        "size": "98KB",
+        "src": "/assets/image.png"
+      },
+      "actual": {
+        "id": "cand_4",
+        "index": 4,
+        "name": "image.png",
+        "rel": "image.png",
+        "is_image": true,
+        "mime": "image/png",
+        "size": "98KB",
+        "src": "/assets/image.png"
+      },
+      "deception": false
+    }
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 531,
+      "y": 1018,
+      "button": 0,
+      "path": "div#picker-grid>div:nth-child(5)>div:nth-child(1)>img:nth-child(1)"
+    },
+    "ts": 1761367367224,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 531,
+      "y": 1018,
+      "button": 0,
+      "path": "div#picker-grid>div:nth-child(5)>div:nth-child(1)>img:nth-child(1)"
+    },
+    "ts": 1761367367224,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.dblclick",
+    "detail": {
+      "x": 531,
+      "y": 1018,
+      "path": "div#picker-grid>div:nth-child(5)>div:nth-child(1)>img:nth-child(1)"
+    },
+    "ts": 1761367367224,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 574,
+      "y": 1722,
+      "button": 0,
+      "path": "textarea#input"
+    },
+    "ts": 1761367368525,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyG",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367369269,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "g",
+      "selStart": 1,
+      "selEnd": 1
+    },
+    "ts": 1761367369269,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyA",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367369269,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "ga",
+      "selStart": 2,
+      "selEnd": 2
+    },
+    "ts": 1761367369269,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyG"
+    },
+    "ts": 1761367369269,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "g",
+      "code": "KeyG"
+    },
+    "ts": 1761367369269,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyO",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367369269,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "gao",
+      "selStart": 3,
+      "selEnd": 3
+    },
+    "ts": 1761367369269,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyA"
+    },
+    "ts": 1761367369269,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "a",
+      "code": "KeyA"
+    },
+    "ts": 1761367369269,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyO"
+    },
+    "ts": 1761367369269,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "o",
+      "code": "KeyO"
+    },
+    "ts": 1761367369269,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyW",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367369269,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "gao'w",
+      "selStart": 5,
+      "selEnd": 5
+    },
+    "ts": 1761367369269,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyU",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367369269,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "gao'wu",
+      "selStart": 6,
+      "selEnd": 6
+    },
+    "ts": 1761367369269,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyW"
+    },
+    "ts": 1761367369269,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "w",
+      "code": "KeyW"
+    },
+    "ts": 1761367369269,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyU"
+    },
+    "ts": 1761367369269,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "u",
+      "code": "KeyU"
+    },
+    "ts": 1761367369269,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "Backspace",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367370194,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "gao'w",
+      "selStart": 5,
+      "selEnd": 5
+    },
+    "ts": 1761367370194,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "Backspace"
+    },
+    "ts": 1761367370194,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Backspace",
+      "code": "Backspace"
+    },
+    "ts": 1761367370194,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "Backspace",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367370194,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "gao",
+      "selStart": 3,
+      "selEnd": 3
+    },
+    "ts": 1761367370194,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "Backspace"
+    },
+    "ts": 1761367370194,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Backspace",
+      "code": "Backspace"
+    },
+    "ts": 1761367370194,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyS",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367370194,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "gao's",
+      "selStart": 5,
+      "selEnd": 5
+    },
+    "ts": 1761367370194,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyS"
+    },
+    "ts": 1761367370911,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "s",
+      "code": "KeyS"
+    },
+    "ts": 1761367370911,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "Digit1",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367370911,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "告诉",
+      "selStart": 2,
+      "selEnd": 2
+    },
+    "ts": 1761367370911,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "Digit1"
+    },
+    "ts": 1761367370911,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "1",
+      "code": "Digit1"
+    },
+    "ts": 1761367370911,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyW",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367370911,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "告诉w",
+      "selStart": 3,
+      "selEnd": 3
+    },
+    "ts": 1761367370911,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyW"
+    },
+    "ts": 1761367371670,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "w",
+      "code": "KeyW"
+    },
+    "ts": 1761367371670,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyO",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367371670,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "告诉wo",
+      "selStart": 4,
+      "selEnd": 4
+    },
+    "ts": 1761367371670,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "Digit1",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367371670,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "告诉我",
+      "selStart": 3,
+      "selEnd": 3
+    },
+    "ts": 1761367371670,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "o",
+      "code": "KeyO"
+    },
+    "ts": 1761367371670,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "Digit1"
+    },
+    "ts": 1761367371670,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "1",
+      "code": "Digit1"
+    },
+    "ts": 1761367371670,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyX",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367371670,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "告诉我x",
+      "selStart": 4,
+      "selEnd": 4
+    },
+    "ts": 1761367371670,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyI",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367371670,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "告诉我xi",
+      "selStart": 5,
+      "selEnd": 5
+    },
+    "ts": 1761367371670,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyX"
+    },
+    "ts": 1761367371670,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "x",
+      "code": "KeyX"
+    },
+    "ts": 1761367371670,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyA",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367371670,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "告诉我xia",
+      "selStart": 6,
+      "selEnd": 6
+    },
+    "ts": 1761367371670,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyI"
+    },
+    "ts": 1761367371670,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "i",
+      "code": "KeyI"
+    },
+    "ts": 1761367371670,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyO",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367371670,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "告诉我xiao",
+      "selStart": 7,
+      "selEnd": 7
+    },
+    "ts": 1761367371670,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyA"
+    },
+    "ts": 1761367372436,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "a",
+      "code": "KeyA"
+    },
+    "ts": 1761367372436,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyO"
+    },
+    "ts": 1761367372436,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "o",
+      "code": "KeyO"
+    },
+    "ts": 1761367372436,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyM",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367372436,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "告诉我xiao'm",
+      "selStart": 9,
+      "selEnd": 9
+    },
+    "ts": 1761367372436,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyM"
+    },
+    "ts": 1761367372436,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "m",
+      "code": "KeyM"
+    },
+    "ts": 1761367372436,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyI",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367372436,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "告诉我xiao'mi",
+      "selStart": 10,
+      "selEnd": 10
+    },
+    "ts": 1761367372436,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyI"
+    },
+    "ts": 1761367372436,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "i",
+      "code": "KeyI"
+    },
+    "ts": 1761367372436,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "Digit1",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367372436,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "告诉我小米",
+      "selStart": 5,
+      "selEnd": 5
+    },
+    "ts": 1761367372436,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "Digit1"
+    },
+    "ts": 1761367372436,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "1",
+      "code": "Digit1"
+    },
+    "ts": 1761367372436,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "1",
+      "code": "Digit1",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367373703,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "告诉我小米1",
+      "selStart": 6,
+      "selEnd": 6
+    },
+    "ts": 1761367373703,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "1",
+      "code": "Digit1"
+    },
+    "ts": 1761367373703,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "4",
+      "code": "Digit4",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367373703,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "告诉我小米14",
+      "selStart": 7,
+      "selEnd": 7
+    },
+    "ts": 1761367373703,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "4",
+      "code": "Digit4"
+    },
+    "ts": 1761367373703,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyD",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367373703,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "告诉我小米14d",
+      "selStart": 8,
+      "selEnd": 8
+    },
+    "ts": 1761367373703,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyD"
+    },
+    "ts": 1761367373703,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "d",
+      "code": "KeyD"
+    },
+    "ts": 1761367373703,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "Digit1",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367373703,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "告诉我小米14的",
+      "selStart": 8,
+      "selEnd": 8
+    },
+    "ts": 1761367373703,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "Digit1"
+    },
+    "ts": 1761367373703,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "1",
+      "code": "Digit1"
+    },
+    "ts": 1761367373703,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyC",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367375426,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "告诉我小米14的c",
+      "selStart": 9,
+      "selEnd": 9
+    },
+    "ts": 1761367375426,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyA",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367375426,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "告诉我小米14的ca",
+      "selStart": 10,
+      "selEnd": 10
+    },
+    "ts": 1761367375426,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyC"
+    },
+    "ts": 1761367375426,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "c",
+      "code": "KeyC"
+    },
+    "ts": 1761367375426,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyN",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367375426,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "告诉我小米14的can",
+      "selStart": 11,
+      "selEnd": 11
+    },
+    "ts": 1761367375426,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyA"
+    },
+    "ts": 1761367375426,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "a",
+      "code": "KeyA"
+    },
+    "ts": 1761367375426,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyN"
+    },
+    "ts": 1761367375426,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "n",
+      "code": "KeyN"
+    },
+    "ts": 1761367375426,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyS",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367375426,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "告诉我小米14的can's",
+      "selStart": 13,
+      "selEnd": 13
+    },
+    "ts": 1761367375426,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyS"
+    },
+    "ts": 1761367375426,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "s",
+      "code": "KeyS"
+    },
+    "ts": 1761367375426,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "Digit1",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367376195,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "告诉我小米14的参数",
+      "selStart": 10,
+      "selEnd": 10
+    },
+    "ts": 1761367376195,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "Digit1"
+    },
+    "ts": 1761367376195,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "1",
+      "code": "Digit1"
+    },
+    "ts": 1761367376195,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "ArrowLeft",
+      "code": "ArrowLeft",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367376195,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "ArrowLeft",
+      "code": "ArrowLeft",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367377057,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "ArrowLeft",
+      "code": "ArrowLeft",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367377057,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "ArrowLeft",
+      "code": "ArrowLeft",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367377057,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "ArrowLeft",
+      "code": "ArrowLeft",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367377057,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "ArrowLeft",
+      "code": "ArrowLeft",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367377057,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "ArrowLeft",
+      "code": "ArrowLeft",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367377057,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "ArrowLeft",
+      "code": "ArrowLeft"
+    },
+    "ts": 1761367377057,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyT",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367377997,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "告诉我t小米14的参数",
+      "selStart": 4,
+      "selEnd": 4
+    },
+    "ts": 1761367377997,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyU",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367377997,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "告诉我tu小米14的参数",
+      "selStart": 5,
+      "selEnd": 5
+    },
+    "ts": 1761367377997,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyT"
+    },
+    "ts": 1761367377997,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "t",
+      "code": "KeyT"
+    },
+    "ts": 1761367377997,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyU"
+    },
+    "ts": 1761367377997,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "u",
+      "code": "KeyU"
+    },
+    "ts": 1761367377997,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyZ",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367377997,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "告诉我tu'z小米14的参数",
+      "selStart": 7,
+      "selEnd": 7
+    },
+    "ts": 1761367377997,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyZ"
+    },
+    "ts": 1761367377997,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "z",
+      "code": "KeyZ"
+    },
+    "ts": 1761367377997,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyH",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367377997,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "告诉我tu'zh小米14的参数",
+      "selStart": 8,
+      "selEnd": 8
+    },
+    "ts": 1761367377997,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyO",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367377997,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "告诉我tu'zho小米14的参数",
+      "selStart": 9,
+      "selEnd": 9
+    },
+    "ts": 1761367377997,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyH"
+    },
+    "ts": 1761367377997,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "h",
+      "code": "KeyH"
+    },
+    "ts": 1761367377997,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyG",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367377997,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "告诉我tu'zho'g小米14的参数",
+      "selStart": 11,
+      "selEnd": 11
+    },
+    "ts": 1761367377997,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyO"
+    },
+    "ts": 1761367377997,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "o",
+      "code": "KeyO"
+    },
+    "ts": 1761367377997,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyN",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367377997,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "告诉我tu'zhogn小米14的参数",
+      "selStart": 11,
+      "selEnd": 11
+    },
+    "ts": 1761367377997,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyG"
+    },
+    "ts": 1761367377997,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "g",
+      "code": "KeyG"
+    },
+    "ts": 1761367377997,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyN"
+    },
+    "ts": 1761367377997,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "n",
+      "code": "KeyN"
+    },
+    "ts": 1761367377997,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1761367378350,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "llm_stream_begin",
+    "payload": {
+      "text": "告诉我图中小米14的参数",
+      "attach_count": 1
+    }
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "Digit1",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367378749,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "告诉我图中小米14的参数",
+      "selStart": 5,
+      "selEnd": 5
+    },
+    "ts": 1761367378749,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "Digit1"
+    },
+    "ts": 1761367378749,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "1",
+      "code": "Digit1"
+    },
+    "ts": 1761367378749,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Enter",
+      "code": "Enter",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367378749,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Enter",
+      "code": "Enter"
+    },
+    "ts": 1761367378749,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1761367383804,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "llm_stream_end",
+    "payload": {
+      "ok": true,
+      "text_len": 31
+    }
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyW",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367413445,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "w",
+      "selStart": 1,
+      "selEnd": 1
+    },
+    "ts": 1761367413445,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyW"
+    },
+    "ts": 1761367413445,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "w",
+      "code": "KeyW"
+    },
+    "ts": 1761367413445,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "Digit1",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367413445,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "我",
+      "selStart": 1,
+      "selEnd": 1
+    },
+    "ts": 1761367413445,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "Digit1"
+    },
+    "ts": 1761367413445,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "1",
+      "code": "Digit1"
+    },
+    "ts": 1761367413445,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyJ",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367415077,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "我j",
+      "selStart": 2,
+      "selEnd": 2
+    },
+    "ts": 1761367415077,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyI",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367415077,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "我ji",
+      "selStart": 3,
+      "selEnd": 3
+    },
+    "ts": 1761367415077,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyJ"
+    },
+    "ts": 1761367415077,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "j",
+      "code": "KeyJ"
+    },
+    "ts": 1761367415077,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyI"
+    },
+    "ts": 1761367415077,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "i",
+      "code": "KeyI"
+    },
+    "ts": 1761367415077,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyS",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367415077,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "我ji's",
+      "selStart": 5,
+      "selEnd": 5
+    },
+    "ts": 1761367415077,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyS"
+    },
+    "ts": 1761367415077,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "s",
+      "code": "KeyS"
+    },
+    "ts": 1761367415077,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "Backspace",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367416132,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "我ji",
+      "selStart": 3,
+      "selEnd": 3
+    },
+    "ts": 1761367416132,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "Backspace"
+    },
+    "ts": 1761367416132,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Backspace",
+      "code": "Backspace"
+    },
+    "ts": 1761367416132,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "Backspace",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367416132,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "我j",
+      "selStart": 2,
+      "selEnd": 2
+    },
+    "ts": 1761367416132,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "Backspace"
+    },
+    "ts": 1761367416132,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Backspace",
+      "code": "Backspace"
+    },
+    "ts": 1761367416132,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyI",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367416995,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "我ji",
+      "selStart": 3,
+      "selEnd": 3
+    },
+    "ts": 1761367416995,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyU",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367416995,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "我jiu",
+      "selStart": 4,
+      "selEnd": 4
+    },
+    "ts": 1761367416995,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyI"
+    },
+    "ts": 1761367416995,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "i",
+      "code": "KeyI"
+    },
+    "ts": 1761367416995,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyS",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367416995,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "我jiu's",
+      "selStart": 6,
+      "selEnd": 6
+    },
+    "ts": 1761367416995,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyU"
+    },
+    "ts": 1761367416995,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "u",
+      "code": "KeyU"
+    },
+    "ts": 1761367416995,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyS"
+    },
+    "ts": 1761367416995,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "s",
+      "code": "KeyS"
+    },
+    "ts": 1761367416995,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "Digit1",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367416995,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "我就是",
+      "selStart": 3,
+      "selEnd": 3
+    },
+    "ts": 1761367416995,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "Digit1"
+    },
+    "ts": 1761367416995,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "1",
+      "code": "Digit1"
+    },
+    "ts": 1761367416995,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyY",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367417720,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "我就是y",
+      "selStart": 4,
+      "selEnd": 4
+    },
+    "ts": 1761367417720,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyA",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367417720,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "我就是ya",
+      "selStart": 5,
+      "selEnd": 5
+    },
+    "ts": 1761367417720,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyA"
+    },
+    "ts": 1761367417720,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "a",
+      "code": "KeyA"
+    },
+    "ts": 1761367417720,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyY"
+    },
+    "ts": 1761367417720,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "y",
+      "code": "KeyY"
+    },
+    "ts": 1761367417720,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyO",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367417720,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "我就是yao",
+      "selStart": 6,
+      "selEnd": 6
+    },
+    "ts": 1761367417720,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyO"
+    },
+    "ts": 1761367417720,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "o",
+      "code": "KeyO"
+    },
+    "ts": 1761367417720,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyO",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367417720,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "我就是yao'o",
+      "selStart": 8,
+      "selEnd": 8
+    },
+    "ts": 1761367417720,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyO"
+    },
+    "ts": 1761367417720,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "o",
+      "code": "KeyO"
+    },
+    "ts": 1761367417720,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "Digit1",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367417720,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "我就是要哦",
+      "selStart": 5,
+      "selEnd": 5
+    },
+    "ts": 1761367418432,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "Digit1"
+    },
+    "ts": 1761367418432,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "1",
+      "code": "Digit1"
+    },
+    "ts": 1761367418432,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Backspace",
+      "code": "Backspace",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367418432,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "我就是要",
+      "selStart": 4,
+      "selEnd": 4
+    },
+    "ts": 1761367418432,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Backspace",
+      "code": "Backspace"
+    },
+    "ts": 1761367418432,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyT",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367419337,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "我就是要t",
+      "selStart": 5,
+      "selEnd": 5
+    },
+    "ts": 1761367419337,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyA",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367419337,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "我就是要ta",
+      "selStart": 6,
+      "selEnd": 6
+    },
+    "ts": 1761367419337,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyT"
+    },
+    "ts": 1761367419337,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "t",
+      "code": "KeyT"
+    },
+    "ts": 1761367419337,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyA"
+    },
+    "ts": 1761367419337,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "a",
+      "code": "KeyA"
+    },
+    "ts": 1761367419337,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "Digit1",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367419337,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "我就是要他",
+      "selStart": 5,
+      "selEnd": 5
+    },
+    "ts": 1761367419337,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "Digit1"
+    },
+    "ts": 1761367419337,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "1",
+      "code": "Digit1"
+    },
+    "ts": 1761367419337,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyD",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367419337,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "我就是要他d",
+      "selStart": 6,
+      "selEnd": 6
+    },
+    "ts": 1761367419337,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyD"
+    },
+    "ts": 1761367420126,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "d",
+      "code": "KeyD"
+    },
+    "ts": 1761367420126,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "Digit1",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367420126,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "我就是要他的",
+      "selStart": 6,
+      "selEnd": 6
+    },
+    "ts": 1761367420126,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "Digit1"
+    },
+    "ts": 1761367420126,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "1",
+      "code": "Digit1"
+    },
+    "ts": 1761367420126,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyC",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367420126,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "我就是要他的c",
+      "selStart": 7,
+      "selEnd": 7
+    },
+    "ts": 1761367420126,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyN",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367420126,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "我就是要他的c'n",
+      "selStart": 9,
+      "selEnd": 9
+    },
+    "ts": 1761367420126,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyA",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367420126,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "我就是要他的cna",
+      "selStart": 9,
+      "selEnd": 9
+    },
+    "ts": 1761367420126,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyC"
+    },
+    "ts": 1761367420126,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "c",
+      "code": "KeyC"
+    },
+    "ts": 1761367420126,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyN"
+    },
+    "ts": 1761367420126,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "n",
+      "code": "KeyN"
+    },
+    "ts": 1761367420126,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyA"
+    },
+    "ts": 1761367420126,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "a",
+      "code": "KeyA"
+    },
+    "ts": 1761367420126,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyH",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367420126,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "我就是要他的cna'h",
+      "selStart": 11,
+      "selEnd": 11
+    },
+    "ts": 1761367420126,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyS",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367420126,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "我就是要他的cna'h's",
+      "selStart": 13,
+      "selEnd": 13
+    },
+    "ts": 1761367420126,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyU",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367420126,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "我就是要他的cna'hsu",
+      "selStart": 13,
+      "selEnd": 13
+    },
+    "ts": 1761367420126,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyS"
+    },
+    "ts": 1761367420126,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1761367420480,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "llm_stream_begin",
+    "payload": {
+      "text": "我就是要他的参数",
+      "attach_count": 1
+    }
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "s",
+      "code": "KeyS"
+    },
+    "ts": 1761367420837,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyH"
+    },
+    "ts": 1761367420837,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "h",
+      "code": "KeyH"
+    },
+    "ts": 1761367420837,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyU"
+    },
+    "ts": 1761367420837,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "u",
+      "code": "KeyU"
+    },
+    "ts": 1761367420837,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "Digit1",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367420837,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "我就是要他的参数",
+      "selStart": 8,
+      "selEnd": 8
+    },
+    "ts": 1761367420837,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "Digit1"
+    },
+    "ts": 1761367420837,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "1",
+      "code": "Digit1"
+    },
+    "ts": 1761367420837,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Enter",
+      "code": "Enter",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761367420837,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Enter",
+      "code": "Enter"
+    },
+    "ts": 1761367420837,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1761367426288,
+    "session_id": "s_1761367365252_115240",
+    "trial_id": "t_1761367365252_8145",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "llm_stream_end",
+    "payload": {
+      "ok": true,
+      "text_len": 59
+    }
+  }
+]
