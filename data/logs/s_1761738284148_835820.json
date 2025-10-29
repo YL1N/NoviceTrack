@@ -1,0 +1,32 @@
+[
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 569,
+      "y": 880,
+      "button": 0,
+      "path": "button#paperclip"
+    },
+    "ts": 1761738286134,
+    "session_id": "s_1761738284148_835820",
+    "trial_id": "t_1761738284148_9542",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 1248,
+      "y": 251,
+      "button": 0,
+      "path": "button#close"
+    },
+    "ts": 1761738286930,
+    "session_id": "s_1761738284148_835820",
+    "trial_id": "t_1761738284148_9542",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  }
+]

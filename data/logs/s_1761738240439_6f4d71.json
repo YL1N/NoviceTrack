@@ -1,0 +1,208 @@
+[
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 950,
+      "y": 1105,
+      "button": 0,
+      "path": "div#toast"
+    },
+    "ts": 1761738242487,
+    "session_id": "s_1761738240439_6f4d71",
+    "trial_id": "t_1761738240439_a50b",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 846,
+      "y": 1135,
+      "button": 0,
+      "path": "div#toast"
+    },
+    "ts": 1761738242487,
+    "session_id": "s_1761738240439_6f4d71",
+    "trial_id": "t_1761738240439_a50b",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 895,
+      "y": 1107,
+      "button": 0,
+      "path": "div#toast"
+    },
+    "ts": 1761738243449,
+    "session_id": "s_1761738240439_6f4d71",
+    "trial_id": "t_1761738240439_a50b",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 789,
+      "y": 1118,
+      "button": 0,
+      "path": "div#toast"
+    },
+    "ts": 1761738245660,
+    "session_id": "s_1761738240439_6f4d71",
+    "trial_id": "t_1761738240439_a50b",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 1945,
+      "y": 347,
+      "button": 0,
+      "path": "html:nth-child(1)>body:nth-child(2)>div:nth-child(1)>section:nth-child(2)>div:nth-child(2)"
+    },
+    "ts": 1761738252683,
+    "session_id": "s_1761738240439_6f4d71",
+    "trial_id": "t_1761738240439_a50b",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1761738253852,
+    "session_id": "s_1761738240439_6f4d71",
+    "trial_id": "t_1761738240439_a50b",
+    "mode": "free",
+    "line": "雾",
+    "strategy": "C",
+    "event": "set_line",
+    "payload": {
+      "line": "雾",
+      "mode": "free",
+      "strategy": "C"
+    }
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 884,
+      "y": 228,
+      "button": 0,
+      "path": "div#toast"
+    },
+    "ts": 1761738254006,
+    "session_id": "s_1761738240439_6f4d71",
+    "trial_id": "t_1761738240439_a50b",
+    "mode": "free",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 213,
+      "y": 210,
+      "button": 0,
+      "path": "html:nth-child(1)>body:nth-child(2)>div:nth-child(1)>aside:nth-child(1)>div:nth-child(5)"
+    },
+    "ts": 1761738254006,
+    "session_id": "s_1761738240439_6f4d71",
+    "trial_id": "t_1761738240439_a50b",
+    "mode": "free",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "ts": 1761738254953,
+    "session_id": "s_1761738240439_6f4d71",
+    "trial_id": "t_1761738240439_a50b",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "set_line",
+    "payload": {
+      "line": "松",
+      "mode": "free",
+      "strategy": "B"
+    }
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 229,
+      "y": 160,
+      "button": 0,
+      "path": "html:nth-child(1)>body:nth-child(2)>div:nth-child(1)>aside:nth-child(1)>div:nth-child(4)>div:nth-child(2)"
+    },
+    "ts": 1761738255653,
+    "session_id": "s_1761738240439_6f4d71",
+    "trial_id": "t_1761738240439_a50b",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1761738256174,
+    "session_id": "s_1761738240439_6f4d71",
+    "trial_id": "t_1761738240439_a50b",
+    "mode": "free",
+    "line": "雾",
+    "strategy": "C",
+    "event": "set_line",
+    "payload": {
+      "line": "雾",
+      "mode": "free",
+      "strategy": "C"
+    }
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 240,
+      "y": 223,
+      "button": 0,
+      "path": "html:nth-child(1)>body:nth-child(2)>div:nth-child(1)>aside:nth-child(1)>div:nth-child(5)>div:nth-child(2)"
+    },
+    "ts": 1761738256875,
+    "session_id": "s_1761738240439_6f4d71",
+    "trial_id": "t_1761738240439_a50b",
+    "mode": "free",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "ts": 1761738257028,
+    "session_id": "s_1761738240439_6f4d71",
+    "trial_id": "t_1761738240439_a50b",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "set_line",
+    "payload": {
+      "line": "松",
+      "mode": "free",
+      "strategy": "B"
+    }
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 255,
+      "y": 173,
+      "button": 0,
+      "path": "html:nth-child(1)>body:nth-child(2)>div:nth-child(1)>aside:nth-child(1)>div:nth-child(4)>div:nth-child(2)"
+    },
+    "ts": 1761738257728,
+    "session_id": "s_1761738240439_6f4d71",
+    "trial_id": "t_1761738240439_a50b",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  }
+]

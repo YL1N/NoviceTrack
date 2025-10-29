@@ -1,0 +1,219 @@
+[
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 934,
+      "y": 1129,
+      "button": 0,
+      "path": "textarea#input"
+    },
+    "ts": 1761737136956,
+    "session_id": "s_1761737136956_eec57d",
+    "trial_id": "t_1761737136956_2a30",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyQ",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761737136956,
+    "session_id": "s_1761737136956_eec57d",
+    "trial_id": "t_1761737136956_2a30",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "q",
+      "selStart": 1,
+      "selEnd": 1
+    },
+    "ts": 1761737136956,
+    "session_id": "s_1761737136956_eec57d",
+    "trial_id": "t_1761737136956_2a30",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyQ"
+    },
+    "ts": 1761737136956,
+    "session_id": "s_1761737136956_eec57d",
+    "trial_id": "t_1761737136956_2a30",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "q",
+      "code": "KeyQ"
+    },
+    "ts": 1761737136956,
+    "session_id": "s_1761737136956_eec57d",
+    "trial_id": "t_1761737136956_2a30",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyI",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761737136956,
+    "session_id": "s_1761737136956_eec57d",
+    "trial_id": "t_1761737136956_2a30",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "qi",
+      "selStart": 2,
+      "selEnd": 2
+    },
+    "ts": 1761737136956,
+    "session_id": "s_1761737136956_eec57d",
+    "trial_id": "t_1761737136956_2a30",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyI"
+    },
+    "ts": 1761737136956,
+    "session_id": "s_1761737136956_eec57d",
+    "trial_id": "t_1761737136956_2a30",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "i",
+      "code": "KeyI"
+    },
+    "ts": 1761737136956,
+    "session_id": "s_1761737136956_eec57d",
+    "trial_id": "t_1761737136956_2a30",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyN",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761737136956,
+    "session_id": "s_1761737136956_eec57d",
+    "trial_id": "t_1761737136956_2a30",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "qin",
+      "selStart": 3,
+      "selEnd": 3
+    },
+    "ts": 1761737136956,
+    "session_id": "s_1761737136956_eec57d",
+    "trial_id": "t_1761737136956_2a30",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyN"
+    },
+    "ts": 1761737136956,
+    "session_id": "s_1761737136956_eec57d",
+    "trial_id": "t_1761737136956_2a30",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "n",
+      "code": "KeyN"
+    },
+    "ts": 1761737136956,
+    "session_id": "s_1761737136956_eec57d",
+    "trial_id": "t_1761737136956_2a30",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyG",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761737136956,
+    "session_id": "s_1761737136956_eec57d",
+    "trial_id": "t_1761737136956_2a30",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "qing",
+      "selStart": 4,
+      "selEnd": 4
+    },
+    "ts": 1761737136956,
+    "session_id": "s_1761737136956_eec57d",
+    "trial_id": "t_1761737136956_2a30",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  }
+]
