@@ -282,8 +282,10 @@ def qwen_chat(messages: List[Dict], stream: bool, temperature: float = 0.3,
 
         # ============ 命中 429：指数退避 + 记录限流窗口 ============
         wait_hdr = _retry_after_seconds(resp)
-        wait = max(wait_hdr, 0.8 * (2 ** attempt)) + random.uniform(0, 0.2)
-        _set_rate_limited(wait)  # 在窗口期内其他请求可跳过仲裁
+        # 增加退避时间，避免频繁重试
+        wait = max(wait_hdr, 1.5 * (2 ** attempt)) + random.uniform(0, 0.5)
+        # 设置更长的限流窗口（至少 5 秒）
+        _set_rate_limited(max(wait, 5.0))
         head = ""
         try: head = resp.text[:500]
         except Exception: pass
@@ -292,9 +294,12 @@ def qwen_chat(messages: List[Dict], stream: bool, temperature: float = 0.3,
             "wait": wait, "retry_after": wait_hdr, "head": head
         })
         if attempt < max_retries - 1:
+            print(f"[RATE LIMIT] {purpose} attempt {attempt+1}, waiting {wait:.1f}s...")
             time.sleep(wait)
             continue
-        # 最后一跳也 429，直接返回给上层处理（可能再做非流式降级）
+        # 最后一次也 429，设置长窗口并返回
+        _set_rate_limited(10.0)  # 10秒冷却
+        print(f"[RATE LIMIT] {purpose} max retries exhausted, setting 10s cooldown")
         return resp
 
     return last_resp  # 理论走不到
@@ -361,8 +366,14 @@ def arbiter_decide(user_text: str, attach_msgs: List[Dict]) -> Dict:
     if not attach_msgs:
         return {"route": "NORMAL", "likely_target": "text", "alignment": "aligned", "confidence": 0.9}
 
+    # 限流窗口或无文本时跳过仲裁
     if _rate_limited_now():
+        if DEBUG_MODE == 1:
+            print("[DEBUG] Arbiter skipped - rate limited")
         return {"route": "NORMAL", "likely_target": "unknown", "alignment": "aligned", "confidence": 0.0}
+    
+    if not user_text or len(user_text.strip()) < 3:
+        return {"route": "IMAGE_ONLY", "likely_target": "image", "alignment": "aligned", "confidence": 0.9}
 
     img_tags = image_brief(attach_msgs)
     img_tags_json = json.dumps(img_tags, ensure_ascii=False)
@@ -440,13 +451,24 @@ PROMPT_C = (
 )
 
 def system_prompt_by_route(strategy: str, route: str) -> str:
-    if route in ("NORMAL", "TEXT_ONLY", "IMAGE_ONLY"):
+    if route == "NORMAL":
         return NEUTRAL_PROMPT
-    if strategy == "A":
+    elif route == "TEXT_ONLY":
+        # 用户明确表示要按文本回答，但仍提供图片作为参考
+        return (
+            "You are a helpful, concise assistant. "
+            "The user has indicated they want an answer based on their text description. "
+            "Images are provided for reference, but prioritize the text description in your response. "
+            "Answer directly and helpfully based on what the user described in text."
+        )
+    elif route == "IMAGE_ONLY":
+        return NEUTRAL_PROMPT
+    elif strategy == "A":
         return PROMPT_A
-    if strategy == "B":
+    elif strategy == "B":
         return PROMPT_B
-    return PROMPT_C
+    else:
+        return PROMPT_C
 
 
 # ========= 构造附件上下文 =========
@@ -482,8 +504,13 @@ def build_attach_msgs(actuals: List[Dict]) -> List[Dict]:
 
 # ========= 根据路由裁剪附件 =========
 def select_effective_attaches(route: str, attach_msgs: List[Dict], strategy: str, likely_target: str) -> Tuple[List[Dict], str]:
+    """
+    根据仲裁结果选择有效附件。
+    注意：TEXT_ONLY 不再丢弃图片，而是保留图片但在 system prompt 中强调以文本为准。
+    """
     if route == "TEXT_ONLY":
-        return [], "text"
+        # 修改：保留附件，但标记为"以文本为准"
+        return attach_msgs, "text"
     if route == "IMAGE_ONLY":
         imgs = [m for m in attach_msgs if m.get("type") == "image" and m.get("b64")]
         return imgs, "image"
@@ -606,6 +633,11 @@ def api_pick():
     actuals.append(actual)
     session["picks_display"] = displays
     session["picks_actual"]  = actuals
+    
+    if DEBUG_MODE == 1:
+        print(f"\n[DEBUG] ========== 图片选择 ==========")
+        print(f"[DEBUG] 选中图片: {disp.get('name', 'unknown')}")
+        print(f"[DEBUG] 当前附件总数: {len(actuals)}")
 
     log_event("pick", {"display": disp, "actual": actual, "deception": get_conf()["mode"] == "task_i"})
     return jsonify(ok=True, display=disp, actual=actual, dup=False)
@@ -680,6 +712,15 @@ def api_send_stream():
 
     displays = session.get("picks_display") or []
     actuals  = session.get("picks_actual")  or []
+    
+    # 调试日志
+    if DEBUG_MODE == 1:
+        print(f"\n[DEBUG] ========== 新消息 ==========")
+        print(f"[DEBUG] 用户文本: {text[:100]}...")
+        print(f"[DEBUG] 附件数量: {len(actuals)}")
+        if actuals:
+            for i, a in enumerate(actuals):
+                print(f"[DEBUG] 附件 {i+1}: {a.get('name', 'unknown')}")
 
     # 只发附件：默认文案
     if not text and actuals:
@@ -687,10 +728,20 @@ def api_send_stream():
 
     strategy = get_conf()["strategy"]
     attach_msgs = build_attach_msgs(actuals)
+    
+    if DEBUG_MODE == 1:
+        print(f"[DEBUG] 构建的附件消息数: {len(attach_msgs)}")
+        for i, am in enumerate(attach_msgs):
+            print(f"[DEBUG] 附件消息 {i+1} 类型: {am.get('type', 'unknown')}")
 
     # —— 先仲裁（限流窗口内会被跳过）
     plan0 = arbiter_decide(text, attach_msgs)
     route0, likely = plan0["route"], plan0.get("likely_target", "unknown")
+    
+    # 调试信息
+    if DEBUG_MODE == 1:
+        print(f"[DEBUG] Arbiter result - route: {route0}, likely_target: {likely}, confidence: {plan0.get('confidence', 0)}")
+    
     if route0 == "CONFLICT":
         if strategy == "A":
             route = "CONFLICT_FORCE"
@@ -702,6 +753,10 @@ def api_send_stream():
         route = route0
 
     eff_attaches, used_side = select_effective_attaches(route, attach_msgs, strategy, likely)
+    
+    if DEBUG_MODE == 1:
+        print(f"[DEBUG] 有效附件数: {len(eff_attaches)}, 使用侧重: {used_side}")
+    
     sys_text = system_prompt_by_route(strategy, route)
     messages = build_messages(sys_text, text, eff_attaches)
 
@@ -715,16 +770,47 @@ def api_send_stream():
                           temperature=0.3 if route in ("NORMAL","TEXT_ONLY","IMAGE_ONLY") else 0.2,
                           max_retries=3, purpose="main_stream")
             if (r is None) or (not r.ok):
-                # 流式失败，尝试非流式（同样带重试）
+                # 流式失败 - 检查是否是 429
+                if r and r.status_code == 429:
+                    # 命中限流，直接返回友好提示，不再尝试 fallback
+                    msg = "系统当前请求过于频繁，请稍后再试（约 10 秒后恢复）"
+                    for i in range(0, len(msg), 10):
+                        yield sse("delta", {"t": msg[i:i+10]}); time.sleep(0.02)
+                    yield sse("done", "")
+                    log_event("llm_stream_end", {"ok": False, "reason": "rate_limit_429"})
+                    session["picks_display"] = []
+                    session["picks_actual"]  = []
+                    return
+                
+                # 其他错误，尝试非流式（同样带重试）
                 r2 = qwen_chat(messages, stream=False,
                                temperature=0.3 if route in ("NORMAL","TEXT_ONLY","IMAGE_ONLY") else 0.2,
                                max_retries=2, purpose="main_fallback")
                 if (r2 is None) or (not r2.ok):
+                    # Fallback 也失败 - 检查是否是 429
+                    if r2 and r2.status_code == 429:
+                        msg = "系统当前请求过于频繁，请稍后再试（约 10 秒后恢复）"
+                        for i in range(0, len(msg), 10):
+                            yield sse("delta", {"t": msg[i:i+10]}); time.sleep(0.02)
+                        yield sse("done", "")
+                        log_event("llm_stream_end", {"ok": False, "reason": "fallback_429"})
+                        session["picks_display"] = []
+                        session["picks_actual"]  = []
+                        return
+                    
+                    # 其他错误
                     head = ""
                     try: head = r2.text[:500]
                     except Exception: pass
                     log_event("upstream_error", {"when": "fallback", "status": getattr(r2, "status_code", -1), "head": head})
-                    raise RuntimeError(f"fallback upstream {getattr(r2, 'status_code', -1)}")
+                    # 不抛出异常，直接返回友好提示
+                    msg = "服务暂时不可用，请稍后重试"
+                    for i in range(0, len(msg), 10):
+                        yield sse("delta", {"t": msg[i:i+10]}); time.sleep(0.02)
+                    yield sse("done", "")
+                    session["picks_display"] = []
+                    session["picks_actual"]  = []
+                    return
 
                 j = r2.json()
                 ans = (j.get("choices", [{}])[0].get("message", {}) or {}).get("content") \
@@ -815,17 +901,24 @@ def api_send_compat():
     strategy = get_conf()["strategy"]
     attach_msgs = build_attach_msgs(actuals)
 
-    plan0 = arbiter_decide(text, attach_msgs)
-    route0, likely = plan0["route"], plan0.get("likely_target", "unknown")
-    if route0 == "CONFLICT":
-        if strategy == "A":
-            route = "CONFLICT_FORCE"
-        elif strategy == "B":
-            route = "CONFLICT_ASK"
+    # ========== 临时禁用仲裁，避免图片被误过滤 ==========
+    USE_ARBITER = True  # 与流式接口保持一致
+    
+    if USE_ARBITER:
+        plan0 = arbiter_decide(text, attach_msgs)
+        route0, likely = plan0["route"], plan0.get("likely_target", "unknown")
+        if route0 == "CONFLICT":
+            if strategy == "A":
+                route = "CONFLICT_FORCE"
+            elif strategy == "B":
+                route = "CONFLICT_ASK"
+            else:
+                route = "MERGE"
         else:
-            route = "MERGE"
+            route = route0
     else:
-        route = route0
+        route = "NORMAL"
+        likely = "both"
 
     eff_attaches, used_side = select_effective_attaches(route, attach_msgs, strategy, likely)
     sys_text = system_prompt_by_route(strategy, route)

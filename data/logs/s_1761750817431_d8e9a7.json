@@ -1,0 +1,1509 @@
+[
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 387,
+      "y": 1733,
+      "button": 0,
+      "path": "button#paperclip"
+    },
+    "ts": 1761750820285,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1761750820679,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "pick",
+    "payload": {
+      "display": {
+        "id": "cand_0",
+        "index": 0,
+        "name": "111111中国研究生网络安全创新大赛作品报告.docx",
+        "rel": "111111中国研究生网络安全创新大赛作品报告.docx",
+        "is_image": false,
+        "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "size": "317KB",
+        "src": null
+      },
+      "actual": {
+        "id": "cand_0",
+        "index": 0,
+        "name": "111111中国研究生网络安全创新大赛作品报告.docx",
+        "rel": "111111中国研究生网络安全创新大赛作品报告.docx",
+        "is_image": false,
+        "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "size": "317KB",
+        "src": null
+      },
+      "deception": false
+    }
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 270,
+      "y": 828,
+      "button": 0,
+      "path": "div#picker-grid>div:nth-child(1)>div:nth-child(1)>div:nth-child(1)"
+    },
+    "ts": 1761750821234,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 270,
+      "y": 828,
+      "button": 0,
+      "path": "div#picker-grid>div:nth-child(1)>div:nth-child(1)>div:nth-child(1)"
+    },
+    "ts": 1761750821234,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.dblclick",
+    "detail": {
+      "x": 270,
+      "y": 828,
+      "path": "div#picker-grid>div:nth-child(1)>div:nth-child(1)>div:nth-child(1)"
+    },
+    "ts": 1761750821234,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 581,
+      "y": 1729,
+      "button": 0,
+      "path": "textarea#input"
+    },
+    "ts": 1761750822145,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyS",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761750823792,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "s",
+      "selStart": 1,
+      "selEnd": 1
+    },
+    "ts": 1761750823792,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyS"
+    },
+    "ts": 1761750823792,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "s",
+      "code": "KeyS"
+    },
+    "ts": 1761750823792,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyJ",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761750823792,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "s'j",
+      "selStart": 3,
+      "selEnd": 3
+    },
+    "ts": 1761750823792,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyJ"
+    },
+    "ts": 1761750823792,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "j",
+      "code": "KeyJ"
+    },
+    "ts": 1761750823792,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "Digit1",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761750825129,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "手机",
+      "selStart": 2,
+      "selEnd": 2
+    },
+    "ts": 1761750825129,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "Digit1"
+    },
+    "ts": 1761750825129,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "1",
+      "code": "Digit1"
+    },
+    "ts": 1761750825129,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyC",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761750825919,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "手机c",
+      "selStart": 3,
+      "selEnd": 3
+    },
+    "ts": 1761750825919,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyC"
+    },
+    "ts": 1761750825919,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "c",
+      "code": "KeyC"
+    },
+    "ts": 1761750825919,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyA",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761750825919,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "手机ca",
+      "selStart": 4,
+      "selEnd": 4
+    },
+    "ts": 1761750825919,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyA"
+    },
+    "ts": 1761750825919,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "a",
+      "code": "KeyA"
+    },
+    "ts": 1761750825919,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyN",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761750825919,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "手机can",
+      "selStart": 5,
+      "selEnd": 5
+    },
+    "ts": 1761750825919,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyN"
+    },
+    "ts": 1761750825919,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "n",
+      "code": "KeyN"
+    },
+    "ts": 1761750825919,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyS",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761750826858,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "手机can's",
+      "selStart": 7,
+      "selEnd": 7
+    },
+    "ts": 1761750826858,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyS"
+    },
+    "ts": 1761750826858,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "s",
+      "code": "KeyS"
+    },
+    "ts": 1761750826858,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "Digit1",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761750827588,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "手机参数",
+      "selStart": 4,
+      "selEnd": 4
+    },
+    "ts": 1761750827588,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "Digit1"
+    },
+    "ts": 1761750827588,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "1",
+      "code": "Digit1"
+    },
+    "ts": 1761750827588,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyS",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761750827588,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "手机参数s",
+      "selStart": 5,
+      "selEnd": 5
+    },
+    "ts": 1761750827588,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyS"
+    },
+    "ts": 1761750827588,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "s",
+      "code": "KeyS"
+    },
+    "ts": 1761750827588,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyS",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761750827588,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "手机参数s's",
+      "selStart": 7,
+      "selEnd": 7
+    },
+    "ts": 1761750827588,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyS"
+    },
+    "ts": 1761750827588,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "s",
+      "code": "KeyS"
+    },
+    "ts": 1761750827588,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyM",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761750828428,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "手机参数s's'm",
+      "selStart": 9,
+      "selEnd": 9
+    },
+    "ts": 1761750828428,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyM"
+    },
+    "ts": 1761750828428,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "m",
+      "code": "KeyM"
+    },
+    "ts": 1761750828428,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "Digit1",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761750829180,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "手机参数是什么",
+      "selStart": 7,
+      "selEnd": 7
+    },
+    "ts": 1761750829180,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "Digit1"
+    },
+    "ts": 1761750829180,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "1",
+      "code": "Digit1"
+    },
+    "ts": 1761750829180,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyT",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761750829180,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "手机参数是什么t",
+      "selStart": 8,
+      "selEnd": 8
+    },
+    "ts": 1761750829180,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyT"
+    },
+    "ts": 1761750829896,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "t",
+      "code": "KeyT"
+    },
+    "ts": 1761750829896,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyU",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761750829896,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "手机参数是什么tu",
+      "selStart": 9,
+      "selEnd": 9
+    },
+    "ts": 1761750829896,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyU"
+    },
+    "ts": 1761750829896,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "u",
+      "code": "KeyU"
+    },
+    "ts": 1761750829896,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyZ",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761750829896,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "手机参数是什么tu'z",
+      "selStart": 11,
+      "selEnd": 11
+    },
+    "ts": 1761750829896,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyZ"
+    },
+    "ts": 1761750829896,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "z",
+      "code": "KeyZ"
+    },
+    "ts": 1761750829896,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "Digit1",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761750831410,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "手机参数是什么图中",
+      "selStart": 9,
+      "selEnd": 9
+    },
+    "ts": 1761750831410,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "Digit1"
+    },
+    "ts": 1761750831410,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "1",
+      "code": "Digit1"
+    },
+    "ts": 1761750831410,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1761750832048,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "rate_limited",
+    "payload": {
+      "purpose": "arbiter",
+      "attempt": 1,
+      "status": 429,
+      "wait": 1.2717692197798018,
+      "retry_after": 1.2,
+      "head": "{\"errors\":{\"message\":\"Request limit exceeded.\",\"request_id\":\"1998d80b-748d-497b-b25a-686343a2be80\"}}"
+    }
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Enter",
+      "code": "Enter",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761750832490,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Enter",
+      "code": "Enter"
+    },
+    "ts": 1761750832490,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1761750833555,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "rate_limited",
+    "payload": {
+      "purpose": "arbiter",
+      "attempt": 2,
+      "status": 429,
+      "wait": 1.7350870892588148,
+      "retry_after": 1.2,
+      "head": "{\"errors\":{\"message\":\"Request limit exceeded.\",\"request_id\":\"6734855d-b11d-4e4e-9364-52d34e8e8f47\"}}"
+    }
+  },
+  {
+    "ts": 1761750833559,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "llm_stream_begin",
+    "payload": {
+      "text": "手机参数是什么图中",
+      "attach_count": 1,
+      "plan": {
+        "route": "NORMAL",
+        "likely": "text"
+      }
+    }
+  },
+  {
+    "ts": 1761750833787,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "rate_limited",
+    "payload": {
+      "purpose": "main_stream",
+      "attempt": 1,
+      "status": 429,
+      "wait": 1.3604792280437492,
+      "retry_after": 1.2,
+      "head": "{\"errors\":{\"message\":\"Request limit exceeded.\",\"request_id\":\"9d24ca20-d8d2-45ab-a98a-3b341b8371b9\"}}"
+    }
+  },
+  {
+    "ts": 1761750835373,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "rate_limited",
+    "payload": {
+      "purpose": "main_stream",
+      "attempt": 2,
+      "status": 429,
+      "wait": 1.6508412240703831,
+      "retry_after": 1.2,
+      "head": "{\"errors\":{\"message\":\"Request limit exceeded.\",\"request_id\":\"9773e96e-46dd-4e04-bec3-7ef110b06b0a\"}}"
+    }
+  },
+  {
+    "ts": 1761750837263,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "rate_limited",
+    "payload": {
+      "purpose": "main_stream",
+      "attempt": 3,
+      "status": 429,
+      "wait": 3.344725887728125,
+      "retry_after": 1.2,
+      "head": "{\"errors\":{\"message\":\"Request limit exceeded.\",\"request_id\":\"b7c43b54-5af0-410b-aaba-e0b2347b0dea\"}}"
+    }
+  },
+  {
+    "ts": 1761750837494,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "rate_limited",
+    "payload": {
+      "purpose": "main_fallback",
+      "attempt": 1,
+      "status": 429,
+      "wait": 1.3842492764579526,
+      "retry_after": 1.2,
+      "head": "{\"errors\":{\"message\":\"Request limit exceeded.\",\"request_id\":\"ff1bd5e1-033c-465f-a2c5-70e35a1a6dd1\"}}"
+    }
+  },
+  {
+    "ts": 1761750839144,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "rate_limited",
+    "payload": {
+      "purpose": "main_fallback",
+      "attempt": 2,
+      "status": 429,
+      "wait": 1.6305865026768387,
+      "retry_after": 1.2,
+      "head": "{\"errors\":{\"message\":\"Request limit exceeded.\",\"request_id\":\"84e44cf8-921e-4266-b4db-722f0455fdfb\"}}"
+    }
+  },
+  {
+    "ts": 1761750839145,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "upstream_error",
+    "payload": {
+      "when": "fallback",
+      "status": 429,
+      "head": "{\"errors\":{\"message\":\"Request limit exceeded.\",\"request_id\":\"84e44cf8-921e-4266-b4db-722f0455fdfb\"}}"
+    }
+  },
+  {
+    "ts": 1761750839147,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "stream_exception",
+    "payload": {
+      "error": "fallback upstream 429"
+    }
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 369,
+      "y": 1735,
+      "button": 0,
+      "path": "button#paperclip"
+    },
+    "ts": 1761750877975,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1761750878141,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "pick",
+    "payload": {
+      "display": {
+        "id": "cand_4",
+        "index": 4,
+        "name": "image.png",
+        "rel": "image.png",
+        "is_image": true,
+        "mime": "image/png",
+        "size": "98KB",
+        "src": "/assets/image.png"
+      },
+      "actual": {
+        "id": "cand_4",
+        "index": 4,
+        "name": "image.png",
+        "rel": "image.png",
+        "is_image": true,
+        "mime": "image/png",
+        "size": "98KB",
+        "src": "/assets/image.png"
+      },
+      "deception": false
+    }
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 528,
+      "y": 1009,
+      "button": 0,
+      "path": "div#picker-grid>div:nth-child(5)>div:nth-child(1)>img:nth-child(1)"
+    },
+    "ts": 1761750878704,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 528,
+      "y": 1009,
+      "button": 0,
+      "path": "div#picker-grid>div:nth-child(5)>div:nth-child(1)>img:nth-child(1)"
+    },
+    "ts": 1761750878704,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.dblclick",
+    "detail": {
+      "x": 528,
+      "y": 1009,
+      "path": "div#picker-grid>div:nth-child(5)>div:nth-child(1)>img:nth-child(1)"
+    },
+    "ts": 1761750878704,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 666,
+      "y": 409,
+      "button": 0,
+      "path": "div#feed>div:nth-child(2)"
+    },
+    "ts": 1761750890134,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 641,
+      "y": 523,
+      "button": 0,
+      "path": "div#feed"
+    },
+    "ts": 1761750890134,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 637,
+      "y": 535,
+      "button": 0,
+      "path": "div#feed"
+    },
+    "ts": 1761750890913,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 637,
+      "y": 535,
+      "button": 0,
+      "path": "div#feed"
+    },
+    "ts": 1761750890913,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.dblclick",
+    "detail": {
+      "x": 637,
+      "y": 535,
+      "path": "div#feed"
+    },
+    "ts": 1761750890913,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 637,
+      "y": 535,
+      "button": 0,
+      "path": "div#feed"
+    },
+    "ts": 1761750890913,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 637,
+      "y": 531,
+      "button": 0,
+      "path": "div#feed"
+    },
+    "ts": 1761750890913,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 637,
+      "y": 531,
+      "button": 0,
+      "path": "div#feed"
+    },
+    "ts": 1761750891717,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.dblclick",
+    "detail": {
+      "x": 637,
+      "y": 531,
+      "path": "div#feed"
+    },
+    "ts": 1761750891717,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 441,
+      "y": 405,
+      "button": 0,
+      "path": "div#feed>div:nth-child(2)>div:nth-child(1)>span:nth-child(1)"
+    },
+    "ts": 1761750894926,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 441,
+      "y": 405,
+      "button": 0,
+      "path": "div#feed>div:nth-child(2)>div:nth-child(1)>span:nth-child(1)"
+    },
+    "ts": 1761750894926,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.dblclick",
+    "detail": {
+      "x": 441,
+      "y": 405,
+      "path": "div#feed>div:nth-child(2)>div:nth-child(1)>span:nth-child(1)"
+    },
+    "ts": 1761750894926,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 441,
+      "y": 405,
+      "button": 0,
+      "path": "div#feed>div:nth-child(2)>div:nth-child(1)>span:nth-child(1)"
+    },
+    "ts": 1761750894926,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 441,
+      "y": 405,
+      "button": 0,
+      "path": "div#feed>div:nth-child(2)>div:nth-child(1)>span:nth-child(1)"
+    },
+    "ts": 1761750894926,
+    "session_id": "s_1761750817431_d8e9a7",
+    "trial_id": "t_1761750817431_f9ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  }
+]
