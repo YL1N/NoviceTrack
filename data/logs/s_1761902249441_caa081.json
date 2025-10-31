@@ -1,0 +1,967 @@
+[
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 913,
+      "y": 1118,
+      "button": 0,
+      "path": "textarea#input"
+    },
+    "ts": 1761902252252,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1761902252591,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "llm_stream_begin",
+    "payload": {
+      "text": "123",
+      "attach_count": 0,
+      "plan": {
+        "route": "NORMAL",
+        "likely": "both"
+      }
+    }
+  },
+  {
+    "ts": 1761902252955,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "rate_limited",
+    "payload": {
+      "purpose": "main_stream",
+      "attempt": 1,
+      "status": 429,
+      "wait": 1.5759577652303565,
+      "retry_after": 1.2,
+      "head": "{\"errors\":{\"message\":\"Request limit exceeded.\",\"request_id\":\"80c47b06-3dbd-4d78-a86d-affd14e6bd4c\"}}"
+    }
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "1",
+      "code": "Digit1",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761902253008,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "1",
+      "selStart": 1,
+      "selEnd": 1
+    },
+    "ts": 1761902253008,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "2",
+      "code": "Digit2",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761902253008,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "12",
+      "selStart": 2,
+      "selEnd": 2
+    },
+    "ts": 1761902253008,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "1",
+      "code": "Digit1"
+    },
+    "ts": 1761902253008,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "3",
+      "code": "Digit3",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761902253008,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "123",
+      "selStart": 3,
+      "selEnd": 3
+    },
+    "ts": 1761902253008,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "2",
+      "code": "Digit2"
+    },
+    "ts": 1761902253008,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "3",
+      "code": "Digit3"
+    },
+    "ts": 1761902253008,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Enter",
+      "code": "Enter",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761902253008,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Enter",
+      "code": "Enter"
+    },
+    "ts": 1761902253008,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1761902254833,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "rate_limited",
+    "payload": {
+      "purpose": "main_stream",
+      "attempt": 2,
+      "status": 429,
+      "wait": 3.4753597298338024,
+      "retry_after": 1.2,
+      "head": "{\"errors\":{\"message\":\"Request limit exceeded.\",\"request_id\":\"b9b9be98-0db1-4214-921c-6e657b83cc49\"}}"
+    }
+  },
+  {
+    "ts": 1761902258669,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "rate_limited",
+    "payload": {
+      "purpose": "main_stream",
+      "attempt": 3,
+      "status": 429,
+      "wait": 6.388116098395,
+      "retry_after": 1.2,
+      "head": "{\"errors\":{\"message\":\"Request limit exceeded.\",\"request_id\":\"a65a11e8-5595-4fe2-b7a6-1c9d5caa1e18\"}}"
+    }
+  },
+  {
+    "ts": 1761902258960,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "rate_limited",
+    "payload": {
+      "purpose": "main_fallback",
+      "attempt": 1,
+      "status": 429,
+      "wait": 1.7574432480880275,
+      "retry_after": 1.2,
+      "head": "{\"errors\":{\"message\":\"Request limit exceeded.\",\"request_id\":\"f655baee-73aa-4955-9af6-fd22cd48026a\"}}"
+    }
+  },
+  {
+    "ts": 1761902261022,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "rate_limited",
+    "payload": {
+      "purpose": "main_fallback",
+      "attempt": 2,
+      "status": 429,
+      "wait": 3.2938736165678426,
+      "retry_after": 1.2,
+      "head": "{\"errors\":{\"message\":\"Request limit exceeded.\",\"request_id\":\"30fb4af8-7c06-432b-b3a8-7ec711c677e3\"}}"
+    }
+  },
+  {
+    "ts": 1761902261023,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "upstream_error",
+    "payload": {
+      "when": "fallback",
+      "status": 429,
+      "head": "{\"errors\":{\"message\":\"Request limit exceeded.\",\"request_id\":\"30fb4af8-7c06-432b-b3a8-7ec711c677e3\"}}"
+    }
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 907,
+      "y": 1130,
+      "button": 0,
+      "path": "textarea#input"
+    },
+    "ts": 1761902280059,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyS",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761902280805,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "s",
+      "selStart": 1,
+      "selEnd": 1
+    },
+    "ts": 1761902280805,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "Space",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761902280805,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "是",
+      "selStart": 1,
+      "selEnd": 1
+    },
+    "ts": 1761902280805,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyE",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761902280805,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "是e",
+      "selStart": 2,
+      "selEnd": 2
+    },
+    "ts": 1761902280805,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyS"
+    },
+    "ts": 1761902280805,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "s",
+      "code": "KeyS"
+    },
+    "ts": 1761902280805,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "Space"
+    },
+    "ts": 1761902280805,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": " ",
+      "code": "Space"
+    },
+    "ts": 1761902280805,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyD",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761902280805,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "是ed",
+      "selStart": 3,
+      "selEnd": 3
+    },
+    "ts": 1761902280805,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyE"
+    },
+    "ts": 1761902280805,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "e",
+      "code": "KeyE"
+    },
+    "ts": 1761902280805,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyD"
+    },
+    "ts": 1761902280805,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "d",
+      "code": "KeyD"
+    },
+    "ts": 1761902280805,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyF",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761902280805,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "是edf",
+      "selStart": 4,
+      "selEnd": 4
+    },
+    "ts": 1761902280805,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "Space",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761902280805,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "是二等分",
+      "selStart": 4,
+      "selEnd": 4
+    },
+    "ts": 1761902280805,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyS",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761902280805,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "是二等分s",
+      "selStart": 5,
+      "selEnd": 5
+    },
+    "ts": 1761902280805,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyF"
+    },
+    "ts": 1761902280805,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "f",
+      "code": "KeyF"
+    },
+    "ts": 1761902280805,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyS"
+    },
+    "ts": 1761902280805,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "s",
+      "code": "KeyS"
+    },
+    "ts": 1761902280805,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyF",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761902280805,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "是二等分sf",
+      "selStart": 6,
+      "selEnd": 6
+    },
+    "ts": 1761902280805,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyF"
+    },
+    "ts": 1761902280805,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "f",
+      "code": "KeyF"
+    },
+    "ts": 1761902280805,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "Space"
+    },
+    "ts": 1761902280805,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": " ",
+      "code": "Space"
+    },
+    "ts": 1761902280805,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "Space",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761902280805,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "是二等分是否",
+      "selStart": 6,
+      "selEnd": 6
+    },
+    "ts": 1761902280805,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1761902280922,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "llm_stream_begin",
+    "payload": {
+      "text": "是二等分是否",
+      "attach_count": 0,
+      "plan": {
+        "route": "NORMAL",
+        "likely": "both"
+      }
+    }
+  },
+  {
+    "ts": 1761902281259,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "rate_limited",
+    "payload": {
+      "purpose": "main_stream",
+      "attempt": 1,
+      "status": 429,
+      "wait": 1.5155619003713023,
+      "retry_after": 1.2,
+      "head": "{\"errors\":{\"message\":\"Request limit exceeded.\",\"request_id\":\"d2ea1d7f-0de4-49ab-b199-9052a2b41258\"}}"
+    }
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "Space"
+    },
+    "ts": 1761902281541,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": " ",
+      "code": "Space"
+    },
+    "ts": 1761902281541,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Enter",
+      "code": "Enter",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761902281541,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Enter",
+      "code": "Enter"
+    },
+    "ts": 1761902281541,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1761902283083,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "rate_limited",
+    "payload": {
+      "purpose": "main_stream",
+      "attempt": 2,
+      "status": 429,
+      "wait": 3.230376094726706,
+      "retry_after": 1.2,
+      "head": "{\"errors\":{\"message\":\"Request limit exceeded.\",\"request_id\":\"8e8f69a4-9e7b-45ba-b17b-37ee05aee1b7\"}}"
+    }
+  },
+  {
+    "ts": 1761902286635,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "rate_limited",
+    "payload": {
+      "purpose": "main_stream",
+      "attempt": 3,
+      "status": 429,
+      "wait": 6.358311660772959,
+      "retry_after": 1.2,
+      "head": "{\"errors\":{\"message\":\"Request limit exceeded.\",\"request_id\":\"10c7a490-0eb4-45e4-9ecb-02c439c1a187\"}}"
+    }
+  },
+  {
+    "ts": 1761902286952,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "rate_limited",
+    "payload": {
+      "purpose": "main_fallback",
+      "attempt": 1,
+      "status": 429,
+      "wait": 1.5729263987185886,
+      "retry_after": 1.2,
+      "head": "{\"errors\":{\"message\":\"Request limit exceeded.\",\"request_id\":\"88f68ad3-db9a-4947-9a5a-74cd15d881b4\"}}"
+    }
+  },
+  {
+    "ts": 1761902288855,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "rate_limited",
+    "payload": {
+      "purpose": "main_fallback",
+      "attempt": 2,
+      "status": 429,
+      "wait": 3.4547466187700424,
+      "retry_after": 1.2,
+      "head": "{\"errors\":{\"message\":\"Request limit exceeded.\",\"request_id\":\"a692b99b-6483-427b-961e-1949680f236c\"}}"
+    }
+  },
+  {
+    "ts": 1761902288857,
+    "session_id": "s_1761902249441_caa081",
+    "trial_id": "t_1761902246634_d965",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "upstream_error",
+    "payload": {
+      "when": "fallback",
+      "status": 429,
+      "head": "{\"errors\":{\"message\":\"Request limit exceeded.\",\"request_id\":\"a692b99b-6483-427b-961e-1949680f236c\"}}"
+    }
+  }
+]

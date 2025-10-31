@@ -1,0 +1,118 @@
+[
+  {
+    "ts": 1761908031176,
+    "session_id": "s_1761908031176_dd2ad4",
+    "trial_id": "t_1761908031175_47e8",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "llm_stream_begin",
+    "payload": {
+      "text": "123123",
+      "attach_count": 0,
+      "plan": {
+        "route": "NORMAL",
+        "likely": "both"
+      }
+    }
+  },
+  {
+    "ts": 1761908031506,
+    "session_id": "s_1761908031176_dd2ad4",
+    "trial_id": "t_1761908031175_47e8",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "rate_limited",
+    "payload": {
+      "purpose": "main_stream",
+      "attempt": 1,
+      "status": 429,
+      "wait": 1.5361698715724454,
+      "retry_after": 1.2,
+      "head": "{\"errors\":{\"message\":\"Request limit exceeded.\",\"request_id\":\"5fb88702-052b-40db-9619-3e84962718aa\"}}"
+    }
+  },
+  {
+    "ts": 1761908033375,
+    "session_id": "s_1761908031176_dd2ad4",
+    "trial_id": "t_1761908031175_47e8",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "rate_limited",
+    "payload": {
+      "purpose": "main_stream",
+      "attempt": 2,
+      "status": 429,
+      "wait": 3.1160849835285895,
+      "retry_after": 1.2,
+      "head": "{\"errors\":{\"message\":\"Request limit exceeded.\",\"request_id\":\"9faaa746-d12c-4ab2-b387-58f68756aa04\"}}"
+    }
+  },
+  {
+    "ts": 1761908037187,
+    "session_id": "s_1761908031176_dd2ad4",
+    "trial_id": "t_1761908031175_47e8",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "rate_limited",
+    "payload": {
+      "purpose": "main_stream",
+      "attempt": 3,
+      "status": 429,
+      "wait": 6.412536561959285,
+      "retry_after": 1.2,
+      "head": "{\"errors\":{\"message\":\"Request limit exceeded.\",\"request_id\":\"06fec10c-3c34-419d-9b53-8c6a82fc4da4\"}}"
+    }
+  },
+  {
+    "ts": 1761908037484,
+    "session_id": "s_1761908031176_dd2ad4",
+    "trial_id": "t_1761908031175_47e8",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "rate_limited",
+    "payload": {
+      "purpose": "main_fallback",
+      "attempt": 1,
+      "status": 429,
+      "wait": 1.533751756406222,
+      "retry_after": 1.2,
+      "head": "{\"errors\":{\"message\":\"Request limit exceeded.\",\"request_id\":\"67b543e3-5362-4d66-8ac7-3f790a377884\"}}"
+    }
+  },
+  {
+    "ts": 1761908039327,
+    "session_id": "s_1761908031176_dd2ad4",
+    "trial_id": "t_1761908031175_47e8",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "rate_limited",
+    "payload": {
+      "purpose": "main_fallback",
+      "attempt": 2,
+      "status": 429,
+      "wait": 3.345857246610146,
+      "retry_after": 1.2,
+      "head": "{\"errors\":{\"message\":\"Request limit exceeded.\",\"request_id\":\"7131daff-02c6-4c9c-a1b4-66cec5b60a41\"}}"
+    }
+  },
+  {
+    "ts": 1761908039328,
+    "session_id": "s_1761908031176_dd2ad4",
+    "trial_id": "t_1761908031175_47e8",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "upstream_error",
+    "payload": {
+      "when": "fallback",
+      "status": 429,
+      "head": "{\"errors\":{\"message\":\"Request limit exceeded.\",\"request_id\":\"7131daff-02c6-4c9c-a1b4-66cec5b60a41\"}}"
+    }
+  }
+]

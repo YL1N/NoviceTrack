@@ -39,10 +39,21 @@ DEBUG = os.getenv("DEBUG", "1") == "1"
 DEBUG_MODE = 1  # 设置为 1 开启调试模式，设置为 0 关闭调试模式
 
 
-# ModelScope / OpenAI-兼容
-MS_API_KEY = os.getenv("MODELSCOPE_API_KEY", "ms-4c5af8e1-b8d6-4abc-90cc-d4fb078702bb")
-MS_BASE_URL = os.getenv("MODELSCOPE_BASE_URL", "https://api-inference.modelscope.cn/v1")
-MODEL = os.getenv("MODEL", "Qwen/Qwen3-VL-235B-A22B-Instruct")
+# DashScope / OpenAI-兼容（阿里云）
+# 说明：
+# - 使用环境变量 DASHSCOPE_API_KEY 提供密钥（不要硬编码）
+# - 基础地址固定为兼容模式，/chat/completions 会自动拼上
+MS_API_KEY  = os.getenv("DASHSCOPE_API_KEY", "sk-d22d88924be5480294aa9091e8033437")  # ← 你的阿里云 key 放到这个 env
+MS_BASE_URL = os.getenv("DASHSCOPE_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1")
+MODEL       = os.getenv("MODEL", "qwen3-vl-plus")  # 例如：qwen3-vl-plus / qwen2.5-vl-72b-instruct 等
+
+# （可选）启用“思考过程”，与 DashScope 兼容模式参数一致
+DASHSCOPE_ENABLE_THINKING = os.getenv("DASHSCOPE_ENABLE_THINKING", "0") == "1"
+try:
+    DASHSCOPE_THINKING_BUDGET = int(os.getenv("DASHSCOPE_THINKING_BUDGET", "0") or "0")
+except Exception:
+    DASHSCOPE_THINKING_BUDGET = 0
+
 
 # ---- 如需启动即强校验 Token，取消下一行注释 ----
 # def _require_valid_token():
@@ -84,6 +95,21 @@ def _set_rate_limited(seconds: float):
 def _rate_limited_now() -> bool:
     return time.time() < _RATE_LIMIT_UNTIL
 
+def _wait_rate_cooldown(extra: float = 0.0, cap: float = 12.0):
+    """
+    等待当前限流窗口结束；可加额外等待(extra)，并用 cap 设一个最长等待上限，防止长时间阻塞。
+    - 若当前未处于限流窗口，只睡 extra。
+    - 若处于窗口内，睡 (窗口剩余 + extra)，但不超过 cap。
+    """
+    now = time.time()
+    remain = 0.0
+    if _rate_limited_now():
+        remain = max(0.0, _RATE_LIMIT_UNTIL - now)
+    wait = min(max(0.0, remain + max(0.0, extra)), max(0.0, cap))
+    if wait > 0:
+        if DEBUG_MODE == 1:
+            print(f"[DEBUG] Cooldown sleep {wait:.1f}s (remain={remain:.1f}, extra={extra:.1f})")
+        time.sleep(wait)
 
 # ========= 会话/重启保护 =========
 @app.before_request
@@ -311,15 +337,24 @@ def _retry_after_seconds(resp: requests.Response) -> float:
 def qwen_chat(messages: List[Dict], stream: bool, temperature: float = 0.3,
               max_retries: int = 3, purpose: str = "main") -> requests.Response:
     """
-    包装 POST：遇到 429 做指数退避重试；返回最后一次响应（可能 not ok）。
-    命中 429 会设置全局“限流窗口”，其他路径（仲裁/标注）可据此跳过。
+    兼容 DashScope 的 OpenAI /chat/completions：
+    - base: https://dashscope.aliyuncs.com/compatible-mode/v1
+    - 路径: /chat/completions
+    - Header: Authorization: Bearer <DASHSCOPE_API_KEY>
+    - 支持 stream=True 走 SSE
+    - 延续现有 429 退避与全局限流窗口
     """
+    if not MS_API_KEY:
+        raise RuntimeError("DASHSCOPE_API_KEY 未设置，请在环境变量中提供。")
+
     url = f"{MS_BASE_URL}/chat/completions"
     headers = {
         "Authorization": f"Bearer {MS_API_KEY}",
         "Content-Type": "application/json",
         "Accept": "text/event-stream" if stream else "application/json",
     }
+
+    # DashScope 兼容模式的 payload 与 OpenAI 一致；可附加 enable_thinking / thinking_budget
     data = {
         "model": MODEL,
         "temperature": temperature,
@@ -327,6 +362,12 @@ def qwen_chat(messages: List[Dict], stream: bool, temperature: float = 0.3,
     }
     if stream:
         data["stream"] = True
+
+    # （可选）启用“思考过程”（仅当设置了 env 时生效）
+    if DASHSCOPE_ENABLE_THINKING:
+        data["enable_thinking"] = True
+        if DASHSCOPE_THINKING_BUDGET and DASHSCOPE_THINKING_BUDGET > 0:
+            data["thinking_budget"] = DASHSCOPE_THINKING_BUDGET
 
     last_resp = None
     for attempt in range(max_retries):
@@ -336,25 +377,28 @@ def qwen_chat(messages: List[Dict], stream: bool, temperature: float = 0.3,
             last_resp = None
             if attempt < max_retries - 1:
                 wait = (0.8 * (2 ** attempt)) + random.uniform(0, 0.2)
-                log_event("upstream_exception_retry", {"purpose": purpose, "attempt": attempt+1, "wait": wait, "error": str(e)})
+                log_event("upstream_exception_retry", {
+                    "purpose": purpose, "attempt": attempt+1, "wait": wait, "error": str(e)
+                })
                 time.sleep(wait)
                 continue
             raise
 
         last_resp = resp
-        # 非 429 直接返回
+
+        # 非 429 直接返回；429 进入退避
         if resp.status_code != 429:
             return resp
 
-        # ============ 命中 429：指数退避 + 记录限流窗口 ============
+        # 命中 429：指数退避 + 设置全局限流窗口
         wait_hdr = _retry_after_seconds(resp)
-        # 增加退避时间，避免频繁重试
         wait = max(wait_hdr, 1.5 * (2 ** attempt)) + random.uniform(0, 0.5)
-        # 设置更长的限流窗口（至少 5 秒）
         _set_rate_limited(max(wait, 5.0))
         head = ""
-        try: head = resp.text[:500]
-        except Exception: pass
+        try:
+            head = resp.text[:500]
+        except Exception:
+            pass
         log_event("rate_limited", {
             "purpose": purpose, "attempt": attempt+1, "status": resp.status_code,
             "wait": wait, "retry_after": wait_hdr, "head": head
@@ -363,12 +407,14 @@ def qwen_chat(messages: List[Dict], stream: bool, temperature: float = 0.3,
             print(f"[RATE LIMIT] {purpose} attempt {attempt+1}, waiting {wait:.1f}s...")
             time.sleep(wait)
             continue
-        # 最后一次也 429，设置长窗口并返回
-        _set_rate_limited(10.0)  # 10秒冷却
+
+        # 最后一次也 429，设置 10s 冷却并返回
+        _set_rate_limited(10.0)
         print(f"[RATE LIMIT] {purpose} max retries exhausted, setting 10s cooldown")
         return resp
 
-    return last_resp  # 理论走不到
+    return last_resp
+
 
 
 # ========= 仲裁：图像极简标注 =========
@@ -435,13 +481,27 @@ def arbiter_decide(user_text: str, attach_msgs: List[Dict]) -> Dict:
     # 限流窗口或无文本时跳过仲裁
     if _rate_limited_now():
         if DEBUG_MODE == 1:
-            print("[DEBUG] Arbiter skipped - rate limited")
+            print("[DEBUG] Arbiter skipped - rate limited (pre-check)")
         return {"route": "NORMAL", "likely_target": "unknown", "alignment": "aligned", "confidence": 0.0}
-    
+
     if not user_text or len(user_text.strip()) < 3:
         return {"route": "IMAGE_ONLY", "likely_target": "image", "alignment": "aligned", "confidence": 0.9}
 
+    # —— 第一步：图片极简打标（可能命中 429 并设置限流窗口）
     img_tags = image_brief(attach_msgs)
+
+    # tagger → arbiter 之间等待（先固定 1s，再根据限流窗口补等）
+    time.sleep(1.0)
+    if _rate_limited_now():
+        # 若 tagger 设置了窗口，这里等待到窗口结束（再加 0.2s 抖动）
+        _wait_rate_cooldown(extra=0.2, cap=12.0)
+
+    # 仍在限流窗口：直接放弃仲裁，请求走 NORMAL，避免继续撞 429
+    if _rate_limited_now():
+        if DEBUG_MODE == 1:
+            print("[DEBUG] Arbiter aborted - still rate limited after tagger")
+        return {"route": "NORMAL", "likely_target": "text", "alignment": "aligned", "confidence": 0.0}
+
     img_tags_json = json.dumps(img_tags, ensure_ascii=False)
 
     prompt = (
@@ -465,23 +525,22 @@ def arbiter_decide(user_text: str, attach_msgs: List[Dict]) -> Dict:
     ]
 
     try:
-        r = qwen_chat(messages, stream=False, temperature=0.0, max_retries=2, purpose="arbiter")
+        r = qwen_chat(messages, stream=False, temperature=0.0, max_retries=1, purpose="arbiter")
         if r.status_code == 429:
-            # 命中限流，直接 NORMAL
+            # 命中限流：不再继续，回退 NORMAL
             return {"route": "NORMAL", "likely_target": "text", "alignment": "aligned", "confidence": 0.0}
         j = r.json()
         raw = (j.get("choices", [{}])[0].get("message", {}) or {}).get("content", "") or j.get("output", "")
         info = json.loads(raw.strip())
 
-        # 获取 alignment, confirmation 和 likely_target
-        alignment = info.get("alignment", "aligned")  # 如果是 unknown 则默认为 aligned
-        confirmation = info.get("confirmation", "text")  # 如果是 none 则默认为 text
-        likely_target = info.get("likely_target", "text")  # 如果是 unknown 则默认为 text
+        alignment = info.get("alignment", "aligned")
+        confirmation = info.get("confirmation", "text")
+        likely_target = info.get("likely_target", "text")
         confd = float(info.get("confidence") or 0.0)
 
-        # 如果启用调试模式，输出调试信息
         if DEBUG_MODE == 1:
-            print(f"Debug Info - Alignment: {alignment}, Confirmation: {confirmation}, Likely Target: {likely_target}, Confidence: {confd}")
+            print(
+                f"Debug Info - Alignment: {alignment}, Confirmation: {confirmation}, Likely Target: {likely_target}, Confidence: {confd}")
 
         if confirmation == "text":
             return {"route": "TEXT_ONLY", "likely_target": "text", "alignment": alignment, "confidence": confd}
@@ -492,7 +551,6 @@ def arbiter_decide(user_text: str, attach_msgs: List[Dict]) -> Dict:
         return {"route": "NORMAL", "likely_target": likely_target, "alignment": alignment, "confidence": confd}
 
     except Exception:
-        # 捕获异常时，返回默认值
         return {"route": "NORMAL", "likely_target": "text", "alignment": "aligned", "confidence": 0.0}
 
 
@@ -682,6 +740,9 @@ def api_pick():
     if not disp:
         return jsonify(ok=False), 404
 
+    # 当前 trial_id，用于隔离不同“新对话”的选择
+    cur_tid = ensure_trial_id()
+
     actual = disp
     if get_conf()["mode"] == "task_i":
         neigh = []
@@ -700,27 +761,37 @@ def api_pick():
     displays = session.get("picks_display") or []
     actuals  = session.get("picks_actual")  or []
 
+    # 去重逻辑保持不变（按 index 判重）
     if get_conf()["mode"] == "task_i":
         if any(a.get("index") == actual["index"] for a in actuals):
             log_event("pick_dup_actual", {"display": disp, "actual": actual})
-            return jsonify(ok=True, display=disp, actual=actual, dup=True)
+            # 返回时也带上 trial_id，方便前端如需对比
+            ret_disp = dict(disp);  ret_disp["trial_id"] = cur_tid
+            ret_act  = dict(actual);ret_act["trial_id"] = cur_tid
+            return jsonify(ok=True, display=ret_disp, actual=ret_act, dup=True)
     else:
         if any(d.get("index") == disp["index"] for d in displays):
             log_event("pick_dup_display", {"display": disp})
-            return jsonify(ok=True, display=disp, dup=True)
+            ret_disp = dict(disp);  ret_disp["trial_id"] = cur_tid
+            return jsonify(ok=True, display=ret_disp, dup=True)
 
-    displays.append(disp)
-    actuals.append(actual)
+    # —— 关键：写入时打上 trial_id
+    disp_rec = dict(disp);    disp_rec["trial_id"] = cur_tid
+    act_rec  = dict(actual);  act_rec["trial_id"]  = cur_tid
+
+    displays.append(disp_rec)
+    actuals.append(act_rec)
     session["picks_display"] = displays
     session["picks_actual"]  = actuals
-    
+
     if DEBUG_MODE == 1:
         print(f"\n[DEBUG] ========== 图片选择 ==========")
         print(f"[DEBUG] 选中图片: {disp.get('name', 'unknown')}")
-        print(f"[DEBUG] 当前附件总数: {len(actuals)}")
+        print(f"[DEBUG] 当前附件总数: {len(actuals)} (trial={cur_tid})")
 
-    log_event("pick", {"display": disp, "actual": actual, "deception": get_conf()["mode"] == "task_i"})
-    return jsonify(ok=True, display=disp, actual=actual, dup=False)
+    log_event("pick", {"display": disp_rec, "actual": act_rec, "deception": get_conf()["mode"] == "task_i"})
+    return jsonify(ok=True, display=disp_rec, actual=act_rec, dup=False)
+
 
 
 @app.route("/api/remove_pick", methods=["POST"])
@@ -790,22 +861,32 @@ def api_send_stream():
     data = request.get_json(force=True)
     text = (data.get("text") or "").strip()
 
-    displays = session.get("picks_display") or []
-    actuals = session.get("picks_actual") or []
+    # —— 只取“当前 trial”的 picks，避免上轮残留
+    cur_tid = ensure_trial_id()
+    all_disp = session.get("picks_display") or []
+    all_act  = session.get("picks_actual")  or []
+
+    displays_snapshot = [d for d in all_disp if d.get("trial_id") == cur_tid]
+    actuals_snapshot  = [a for a in all_act  if a.get("trial_id") == cur_tid]
+
+    # 立刻清空（防止后续再叠加）
+    session["picks_display"] = []
+    session["picks_actual"]  = []
 
     if DEBUG_MODE == 1:
         print(f"\n[DEBUG] ========== 新消息 ==========")
         print(f"[DEBUG] 用户文本: {text[:100]}...")
-        print(f"[DEBUG] 附件数量: {len(actuals)}")
-        if actuals:
-            for i, a in enumerate(actuals):
+        print(f"[DEBUG] 附件数量(快照): {len(actuals_snapshot)} (trial={cur_tid})")
+        if actuals_snapshot:
+            for i, a in enumerate(actuals_snapshot):
                 print(f"[DEBUG] 附件 {i + 1}: {a.get('name', 'unknown')}")
 
-    if not text and actuals:
+    # 仅附件默认文案
+    if not text and actuals_snapshot:
         text = "请基于我刚刚附带的文件或图片，进行有用的解读、摘要与建议；如需明确目标，请先用一句话澄清后再回答。"
 
     strategy = get_conf()["strategy"]
-    attach_msgs = build_attach_msgs(actuals)
+    attach_msgs = build_attach_msgs(actuals_snapshot)
 
     if DEBUG_MODE == 1:
         print(f"[DEBUG] 构建的附件消息数: {len(attach_msgs)}")
@@ -813,9 +894,9 @@ def api_send_stream():
             print(f"[DEBUG] 附件消息 {i + 1} 类型: {am.get('type', 'unknown')}")
 
     def gen():
-        # —— 构造预览清单（给前端首包插入气泡）
+        # —— 首包：把预览发给前端
         previews = []
-        for it in (session.get("picks_actual") or []):
+        for it in actuals_snapshot:
             rel = it.get("rel")
             name = it.get("name")
             is_image = bool(it.get("is_image"))
@@ -830,11 +911,9 @@ def api_send_stream():
                 except Exception:
                     pass
             previews.append(pv)
-
-        # 先把“预览+提示”实时发给前端，避免卡白屏
         yield sse("meta", {"toast": "已接收，开始处理...", "previews": previews})
 
-        # 仲裁尽量不阻塞首包
+        # 仲裁
         plan0 = {"route": "NORMAL", "likely_target": "both", "alignment": "aligned", "confidence": 0.0}
         try:
             if not _rate_limited_now() and text and len(text.strip()) >= 3 and attach_msgs:
@@ -844,8 +923,7 @@ def api_send_stream():
 
         route0, likely = plan0["route"], plan0.get("likely_target", "unknown")
         if DEBUG_MODE == 1:
-            print(
-                f"[DEBUG] Arbiter result - route: {route0}, likely_target: {likely}, confidence: {plan0.get('confidence', 0)}")
+            print(f"[DEBUG] Arbiter result - route: {route0}, likely_target: {likely}, confidence: {plan0.get('confidence', 0)}")
 
         if route0 == "CONFLICT":
             if strategy == "A":
@@ -867,62 +945,57 @@ def api_send_stream():
         log_event("llm_stream_begin", {"text": text, "attach_count": len(attach_msgs),
                                        "plan": {"route": route, "likely": likely}})
 
+        # （后续逻辑与原函数相同）
         try:
             r = qwen_chat(messages, stream=True,
                           temperature=0.3 if route in ("NORMAL", "TEXT_ONLY", "IMAGE_ONLY") else 0.2,
-                          max_retries=3, purpose="main_stream")
+                          max_retries=1, purpose="main_stream")
             if (r is None) or (not r.ok):
                 if r and r.status_code == 429:
                     msg = "系统当前请求过于频繁，请稍后再试（约 10 秒后恢复）"
                     for i in range(0, len(msg), 10):
-                        yield sse("delta", {"t": msg[i:i + 10]});
-                        time.sleep(0.02)
+                        yield sse("delta", {"t": msg[i:i + 10]}); time.sleep(0.02)
                     yield sse("done", "")
                     log_event("llm_stream_end", {"ok": False, "reason": "rate_limit_429"})
-                    session["picks_display"] = []
-                    session["picks_actual"] = []
+                    return
+
+                # 兜底
+                if _rate_limited_now():
+                    msg = "系统当前请求过于频繁，请稍后再试（约 10 秒后恢复）"
+                    for i in range(0, len(msg), 10):
+                        yield sse("delta", {"t": msg[i:i + 10]}); time.sleep(0.02)
+                    yield sse("done", "")
+                    log_event("llm_stream_end", {"ok": False, "reason": "pre_fallback_rate_limited"})
                     return
 
                 r2 = qwen_chat(messages, stream=False,
                                temperature=0.3 if route in ("NORMAL", "TEXT_ONLY", "IMAGE_ONLY") else 0.2,
-                               max_retries=2, purpose="main_fallback")
+                               max_retries=1, purpose="main_fallback")
                 if (r2 is None) or (not r2.ok):
                     if r2 and r2.status_code == 429:
                         msg = "系统当前请求过于频繁，请稍后再试（约 10 秒后恢复）"
                         for i in range(0, len(msg), 10):
-                            yield sse("delta", {"t": msg[i:i + 10]});
-                            time.sleep(0.02)
+                            yield sse("delta", {"t": msg[i:i + 10]}); time.sleep(0.02)
                         yield sse("done", "")
                         log_event("llm_stream_end", {"ok": False, "reason": "fallback_429"})
-                        session["picks_display"] = []
-                        session["picks_actual"] = []
                         return
                     head = ""
-                    try:
-                        head = r2.text[:500]
-                    except Exception:
-                        pass
-                    log_event("upstream_error",
-                              {"when": "fallback", "status": getattr(r2, "status_code", -1), "head": head})
+                    try: head = r2.text[:500]
+                    except Exception: pass
+                    log_event("upstream_error", {"when": "fallback", "status": getattr(r2, "status_code", -1), "head": head})
                     msg = "服务暂时不可用，请稍后重试"
                     for i in range(0, len(msg), 10):
-                        yield sse("delta", {"t": msg[i:i + 10]});
-                        time.sleep(0.02)
+                        yield sse("delta", {"t": msg[i:i + 10]}); time.sleep(0.02)
                     yield sse("done", "")
-                    session["picks_display"] = []
-                    session["picks_actual"] = []
                     return
 
                 j = r2.json()
                 ans = (j.get("choices", [{}])[0].get("message", {}) or {}).get("content") \
                       or j.get("output") or "(空响应)"
                 for i in range(0, len(ans), 28):
-                    yield sse("delta", {"t": ans[i:i + 28]});
-                    time.sleep(0.02)
+                    yield sse("delta", {"t": ans[i:i + 28]}); time.sleep(0.02)
                 yield sse("done", "")
                 log_event("llm_stream_end", {"ok": True, "text_len": len(ans), "mode": "non_stream_fallback"})
-                session["picks_display"] = []
-                session["picks_actual"] = []
                 return
 
             bbuf = b""
@@ -947,8 +1020,6 @@ def api_send_stream():
                     if payload == "[DONE]":
                         yield sse("done", "")
                         log_event("llm_stream_end", {"ok": True, "text_len": len(acc), "mode": "stream"})
-                        session["picks_display"] = []
-                        session["picks_actual"] = []
                         return
 
                     delta_text = ""
@@ -969,20 +1040,19 @@ def api_send_stream():
 
             yield sse("done", "")
             log_event("llm_stream_end", {"ok": True, "text_len": len(acc), "mode": "stream_no_done"})
-            session["picks_display"] = []
-            session["picks_actual"] = []
 
         except Exception as e:
             log_event("stream_exception", {"error": str(e)})
             msg = f"（上游错误：{str(e)}）"
             for i in range(0, len(msg), 28):
-                yield sse("delta", {"t": msg[i:i + 28]});
-                time.sleep(0.02)
+                yield sse("delta", {"t": msg[i:i + 28]}); time.sleep(0.02)
             yield sse("done", "")
-            session["picks_display"] = []
-            session["picks_actual"] = []
 
     return Response(stream_with_context(gen()), content_type="text/event-stream; charset=utf-8")
+
+
+
+
 
 
 # ========= 非流式（备份） =========
@@ -991,19 +1061,23 @@ def api_send_compat():
     data = request.get_json(force=True)
     text = (data.get("text") or "").strip()
 
-    displays = session.get("picks_display") or []
-    actuals  = session.get("picks_actual")  or []
+    # —— 只取当前 trial 的 picks，再清空
+    cur_tid = ensure_trial_id()
+    all_disp = session.get("picks_display") or []
+    all_act  = session.get("picks_actual")  or []
+    displays_snapshot = [d for d in all_disp if d.get("trial_id") == cur_tid]
+    actuals_snapshot  = [a for a in all_act  if a.get("trial_id") == cur_tid]
+    session["picks_display"] = []
+    session["picks_actual"]  = []
 
-    if not text and actuals:
+    if not text and actuals_snapshot:
         text = "请基于我刚刚附带的文件或图片，进行有用的解读、摘要与建议；如需明确目标，请先用一句话澄清后再回答。"
 
     strategy = get_conf()["strategy"]
-    attach_msgs = build_attach_msgs(actuals)
+    attach_msgs = build_attach_msgs(actuals_snapshot)
 
-    # ========== 临时禁用仲裁，避免图片被误过滤 ==========
-    USE_ARBITER = True  # 与流式接口保持一致
-    
-    if USE_ARBITER:
+    USE_ARBITER = True
+    if USE_ARBITER and (not _rate_limited_now()):
         plan0 = arbiter_decide(text, attach_msgs)
         route0, likely = plan0["route"], plan0.get("likely_target", "unknown")
         if route0 == "CONFLICT":
@@ -1026,8 +1100,11 @@ def api_send_compat():
     try:
         r = qwen_chat(messages, stream=False,
                       temperature=0.3 if route in ("NORMAL","TEXT_ONLY","IMAGE_ONLY") else 0.2,
-                      max_retries=3, purpose="main_non_stream")
+                      max_retries=1, purpose="main_non_stream")
         if (r is None) or (not r.ok):
+            if r and r.status_code == 429:
+                ans = "系统当前请求过于频繁，请稍后再试（约 10 秒后恢复）"
+                return jsonify(ok=True, assistant_text=ans)
             head = ""
             try: head = r.text[:500]
             except Exception: pass
@@ -1041,11 +1118,11 @@ def api_send_compat():
     except Exception as e:
         ans = f"（上游错误：{str(e)}）"
 
-    # 结束后清 picks
-    session["picks_display"] = []
-    session["picks_actual"]  = []
-
     return jsonify(ok=True, assistant_text=ans)
+
+
+
+
 
 
 # ========= 前端日志 =========
