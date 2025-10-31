@@ -139,12 +139,17 @@ function renderAttachPreviewHTML(items){
   if (!items || !items.length) return '';
   const cells = items.map(it=>{
     if (it.is_image){
-      return `<div class="pv"><img src="${it.src}" onerror="this.style.opacity=.2;"></div>`;
+      const src = it.b64 || it.src;
+      if (src){
+        return `<div class="pv"><img src="${src}" loading="eager" onerror="this.closest('.pv').innerHTML='<div class=&quot;pv file&quot;><div class=&quot;icon&quot;>📄</div><div class=&quot;fn&quot;>${(it.name||'图片')}</div></div>';"></div>`;
+      }
+      return `<div class="pv file"><div class="icon">📄</div><div class="fn" title="${it.name}">${it.name}</div></div>`;
     }
     return `<div class="pv file"><div class="icon">📄</div><div class="fn" title="${it.name}">${it.name}</div></div>`;
   }).join('');
   return `<div class="preview-bar">${cells}</div>`;
 }
+
 
 /* 修复：预览叠在气泡上方（不再挤到左侧抬高气泡） */
 function appendUserBubble(text, attaches){
@@ -155,7 +160,36 @@ function appendUserBubble(text, attaches){
   row.innerHTML = `<div class="stack">${pv}<div class="bubble">${text || '(未输入文本)'}</div></div>`;
   feed.appendChild(row);
   feed.scrollTop = feed.scrollHeight;
+  return row;
 }
+
+
+function injectPreviews(userRow, previews){
+  if (!userRow || !previews || !previews.length) return;
+  const stack = userRow.querySelector('.stack');
+  if (!stack) return;
+
+  // 生成预览 HTML（优先 b64，再退回 src；失败时给占位卡）
+  const cells = previews.map(p=>{
+    if (p.is_image){
+      const src = p.b64 || p.src;
+      if (src){
+        return `<div class="pv"><img src="${src}" loading="eager" onerror="this.closest('.pv').innerHTML='<div class=&quot;pv file&quot;><div class=&quot;icon&quot;>📄</div><div class=&quot;fn&quot;>${(p.name||'图片')}</div></div>';"></div>`;
+      }
+      return `<div class="pv file"><div class="icon">📄</div><div class="fn">${(p.name||'图片')}</div></div>`;
+    }
+    return `<div class="pv file"><div class="icon">📄</div><div class="fn">${(p.name||'文件')}</div></div>`;
+  }).join('');
+  const bar = document.createElement('div');
+  bar.className = 'preview-bar';
+  bar.innerHTML = cells;
+
+  // 如果已有预览条，先移除再插入新条
+  const old = stack.querySelector('.preview-bar');
+  if (old) old.remove();
+  stack.insertBefore(bar, stack.firstChild);
+}
+
 
 function createAssistantPlaceholder(){
   const feed = qs('#feed');
@@ -256,24 +290,42 @@ function openPicker(){
     STATE.picker_items = j.items || [];
     const grid = qs('#picker-grid');
     grid.innerHTML='';
+
+    // 打开前清理旧的“已选择”视觉状态
+    // （避免新对话后仍然显示已选择）
+    // 这里直接重建 DOM 已经会清，但保险起见再清一次：
+    // （如果外部自定义样式有残留）
+    // 无需处理
+
     STATE.picker_items.forEach(it=>{
       const cell = document.createElement('div');
       cell.className = 'cell';
       cell.dataset.index = it.index;
+      cell.dataset.rel = it.rel || '';
+
+      const thumbSrc = it.is_image
+        ? `/thumb/${encodeURIComponent(it.rel || '')}?w=360`
+        : null;
+
       const imgHTML = it.is_image
-        ? `<img class="thumb" loading="lazy" src="${it.src}" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22140%22><rect width=%22200%22 height=%22140%22 fill=%22%23f3f4f6%22/><text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2214%22 fill=%22%2399a%22>预览不可用</text></svg>';">`
+        ? `<img class="thumb" loading="lazy" src="${thumbSrc}"
+             alt="${it.name}"
+             onerror="this.onerror=null;this.closest('.thumb-wrap').innerHTML='<div class=&quot;file-icon&quot;>📄</div>';">`
         : `<div class="file-icon">📄</div>`;
+
       cell.innerHTML = `
         <div class="thumb-wrap">${imgHTML}<div class="badge">双击上传</div></div>
         <div class="meta">
           <div class="title" title="${it.name}">${it.name}</div>
           <div class="size">${it.size||''}</div>
         </div>`;
+
       cell.ondblclick = ()=> selectCandidate(it);
       grid.appendChild(cell);
     });
   });
 }
+
 
 function closePicker(){
   qs('#mask').classList.remove('show');
@@ -285,7 +337,6 @@ function closePicker(){
    3) 更新 #chip 以给用户明确反馈
 */
 function selectCandidate(it){
-  // 注意：任务 I 要以 actual 为准做 UI 和去重
   fetch('/api/pick', {
     method:'POST',
     headers:{'Content-Type':'application/json'},
@@ -295,43 +346,39 @@ function selectCandidate(it){
   .then(j=>{
     if(!j || j.ok === false) return;
 
-    // 如果后端给了 actual，就用 actual；否则用用户点的 it
+    // UI 上始终以“用户手动点的那张”为准做高亮
+    markCellAdded(it.index);
+
+    // 构建待发 CHIP（仍然推入服务器最终选择对象的展示信息；若服务器返回 actual，就用它的 name/size/src）
     const chosen = (j.actual && STATE.mode === 'task_i') ? j.actual : it;
 
-    // 按“最终要发送的对象”去重（任务 I：actual；其它：it）
+    // 去重（以展示/发送列表为准）
     if (STATE.chips.some(x => x.index === chosen.index)){
       toast('已在待发送列表');
-      // 视觉上标记“最终选择”的那一项（更直观）
-      markCellAdded(chosen.index);
       closePicker();
       return;
     }
 
-    // 推入待发列表（用于输入框 chip + 发送时的预览/气泡上方）
     STATE.chips.push({
       index: chosen.index,
       name: chosen.name,
       size: chosen.size,
       is_image: chosen.is_image,
-      src: chosen.src
+      // 预览优先用缩略图；后备用原 src
+      src: chosen.is_image ? `/thumb/${encodeURIComponent(chosen.rel || chosen.name)}?w=360` : (chosen.src || '')
     });
 
     renderChips();
-
-    // 标记“最终选择”的卡片
-    markCellAdded(chosen.index);
-
     toast(j.dup ? '已在待发送列表' : '已加入待发送');
-
-    // 关闭选择器
     closePicker();
   });
 }
 
 
+
 /* ========== 发送（流式优先） ========== */
 function send(){
-  // 正在流式 → 本次点击当作“中断/暂停”
+  // 正在流式 → 这次点击当作“中断”
   if (STATE.streaming && STATE.controller){
     try{ STATE.controller.abort(); }catch(_){}
     setSendButtonStreaming(false);
@@ -345,19 +392,20 @@ function send(){
   let txt = input.value.trim();
   if (!txt && STATE.chips.length===0) return;
 
-  // 仅附件：给默认文案（与后端一致）
+  // 仅附件：默认文案
   if (!txt && STATE.chips.length>0){
     txt = "请基于我刚刚附带的文件或图片，进行有用的解读、摘要与建议；如需明确目标，请先用一句话澄清后再回答。";
   }
 
   hideHeroOnce();
 
-  // 先渲染用户气泡（含附件预览，叠在气泡上方）
+  // 渲染用户气泡（含本地快照预览）
   const usedChips = STATE.chips.slice();
-  appendUserBubble(txt, usedChips);
+  const rowUser = appendUserBubble(txt, usedChips);
+  STATE.lastUserRow = rowUser;
 
-  // 立即清空输入 + 附件 UI；但后端会保留 picks 用于 task_ii carryover
-  input.value='';
+  // 清空输入与本地附件 UI（后端仍保留 picks）
+  input.value = '';
   autoGrowTextarea(input);
   STATE.chips = [];
   renderChips();
@@ -365,110 +413,117 @@ function send(){
   const row = createAssistantPlaceholder();
   STATE.pendingRow = row;
 
-  // 启动流式
+  // 启动流式（只创建一次）
   STATE.controller = new AbortController();
   setSendButtonStreaming(true);
 
-// 启动流式
-STATE.controller = new AbortController();
-setSendButtonStreaming(true);
-
-fetch('/api/send_stream', {
-  method:'POST',
-  headers:{'Content-Type':'application/json'},
-  body: JSON.stringify({text: txt}),
-  signal: STATE.controller.signal
-}).then(async (res)=>{
-  if (!res.ok || !res.body){
-    throw new Error('stream not available');
-  }
-  const reader = res.body.getReader();
-  const decoder = new TextDecoder('utf-8');
-  let buffer = '';
-  let curEvent = 'delta';
-  let gotDelta = false;          // ★ 是否收到任何正文
-  let finished = false;
-
-  const handleLine = (line)=>{
-    if (!line.trim()) return;
-    if (line.startsWith('event:')){
-      curEvent = line.slice(6).trim() || 'delta';
-      return;
-    }
-    if (!line.startsWith('data:')) return;
-    const raw = line.slice(5).trim();
-    let data;
-    try{ data = JSON.parse(raw); }catch{ data = raw; }
-
-    if (curEvent === 'delta'){
-      const d = typeof data === 'string' ? data : (data && data.t) || '';
-      if (d){
-        gotDelta = true;
-        updateAssistantStream(row, d);
-      }
-    } else if (curEvent === 'meta'){
-      if (data && data.toast) toast(data.toast);
-    } else if (curEvent === 'modal'){
-      // 可能只给了 modal + done，造成“空流”
-      toast((data && data.title) || '需要澄清');
-    } else if (curEvent === 'done'){
-      finished = true;
-    }
-  };
-
-  while(true){
-    const {done, value} = await reader.read();
-    if (done) break;
-    const chunk = decoder.decode(value, {stream:true});
-    const parts = (buffer + chunk).split('\n');
-    buffer = parts.pop();
-    for (const ln of parts){ handleLine(ln); }
-  }
-  if (buffer){ handleLine(buffer); }
-
-  // 结束占位
-  finishAssistant(row);
-  setSendButtonStreaming(false);
-  STATE.pendingRow = null;
-
-  // ★ 兜底：整段流式没有任何 delta → 自动走非流式补全一次
-  if (!gotDelta) {
-    try{
-      const j = await fetch('/api/send', {
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({text: txt})
-      }).then(r=>r.json());
-      if (j.toast) toast(j.toast);
+  // —— 首包看门狗（3.5s 未拿到任何数据就兜底）
+  let started = false;
+  const startFallback = () => {
+    if (started) return;
+    try { STATE.controller.abort(); } catch (_) {}
+    fetch('/api/send', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({text: txt})
+    }).then(r=>r.json()).then(j=>{
       const text2 = j.assistant_text || '（空响应）';
       updateAssistantStream(row, text2);
-    }catch(_){
+      finishAssistant(row);
+      setSendButtonStreaming(false);
+      STATE.pendingRow = null;
+    }).catch(()=>{
       updateAssistantStream(row, '（发送失败）');
-    }
-  }
-}).catch((err)=>{
-  if (err.name === 'AbortError') return;
-  // Fallback 非流式
-  fetch('/api/send', {
+      finishAssistant(row);
+      setSendButtonStreaming(false);
+      STATE.pendingRow = null;
+    });
+  };
+  const SSE_FIRST_CHUNK_TIMEOUT_MS = 3500;
+  const preTimer = setTimeout(startFallback, SSE_FIRST_CHUNK_TIMEOUT_MS);
+
+  fetch('/api/send_stream', {
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({text: txt})
-  }).then(r=>r.json()).then(j=>{
-    if (j.toast) toast(j.toast);
-    const text = j.assistant_text || '（空响应）';
-    updateAssistantStream(row, text);
-    finishAssistant(row);
-    setSendButtonStreaming(false);
-    STATE.pendingRow = null;
-  }).catch(()=>{
-    updateAssistantStream(row, '（发送失败）');
-    finishAssistant(row);
-    setSendButtonStreaming(false);
-    STATE.pendingRow = null;
-  });
-});
+    body: JSON.stringify({text: txt}),
+    signal: STATE.controller.signal
+  }).then(async (res)=>{
+    started = true;
+    clearTimeout(preTimer);
 
+    if (!res.ok || !res.body){
+      throw new Error('stream not available');
+    }
+
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder('utf-8');
+    let buffer = '';
+    let curEvent = 'delta';
+    let gotDelta = false;
+
+    const handleLine = (line)=>{
+      if (!line.trim()) return;
+      if (line.startsWith('event:')){
+        curEvent = line.slice(6).trim() || 'delta';
+        return;
+      }
+      if (!line.startsWith('data:')) return;
+      const raw = line.slice(5).trim();
+      let data;
+      try{ data = JSON.parse(raw); }catch{ data = raw; }
+
+      if (curEvent === 'delta'){
+        const d = typeof data === 'string' ? data : (data && data.t) || '';
+        if (d){
+          gotDelta = true;
+          updateAssistantStream(row, d);
+        }
+      } else if (curEvent === 'meta'){
+        if (data && data.toast) toast(data.toast);
+        if (data && data.previews && STATE.lastUserRow){
+          injectPreviews(STATE.lastUserRow, data.previews);  // ★ 服务端首包回填预览
+        }
+      } else if (curEvent === 'modal'){
+        toast((data && data.title) || '需要澄清');
+      } else if (curEvent === 'done'){
+        // ignore
+      }
+    };
+
+    while(true){
+      const {done, value} = await reader.read();
+      if (done) break;
+      const chunk = decoder.decode(value, {stream:true});
+      const parts = (buffer + chunk).split('\n');
+      buffer = parts.pop();
+      for (const ln of parts){ handleLine(ln); }
+    }
+    if (buffer){ handleLine(buffer); }
+
+    finishAssistant(row);
+    setSendButtonStreaming(false);
+    STATE.pendingRow = null;
+
+    if (!gotDelta) {
+      try{
+        const j = await fetch('/api/send', {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({text: txt})
+        }).then(r=>r.json());
+        if (j.toast) toast(j.toast);
+        const text2 = j.assistant_text || '（空响应）';
+        updateAssistantStream(row, text2);
+      }catch(_){
+        updateAssistantStream(row, '（发送失败）');
+      }
+    }
+  }).catch((err)=>{
+    if (err.name === 'AbortError') return;
+    startFallback();
+  });
 }
+
+
 
 function startNewChat(){
   // 1) 如果正在流式，先中断
@@ -487,7 +542,7 @@ function startNewChat(){
   STATE.chips = [];
   renderChips();
 
-  STATE.first_sent = false;   // 允许再次显示首屏 hero
+  STATE.first_sent = false;
 
   // 3) 清空对话区并回到首屏
   const feed = qs('#feed');
@@ -498,7 +553,14 @@ function startNewChat(){
     hero.classList.add('show');
   }
 
-  // 4) 通知后端：清空服务端会话上下文（trial/picks等）
+  // 4) 关闭选择器并清空网格，移除任何“已选择”标记
+  qs('#mask').classList.remove('show');
+  const grid = qs('#picker-grid');
+  if (grid){ grid.innerHTML = ''; }
+  // 防守式：如果外界仍保留了旧 DOM
+  qsa('.grid .cell.added').forEach(el=>el.classList.remove('added'));
+
+  // 5) 通知后端重置服务端会话
   fetch('/api/new_chat', {method:'POST'})
     .then(r => r.json())
     .then(j => {
@@ -510,6 +572,7 @@ function startNewChat(){
     })
     .catch(()=> toast('新对话初始化失败'));
 }
+
 
 /* ========== 捕获行为日志（点击/键盘/输入等） ========== */
 function bindCapture(){

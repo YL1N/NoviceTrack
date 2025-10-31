@@ -1,0 +1,90 @@
+[
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 1047,
+      "y": 713,
+      "button": 0,
+      "path": "div#picker-grid>div:nth-child(5)>div:nth-child(1)>img:nth-child(1)"
+    },
+    "ts": 1761887794869,
+    "session_id": "s_1761887794869_fe5f40",
+    "trial_id": "t_1761887794869_58ef",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 1047,
+      "y": 713,
+      "button": 0,
+      "path": "div#picker-grid>div:nth-child(5)>div:nth-child(1)>img:nth-child(1)"
+    },
+    "ts": 1761887794869,
+    "session_id": "s_1761887794869_fe5f40",
+    "trial_id": "t_1761887794869_58ef",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.dblclick",
+    "detail": {
+      "x": 1047,
+      "y": 713,
+      "path": "div#picker-grid>div:nth-child(5)>div:nth-child(1)>img:nth-child(1)"
+    },
+    "ts": 1761887794869,
+    "session_id": "s_1761887794869_fe5f40",
+    "trial_id": "t_1761887794869_58ef",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 766,
+      "y": 691,
+      "button": 0,
+      "path": "div#picker-grid>div:nth-child(4)>div:nth-child(1)>img:nth-child(1)"
+    },
+    "ts": 1761887794869,
+    "session_id": "s_1761887794869_fe5f40",
+    "trial_id": "t_1761887794869_58ef",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 766,
+      "y": 691,
+      "button": 0,
+      "path": "div#picker-grid>div:nth-child(4)>div:nth-child(1)>img:nth-child(1)"
+    },
+    "ts": 1761887794869,
+    "session_id": "s_1761887794869_fe5f40",
+    "trial_id": "t_1761887794869_58ef",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.dblclick",
+    "detail": {
+      "x": 766,
+      "y": 691,
+      "path": "div#picker-grid>div:nth-child(4)>div:nth-child(1)>img:nth-child(1)"
+    },
+    "ts": 1761887794869,
+    "session_id": "s_1761887794869_fe5f40",
+    "trial_id": "t_1761887794869_58ef",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  }
+]

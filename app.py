@@ -24,6 +24,14 @@ from flask import (
     send_from_directory, abort, Response, stream_with_context
 )
 
+from io import BytesIO
+try:
+    from PIL import Image
+    PIL_OK = True
+except Exception:
+    PIL_OK = False
+
+
 # ========= 基础配置 =========
 HOST = os.getenv("HOST", "0.0.0.0")
 PORT = int(os.getenv("PORT", "5010"))
@@ -50,12 +58,16 @@ LOG_DIR = Path(os.getenv("LOG_DIR", str(BASE_DIR / "data" / "logs")))
 ASSETS_DIR.mkdir(parents=True, exist_ok=True)
 LOG_DIR.mkdir(parents=True, exist_ok=True)
 
+THUMB_DIR = Path(os.getenv("THUMB_DIR", str(BASE_DIR / "assets" / "_thumbs")))
+THUMB_DIR.mkdir(parents=True, exist_ok=True)
+
+
 GRID_COLS_DEFAULT = 5
 IMAGE_EXTS = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".bmp"}
 TEXT_EXTS = {".txt", ".md", ".json", ".csv", ".log"}
 PDF_EXTS = {".pdf"}
 DOCX_EXTS = {".docx"}
-INLINE_IMAGE_LIMIT = 200 * 1024  # 仅小图内联 base64
+INLINE_IMAGE_LIMIT = 350 * 1024  # 仅小图内联 base64
 
 SERVER_BOOT_ID = os.environ.get("SERVER_BOOT_ID") or f"boot_{int(time.time()*1000)}_{uuid.uuid4().hex[:6]}"
 
@@ -200,6 +212,32 @@ def safe_base64_of_image(p: Path) -> Optional[str]:
     except Exception:
         return None
 
+def downscale_to_b64(path: Path, max_side: int = 512, max_bytes: int = 100*1024) -> Optional[str]:
+    """
+    将图片压缩成小尺寸 JPEG 并返回 base64（用于预览兜底）。
+    若 Pillow 未安装或处理失败，返回 None。
+    """
+    try:
+        from PIL import Image, ImageOps
+    except Exception:
+        return None
+    try:
+        import io, base64
+        im = Image.open(path)
+        im = ImageOps.exif_transpose(im).convert("RGB")
+        im.thumbnail((max_side, max_side))
+        q = 85
+        while q >= 50:
+            buf = io.BytesIO()
+            im.save(buf, format="JPEG", quality=q, optimize=True)
+            b = buf.getvalue()
+            if len(b) <= max_bytes or q <= 60:
+                return base64.b64encode(b).decode("ascii")
+            q -= 5
+    except Exception:
+        return None
+
+
 
 # ========= 静态资源 =========
 def build_picker_items() -> List[Dict]:
@@ -218,9 +256,10 @@ def build_picker_items() -> List[Dict]:
             "is_image": is_img,
             "mime": mime,
             "size": human_size(p.stat().st_size),
-            "src": f"/assets/{rel.as_posix()}" if is_img else None,
+            "src": (f"/thumb/{rel.as_posix()}?w=360") if is_img else None,
         })
     return items
+
 
 @app.route("/assets/<path:subpath>")
 def serve_asset(subpath):
@@ -228,6 +267,33 @@ def serve_asset(subpath):
     if not str(target).startswith(str(ASSETS_DIR.resolve())):
         abort(403)
     return send_from_directory(ASSETS_DIR, subpath)
+
+@app.route("/thumb/<path:subpath>")
+def serve_thumb(subpath):
+    """
+    生成并返回小尺寸 JPEG 缩略图；失败时回退到原文件。
+    支持中文/空格文件名（浏览器会自动 URL 编码）。
+    """
+    target = (ASSETS_DIR / subpath).resolve()
+    if not str(target).startswith(str(ASSETS_DIR.resolve())):
+        abort(403)
+    if (not target.exists()) or (not target.is_file()):
+        abort(404)
+    try:
+        w = int(request.args.get("w", "360") or "360")
+    except Exception:
+        w = 360
+    try:
+        b64 = downscale_to_b64(target, max_side=max(64, min(2048, w)), max_bytes=120*1024)
+        if not b64:
+            # 无 Pillow 或压缩失败 → 直接回源
+            return send_from_directory(ASSETS_DIR, subpath)
+        data = base64.b64decode(b64.encode("ascii"))
+        return Response(data, mimetype="image/jpeg",
+                        headers={"Cache-Control": "public, max-age=86400"})
+    except Exception:
+        return send_from_directory(ASSETS_DIR, subpath)
+
 
 
 # ========= 上游调用（带重试/退避/记录 Retry-After）=========
@@ -479,27 +545,41 @@ def build_attach_msgs(actuals: List[Dict]) -> List[Dict]:
         p = (ASSETS_DIR / rel).resolve()
         if not p.exists():
             continue
-        mime = a.get("mime") or (mimetypes.guess_type(p.name)[0] or "application/octet-stream")
+
+        mime_guess = mimetypes.guess_type(p.name)[0] or "application/octet-stream"
+        mime = a.get("mime") or mime_guess
         ext = p.suffix.lower()
         size = human_size(p.stat().st_size)
 
         if ext in IMAGE_EXTS:
+            # 先尝试原图内联
             b64 = safe_base64_of_image(p)
+            use_mime = mime
+            # 超限则自动压缩到限制内
+            if not b64:
+                b64 = downscale_to_b64(p, max_bytes=INLINE_IMAGE_LIMIT)
+                if b64:
+                    use_mime = "image/jpeg"
             if b64:
-                out.append({"type":"image","name":p.name,"mime":mime,"size":size,"b64":b64})
+                out.append({"type": "image", "name": p.name, "mime": use_mime, "size": size, "b64": b64})
             else:
-                out.append({"type":"hint","name":p.name,"mime":mime,"size":size})
+                out.append({"type": "hint", "name": p.name, "mime": mime, "size": size})
+
         elif ext in TEXT_EXTS:
             txt = read_text_excerpt(p, 1200)
             if txt:
-                out.append({"type":"text","name":p.name,"mime":mime,"size":size,"text":txt})
+                out.append({"type": "text", "name": p.name, "mime": mime, "size": size, "text": txt})
             else:
-                out.append({"type":"hint","name":p.name,"mime":mime,"size":size})
+                out.append({"type": "hint", "name": p.name, "mime": mime, "size": size})
+
         elif ext in PDF_EXTS or ext in DOCX_EXTS:
-            out.append({"type":"hint","name":p.name,"mime":mime,"size":size})
+            out.append({"type": "hint", "name": p.name, "mime": mime, "size": size})
+
         else:
-            out.append({"type":"hint","name":p.name,"mime":mime,"size":size})
+            out.append({"type": "hint", "name": p.name, "mime": mime, "size": size})
+
     return out
+
 
 
 # ========= 根据路由裁剪附件 =========
@@ -711,121 +791,140 @@ def api_send_stream():
     text = (data.get("text") or "").strip()
 
     displays = session.get("picks_display") or []
-    actuals  = session.get("picks_actual")  or []
-    
-    # 调试日志
+    actuals = session.get("picks_actual") or []
+
     if DEBUG_MODE == 1:
         print(f"\n[DEBUG] ========== 新消息 ==========")
         print(f"[DEBUG] 用户文本: {text[:100]}...")
         print(f"[DEBUG] 附件数量: {len(actuals)}")
         if actuals:
             for i, a in enumerate(actuals):
-                print(f"[DEBUG] 附件 {i+1}: {a.get('name', 'unknown')}")
+                print(f"[DEBUG] 附件 {i + 1}: {a.get('name', 'unknown')}")
 
-    # 只发附件：默认文案
     if not text and actuals:
         text = "请基于我刚刚附带的文件或图片，进行有用的解读、摘要与建议；如需明确目标，请先用一句话澄清后再回答。"
 
     strategy = get_conf()["strategy"]
     attach_msgs = build_attach_msgs(actuals)
-    
+
     if DEBUG_MODE == 1:
         print(f"[DEBUG] 构建的附件消息数: {len(attach_msgs)}")
         for i, am in enumerate(attach_msgs):
-            print(f"[DEBUG] 附件消息 {i+1} 类型: {am.get('type', 'unknown')}")
-
-    # —— 先仲裁（限流窗口内会被跳过）
-    plan0 = arbiter_decide(text, attach_msgs)
-    route0, likely = plan0["route"], plan0.get("likely_target", "unknown")
-    
-    # 调试信息
-    if DEBUG_MODE == 1:
-        print(f"[DEBUG] Arbiter result - route: {route0}, likely_target: {likely}, confidence: {plan0.get('confidence', 0)}")
-    
-    if route0 == "CONFLICT":
-        if strategy == "A":
-            route = "CONFLICT_FORCE"
-        elif strategy == "B":
-            route = "CONFLICT_ASK"
-        else:
-            route = "MERGE"
-    else:
-        route = route0
-
-    eff_attaches, used_side = select_effective_attaches(route, attach_msgs, strategy, likely)
-    
-    if DEBUG_MODE == 1:
-        print(f"[DEBUG] 有效附件数: {len(eff_attaches)}, 使用侧重: {used_side}")
-    
-    sys_text = system_prompt_by_route(strategy, route)
-    messages = build_messages(sys_text, text, eff_attaches)
+            print(f"[DEBUG] 附件消息 {i + 1} 类型: {am.get('type', 'unknown')}")
 
     def gen():
+        # —— 构造预览清单（给前端首包插入气泡）
+        previews = []
+        for it in (session.get("picks_actual") or []):
+            rel = it.get("rel")
+            name = it.get("name")
+            is_image = bool(it.get("is_image"))
+            pv = {"name": name, "is_image": is_image, "src": None, "b64": None}
+            if rel and is_image:
+                pv["src"] = f"/thumb/{rel}?w=360"
+                try:
+                    p = (ASSETS_DIR / rel).resolve()
+                    b64 = downscale_to_b64(p, max_bytes=90 * 1024, max_side=512)
+                    if b64:
+                        pv["b64"] = f"data:image/jpeg;base64,{b64}"
+                except Exception:
+                    pass
+            previews.append(pv)
+
+        # 先把“预览+提示”实时发给前端，避免卡白屏
+        yield sse("meta", {"toast": "已接收，开始处理...", "previews": previews})
+
+        # 仲裁尽量不阻塞首包
+        plan0 = {"route": "NORMAL", "likely_target": "both", "alignment": "aligned", "confidence": 0.0}
+        try:
+            if not _rate_limited_now() and text and len(text.strip()) >= 3 and attach_msgs:
+                plan0 = arbiter_decide(text, attach_msgs)
+        except Exception:
+            pass
+
+        route0, likely = plan0["route"], plan0.get("likely_target", "unknown")
+        if DEBUG_MODE == 1:
+            print(
+                f"[DEBUG] Arbiter result - route: {route0}, likely_target: {likely}, confidence: {plan0.get('confidence', 0)}")
+
+        if route0 == "CONFLICT":
+            if strategy == "A":
+                route = "CONFLICT_FORCE"
+            elif strategy == "B":
+                route = "CONFLICT_ASK"
+            else:
+                route = "MERGE"
+        else:
+            route = route0
+
+        eff_attaches, used_side = select_effective_attaches(route, attach_msgs, strategy, likely)
+        if DEBUG_MODE == 1:
+            print(f"[DEBUG] 有效附件数: {len(eff_attaches)}, 使用侧重: {used_side}")
+
+        sys_text = system_prompt_by_route(strategy, route)
+        messages = build_messages(sys_text, text, eff_attaches)
+
         log_event("llm_stream_begin", {"text": text, "attach_count": len(attach_msgs),
                                        "plan": {"route": route, "likely": likely}})
 
         try:
-            # 主请求（流式，带重试）
             r = qwen_chat(messages, stream=True,
-                          temperature=0.3 if route in ("NORMAL","TEXT_ONLY","IMAGE_ONLY") else 0.2,
+                          temperature=0.3 if route in ("NORMAL", "TEXT_ONLY", "IMAGE_ONLY") else 0.2,
                           max_retries=3, purpose="main_stream")
             if (r is None) or (not r.ok):
-                # 流式失败 - 检查是否是 429
                 if r and r.status_code == 429:
-                    # 命中限流，直接返回友好提示，不再尝试 fallback
                     msg = "系统当前请求过于频繁，请稍后再试（约 10 秒后恢复）"
                     for i in range(0, len(msg), 10):
-                        yield sse("delta", {"t": msg[i:i+10]}); time.sleep(0.02)
+                        yield sse("delta", {"t": msg[i:i + 10]});
+                        time.sleep(0.02)
                     yield sse("done", "")
                     log_event("llm_stream_end", {"ok": False, "reason": "rate_limit_429"})
                     session["picks_display"] = []
-                    session["picks_actual"]  = []
+                    session["picks_actual"] = []
                     return
-                
-                # 其他错误，尝试非流式（同样带重试）
+
                 r2 = qwen_chat(messages, stream=False,
-                               temperature=0.3 if route in ("NORMAL","TEXT_ONLY","IMAGE_ONLY") else 0.2,
+                               temperature=0.3 if route in ("NORMAL", "TEXT_ONLY", "IMAGE_ONLY") else 0.2,
                                max_retries=2, purpose="main_fallback")
                 if (r2 is None) or (not r2.ok):
-                    # Fallback 也失败 - 检查是否是 429
                     if r2 and r2.status_code == 429:
                         msg = "系统当前请求过于频繁，请稍后再试（约 10 秒后恢复）"
                         for i in range(0, len(msg), 10):
-                            yield sse("delta", {"t": msg[i:i+10]}); time.sleep(0.02)
+                            yield sse("delta", {"t": msg[i:i + 10]});
+                            time.sleep(0.02)
                         yield sse("done", "")
                         log_event("llm_stream_end", {"ok": False, "reason": "fallback_429"})
                         session["picks_display"] = []
-                        session["picks_actual"]  = []
+                        session["picks_actual"] = []
                         return
-                    
-                    # 其他错误
                     head = ""
-                    try: head = r2.text[:500]
-                    except Exception: pass
-                    log_event("upstream_error", {"when": "fallback", "status": getattr(r2, "status_code", -1), "head": head})
-                    # 不抛出异常，直接返回友好提示
+                    try:
+                        head = r2.text[:500]
+                    except Exception:
+                        pass
+                    log_event("upstream_error",
+                              {"when": "fallback", "status": getattr(r2, "status_code", -1), "head": head})
                     msg = "服务暂时不可用，请稍后重试"
                     for i in range(0, len(msg), 10):
-                        yield sse("delta", {"t": msg[i:i+10]}); time.sleep(0.02)
+                        yield sse("delta", {"t": msg[i:i + 10]});
+                        time.sleep(0.02)
                     yield sse("done", "")
                     session["picks_display"] = []
-                    session["picks_actual"]  = []
+                    session["picks_actual"] = []
                     return
 
                 j = r2.json()
                 ans = (j.get("choices", [{}])[0].get("message", {}) or {}).get("content") \
                       or j.get("output") or "(空响应)"
-                # 以“伪流式”吐回
                 for i in range(0, len(ans), 28):
-                    yield sse("delta", {"t": ans[i:i+28]}); time.sleep(0.02)
+                    yield sse("delta", {"t": ans[i:i + 28]});
+                    time.sleep(0.02)
                 yield sse("done", "")
                 log_event("llm_stream_end", {"ok": True, "text_len": len(ans), "mode": "non_stream_fallback"})
-                # 结束后清 picks
                 session["picks_display"] = []
-                session["picks_actual"]  = []
+                session["picks_actual"] = []
                 return
 
-            # 正常流式读取
             bbuf = b""
             acc = ""
             for chunk in r.iter_content(chunk_size=1):
@@ -836,7 +935,7 @@ def api_send_stream():
                     pos = bbuf.find(b"\n")
                     if pos == -1: break
                     line_bytes = bbuf[:pos].rstrip(b"\r")
-                    bbuf = bbuf[pos+1:]
+                    bbuf = bbuf[pos + 1:]
                     if not line_bytes:
                         continue
                     line = line_bytes.decode("utf-8", errors="replace")
@@ -849,7 +948,7 @@ def api_send_stream():
                         yield sse("done", "")
                         log_event("llm_stream_end", {"ok": True, "text_len": len(acc), "mode": "stream"})
                         session["picks_display"] = []
-                        session["picks_actual"]  = []
+                        session["picks_actual"] = []
                         return
 
                     delta_text = ""
@@ -871,17 +970,17 @@ def api_send_stream():
             yield sse("done", "")
             log_event("llm_stream_end", {"ok": True, "text_len": len(acc), "mode": "stream_no_done"})
             session["picks_display"] = []
-            session["picks_actual"]  = []
+            session["picks_actual"] = []
 
         except Exception as e:
             log_event("stream_exception", {"error": str(e)})
-            # 再次兜底：输出错误文本，避免空气
             msg = f"（上游错误：{str(e)}）"
             for i in range(0, len(msg), 28):
-                yield sse("delta", {"t": msg[i:i+28]}); time.sleep(0.02)
+                yield sse("delta", {"t": msg[i:i + 28]});
+                time.sleep(0.02)
             yield sse("done", "")
             session["picks_display"] = []
-            session["picks_actual"]  = []
+            session["picks_actual"] = []
 
     return Response(stream_with_context(gen()), content_type="text/event-stream; charset=utf-8")
 

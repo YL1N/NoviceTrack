@@ -1,0 +1,14 @@
+[
+  {
+    "ts": 1761887794864,
+    "session_id": "s_1761887794864_3f8013",
+    "trial_id": "t_1761887794864_c0ba",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "new_chat",
+    "payload": {
+      "reason": "user_click"
+    }
+  }
+]

@@ -1,0 +1,17 @@
+[
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 246,
+      "y": 1132,
+      "button": 0,
+      "path": "button#btn-current"
+    },
+    "ts": 1761887768748,
+    "session_id": "s_1761887768748_70c39c",
+    "trial_id": "t_1761887768748_845b",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  }
+]

@@ -1,0 +1,203 @@
+[
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 787,
+      "y": 1116,
+      "button": 0,
+      "path": "button#paperclip"
+    },
+    "ts": 1761886915040,
+    "session_id": "s_1761886912780_aa95f9",
+    "trial_id": "t_1761886912780_adff",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1761886915966,
+    "session_id": "s_1761886912780_aa95f9",
+    "trial_id": "t_1761886912780_adff",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "pick",
+    "payload": {
+      "display": {
+        "id": "cand_2",
+        "index": 2,
+        "name": "663f0e567cd374324 - 副本 (8) - 副本 - 副本.jpg",
+        "rel": "663f0e567cd374324 - 副本 (8) - 副本 - 副本.jpg",
+        "is_image": true,
+        "mime": "image/jpeg",
+        "size": "39KB",
+        "src": "/thumb/663f0e567cd374324 - 副本 (8) - 副本 - 副本.jpg?w=360"
+      },
+      "actual": {
+        "id": "cand_2",
+        "index": 2,
+        "name": "663f0e567cd374324 - 副本 (8) - 副本 - 副本.jpg",
+        "rel": "663f0e567cd374324 - 副本 (8) - 副本 - 副本.jpg",
+        "is_image": true,
+        "mime": "image/jpeg",
+        "size": "39KB",
+        "src": "/thumb/663f0e567cd374324 - 副本 (8) - 副本 - 副本.jpg?w=360"
+      },
+      "deception": false
+    }
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 1290,
+      "y": 484,
+      "button": 0,
+      "path": "div#picker-grid>div:nth-child(3)>div:nth-child(1)>img:nth-child(1)"
+    },
+    "ts": 1761886916522,
+    "session_id": "s_1761886912780_aa95f9",
+    "trial_id": "t_1761886912780_adff",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 1290,
+      "y": 484,
+      "button": 0,
+      "path": "div#picker-grid>div:nth-child(3)>div:nth-child(1)>img:nth-child(1)"
+    },
+    "ts": 1761886916522,
+    "session_id": "s_1761886912780_aa95f9",
+    "trial_id": "t_1761886912780_adff",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.dblclick",
+    "detail": {
+      "x": 1290,
+      "y": 484,
+      "path": "div#picker-grid>div:nth-child(3)>div:nth-child(1)>img:nth-child(1)"
+    },
+    "ts": 1761886916522,
+    "session_id": "s_1761886912780_aa95f9",
+    "trial_id": "t_1761886912780_adff",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 1650,
+      "y": 1115,
+      "button": 0,
+      "path": "button#send"
+    },
+    "ts": 1761886917641,
+    "session_id": "s_1761886912780_aa95f9",
+    "trial_id": "t_1761886912780_adff",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1761886920881,
+    "session_id": "s_1761886912780_aa95f9",
+    "trial_id": "t_1761886912780_adff",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "llm_stream_begin",
+    "payload": {
+      "text": "请基于我刚刚附带的文件或图片，进行有用的解读、摘要与建议；如需明确目标，请先用一句话澄清后再回答。",
+      "attach_count": 1,
+      "plan": {
+        "route": "TEXT_ONLY",
+        "likely": "text"
+      }
+    }
+  },
+  {
+    "ts": 1761886921447,
+    "session_id": "s_1761886912780_aa95f9",
+    "trial_id": "t_1761886912780_adff",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "rate_limited",
+    "payload": {
+      "purpose": "main_stream",
+      "attempt": 1,
+      "status": 429,
+      "wait": 1.945899382534372,
+      "retry_after": 1.2,
+      "head": "{\"errors\":{\"message\":\"Request limit exceeded.\",\"request_id\":\"356ae9c8-77d7-4ff2-993f-525538d6e695\"}}"
+    }
+  },
+  {
+    "ts": 1761886924137,
+    "session_id": "s_1761886912780_aa95f9",
+    "trial_id": "t_1761886912780_adff",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "rate_limited",
+    "payload": {
+      "purpose": "main_stream",
+      "attempt": 2,
+      "status": 429,
+      "wait": 3.2295762864470614,
+      "retry_after": 1.2,
+      "head": "{\"errors\":{\"message\":\"Request limit exceeded.\",\"request_id\":\"cf05e9c5-312c-4fb2-88b1-650aac9fbab0\"}}"
+    }
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 795,
+      "y": 1115,
+      "button": 0,
+      "path": "button#paperclip"
+    },
+    "ts": 1761886925582,
+    "session_id": "s_1761886912780_aa95f9",
+    "trial_id": "t_1761886912780_adff",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1761886940116,
+    "session_id": "s_1761886912780_aa95f9",
+    "trial_id": "t_1761886912780_adff",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "llm_stream_end",
+    "payload": {
+      "ok": true,
+      "text_len": 861,
+      "mode": "stream"
+    }
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 1469,
+      "y": 360,
+      "button": 0,
+      "path": "button#close"
+    },
+    "ts": 1761886972680,
+    "session_id": "s_1761886912780_aa95f9",
+    "trial_id": "t_1761886912780_adff",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  }
+]
