@@ -1,0 +1,822 @@
+[
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 920,
+      "y": 875,
+      "button": 0,
+      "path": "div#feed"
+    },
+    "ts": 1761911170025,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 782,
+      "y": 1112,
+      "button": 0,
+      "path": "button#paperclip"
+    },
+    "ts": 1761911171607,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "ts": 1761911172282,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C",
+    "event": "pick",
+    "payload": {
+      "display": {
+        "id": "cand_2",
+        "index": 2,
+        "name": "663f0e567cd374324 - 副本 (8) - 副本 - 副本.jpg",
+        "rel": "663f0e567cd374324 - 副本 (8) - 副本 - 副本.jpg",
+        "is_image": true,
+        "mime": "image/jpeg",
+        "size": "39KB",
+        "src": "/thumb/663f0e567cd374324 - 副本 (8) - 副本 - 副本.jpg?w=360",
+        "trial_id": "t_1761911070303_90a6"
+      },
+      "actual": {
+        "id": "cand_3",
+        "index": 3,
+        "name": "663f0e567cd374324 - 副本 (8) - 副本.jpg",
+        "rel": "663f0e567cd374324 - 副本 (8) - 副本.jpg",
+        "is_image": true,
+        "mime": "image/jpeg",
+        "size": "39KB",
+        "src": "/thumb/663f0e567cd374324 - 副本 (8) - 副本.jpg?w=360",
+        "trial_id": "t_1761911070303_90a6"
+      },
+      "deception": true
+    }
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 1341,
+      "y": 525,
+      "button": 0,
+      "path": "div#picker-grid>div:nth-child(3)>div:nth-child(1)>img:nth-child(1)"
+    },
+    "ts": 1761911172839,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 1341,
+      "y": 525,
+      "button": 0,
+      "path": "div#picker-grid>div:nth-child(3)>div:nth-child(1)>img:nth-child(1)"
+    },
+    "ts": 1761911172839,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "dom.dblclick",
+    "detail": {
+      "x": 1341,
+      "y": 525,
+      "path": "div#picker-grid>div:nth-child(3)>div:nth-child(1)>img:nth-child(1)"
+    },
+    "ts": 1761911172839,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 941,
+      "y": 1131,
+      "button": 0,
+      "path": "textarea#input"
+    },
+    "ts": 1761911173966,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyZ",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761911176681,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "z",
+      "selStart": 1,
+      "selEnd": 1
+    },
+    "ts": 1761911176681,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyZ"
+    },
+    "ts": 1761911176681,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "z",
+      "code": "KeyZ"
+    },
+    "ts": 1761911176681,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyS",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761911176681,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "zs",
+      "selStart": 2,
+      "selEnd": 2
+    },
+    "ts": 1761911176681,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyS"
+    },
+    "ts": 1761911176681,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "s",
+      "code": "KeyS"
+    },
+    "ts": 1761911176681,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyS",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761911176681,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "zss",
+      "selStart": 3,
+      "selEnd": 3
+    },
+    "ts": 1761911176681,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyS"
+    },
+    "ts": 1761911176681,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "s",
+      "code": "KeyS"
+    },
+    "ts": 1761911176681,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "KeyM",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761911177469,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "zssm",
+      "selStart": 4,
+      "selEnd": 4
+    },
+    "ts": 1761911177469,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "KeyM"
+    },
+    "ts": 1761911177469,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "m",
+      "code": "KeyM"
+    },
+    "ts": 1761911177469,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Process",
+      "code": "Space",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761911177469,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "form.input",
+    "detail": {
+      "path": "textarea#input",
+      "value": "这是什么",
+      "selStart": 4,
+      "selEnd": 4
+    },
+    "ts": 1761911177469,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Process",
+      "code": "Space"
+    },
+    "ts": 1761911177469,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": " ",
+      "code": "Space"
+    },
+    "ts": 1761911177469,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Enter",
+      "code": "Enter",
+      "alt": false,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761911177469,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "Enter",
+      "code": "Enter"
+    },
+    "ts": 1761911177469,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "ts": 1761911186862,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C",
+    "event": "llm_stream_begin",
+    "payload": {
+      "text": "这是什么",
+      "attach_count": 1,
+      "plan": {
+        "route": "TEXT_ONLY",
+        "likely": "text"
+      }
+    }
+  },
+  {
+    "ts": 1761911194529,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C",
+    "event": "llm_stream_end",
+    "payload": {
+      "ok": true,
+      "text_len": 231,
+      "mode": "stream"
+    }
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 800,
+      "y": 1110,
+      "button": 0,
+      "path": "button#paperclip"
+    },
+    "ts": 1761911261714,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "ts": 1761911262846,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C",
+    "event": "set_line",
+    "payload": {
+      "line": "雾",
+      "mode": "task_i",
+      "strategy": "C"
+    }
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 1471,
+      "y": 370,
+      "button": 0,
+      "path": "button#close"
+    },
+    "ts": 1761911262963,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 173,
+      "y": 227,
+      "button": 0,
+      "path": "html:nth-child(1)>body:nth-child(2)>div:nth-child(1)>aside:nth-child(1)>div:nth-child(5)"
+    },
+    "ts": 1761911262963,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 789,
+      "y": 1119,
+      "button": 0,
+      "path": "button#paperclip"
+    },
+    "ts": 1761911264360,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 1481,
+      "y": 360,
+      "button": 0,
+      "path": "button#close"
+    },
+    "ts": 1761911265551,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 175,
+      "y": 317,
+      "button": 0,
+      "path": "select#fake-model"
+    },
+    "ts": 1761911265551,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911070303_90a6",
+    "mode": "task_i",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "ts": 1761911265991,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911265991_999e",
+    "mode": "free",
+    "line": "雾",
+    "strategy": "C",
+    "event": "set_mode",
+    "payload": {
+      "line": "雾",
+      "mode": "free",
+      "strategy": "C"
+    }
+  },
+  {
+    "event": "form.change",
+    "detail": {
+      "path": "select#fake-model",
+      "value": "free"
+    },
+    "ts": 1761911266686,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911265991_999e",
+    "mode": "free",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 15,
+      "y": 290,
+      "button": -1,
+      "path": "select#fake-model"
+    },
+    "ts": 1761911266686,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911265991_999e",
+    "mode": "free",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 790,
+      "y": 1136,
+      "button": 0,
+      "path": "button#paperclip"
+    },
+    "ts": 1761911267610,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911265991_999e",
+    "mode": "free",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "ts": 1761911268263,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911268263_8db6",
+    "mode": "free",
+    "line": "雾",
+    "strategy": "C",
+    "event": "new_chat",
+    "payload": {
+      "reason": "user_click"
+    }
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 1482,
+      "y": 360,
+      "button": 0,
+      "path": "button#close"
+    },
+    "ts": 1761911268335,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911268263_8db6",
+    "mode": "free",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 238,
+      "y": 1126,
+      "button": 0,
+      "path": "button#btn-current"
+    },
+    "ts": 1761911268335,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911268263_8db6",
+    "mode": "free",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 781,
+      "y": 1132,
+      "button": 0,
+      "path": "button#paperclip"
+    },
+    "ts": 1761911269555,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911268263_8db6",
+    "mode": "free",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 1454,
+      "y": 355,
+      "button": 0,
+      "path": "button#close"
+    },
+    "ts": 1761911271114,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911268263_8db6",
+    "mode": "free",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 240,
+      "y": 325,
+      "button": 0,
+      "path": "select#fake-model"
+    },
+    "ts": 1761911277281,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911268263_8db6",
+    "mode": "free",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 249,
+      "y": 315,
+      "button": 0,
+      "path": "select#fake-model"
+    },
+    "ts": 1761911277281,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911268263_8db6",
+    "mode": "free",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 648,
+      "y": 954,
+      "button": 0,
+      "path": "html:nth-child(1)>body:nth-child(2)>div:nth-child(1)>section:nth-child(2)>div:nth-child(2)"
+    },
+    "ts": 1761911287301,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911268263_8db6",
+    "mode": "free",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 810,
+      "y": 1130,
+      "button": 0,
+      "path": "html:nth-child(1)>body:nth-child(2)>div:nth-child(1)>section:nth-child(2)>div:nth-child(2)>div:nth-child(4)>div:nth-child(1)"
+    },
+    "ts": 1761911287301,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911268263_8db6",
+    "mode": "free",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 794,
+      "y": 1126,
+      "button": 0,
+      "path": "button#paperclip"
+    },
+    "ts": 1761911287301,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911268263_8db6",
+    "mode": "free",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "dom.click",
+    "detail": {
+      "x": 782,
+      "y": 1113,
+      "button": 0,
+      "path": "button#paperclip"
+    },
+    "ts": 1761911291934,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911268263_8db6",
+    "mode": "free",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "kbd.keydown",
+    "detail": {
+      "key": "Alt",
+      "code": "AltLeft",
+      "alt": true,
+      "ctrl": false,
+      "shift": false
+    },
+    "ts": 1761911291934,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911268263_8db6",
+    "mode": "free",
+    "line": "雾",
+    "strategy": "C"
+  },
+  {
+    "event": "kbd.keyup",
+    "detail": {
+      "key": "a",
+      "code": "KeyA"
+    },
+    "ts": 1761911292665,
+    "session_id": "s_1761911039421_7b8b07",
+    "trial_id": "t_1761911268263_8db6",
+    "mode": "free",
+    "line": "雾",
+    "strategy": "C"
+  }
+]
