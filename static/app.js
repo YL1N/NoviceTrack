@@ -53,6 +53,8 @@ trial_id: (window.__BOOT__ && window.__BOOT__.trial_id) || 't',
   first_sent: false,
 };
 
+let INPUT_SNAPSHOT_TIMER = null;
+
 function logPush(ev){
   try{
     STATE.log_buffer.push(ev);
@@ -66,6 +68,38 @@ function logPush(ev){
   }catch(_){}
 }
 
+function computeZone(target){
+  if (!target) return 'other';
+
+  // 发送按钮
+  if (target.closest('#send')) return 'send';
+
+  // 输入框（textarea）
+  if (target.closest('#input')) return 'input';
+
+  // 历史对话按钮
+  if (target.closest('#btn-history')) return 'history';
+
+  // 新对话按钮
+  if (target.closest('#btn-current')) return 'new_chat';
+
+  // 左侧 岚/松/雾 线路切换
+  if (target.closest('.option[data-line]')) return 'line_switch';
+
+  // 任务 I / II / III 模式下拉
+  if (target.closest('#fake-model')) return 'mode_switch';
+
+  // 对话区（包含用户/助手气泡区域）
+  if (target.closest('#feed')) return 'feed';
+
+  // 附件选择器 Modal
+  if (target.closest('#mask')) return 'picker';
+
+  // 顶部帮助（粗略通过“帮助”文本识别）
+  if (target.closest('.topbar') && /帮助/.test(target.textContent || '')) return 'help';
+
+  return 'other';
+}
 function hideHeroOnce(){
   if (STATE.first_sent) return;
   (function(el){ if(el) el.classList.add('hidden'); })(qs('#hero'));
@@ -576,27 +610,63 @@ function startNewChat(){
 
 /* ========== 捕获行为日志（点击/键盘/输入等） ========== */
 function bindCapture(){
+  // 1) 语义化点击：ui.click + zone
   document.addEventListener('click', (e)=>{
-    logPush({event:'dom.click', detail:{x:e.clientX,y:e.clientY,button:e.button,path:cssPath(e.target)}});
+    const zone = computeZone(e.target);
+    logPush({
+      event: 'ui.click',
+      detail: { zone }
+    });
   }, true);
-  document.addEventListener('dblclick', (e)=>{
-    logPush({event:'dom.dblclick', detail:{x:e.clientX,y:e.clientY,path:cssPath(e.target)}});
+
+  // 2) 文本选择：dom.select
+  document.addEventListener('selectionchange', ()=>{
+    const sel = window.getSelection();
+    if (!sel) return;
+    const text = String(sel);
+    if (!text || text.length < 2) return; // 过滤掉单字符噪声
+    logPush({
+      event: 'dom.select',
+      detail: { length: text.length }
+    });
   }, true);
-  document.addEventListener('keydown', (e)=>{
-    logPush({event:'kbd.keydown', detail:{key:e.key,code:e.code,alt:e.altKey,ctrl:e.ctrlKey,shift:e.shiftKey}});
+
+  // 3) 复制操作：dom.copy
+  document.addEventListener('copy', ()=>{
+    const sel = window.getSelection();
+    const text = sel ? String(sel) : '';
+    logPush({
+      event: 'dom.copy',
+      detail: { length: text.length }
+    });
   }, true);
-  document.addEventListener('keyup', (e)=>{
-    logPush({event:'kbd.keyup', detail:{key:e.key,code:e.code}});
-  }, true);
-  document.addEventListener('input', (e)=>{
-    if (!(e.target instanceof HTMLInputElement) && !(e.target instanceof HTMLTextAreaElement)) return;
-    const t = e.target;
-    logPush({event:'form.input', detail:{path:cssPath(t), value:t.value, selStart:t.selectionStart, selEnd:t.selectionEnd}});
-  }, true);
-  document.addEventListener('change', (e)=>{
-    logPush({event:'form.change', detail:{path:cssPath(e.target), value:e.target.value}});
-  }, true);
+
+  // 4) 对话区滚动：feed.scroll / feed.wheel
+  const feed = qs('#feed');
+  if (feed){
+    feed.addEventListener('scroll', ()=>{
+      logPush({
+        event: 'feed.scroll',
+        detail: {
+          scrollTop: feed.scrollTop,
+          scrollHeight: feed.scrollHeight,
+          clientHeight: feed.clientHeight,
+        }
+      });
+    }, { passive: true });
+
+    feed.addEventListener('wheel', (e)=>{
+      logPush({
+        event: 'feed.wheel',
+        detail: {
+          deltaY: e.deltaY,
+          deltaX: e.deltaX,
+        }
+      });
+    }, { passive: true });
+  }
 }
+
 
 /* ========== 初始化 ========== */
 document.addEventListener('DOMContentLoaded', ()=>{
@@ -606,18 +676,62 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
   const input = qs('#input');
   autoGrowTextarea(input);
-  input.addEventListener('input', ()=> autoGrowTextarea(input));
+
+  /**
+   * === 1. input.snapshot：输入框内容快照（带 250ms 防抖） ===
+   * 用于：
+   * - 计算净增字符数 ΔL_r
+   * - 标点修正（相邻快照 diff）
+   * - 短暂停顿（相邻快照时间差 0.5～2s）
+   * - TBA（把 snapshot 作为行为事件之一）
+   */
+  input.addEventListener('input', ()=>{
+    autoGrowTextarea(input);
+
+    // 防抖：250ms 内多次输入合并成一次 snapshot
+    if (INPUT_SNAPSHOT_TIMER){
+      clearTimeout(INPUT_SNAPSHOT_TIMER);
+    }
+    INPUT_SNAPSHOT_TIMER = setTimeout(()=>{
+      logPush({
+        event: 'input.snapshot',
+        detail: {
+          value: input.value,
+          len: input.value.length,
+        },
+      });
+    }, 250);
+  });
+
+  /**
+   * === 2. keydown：Enter 发送 + input.delete（删除行为） ===
+   * - Enter（不带 Shift）触发 send()
+   * - Backspace / Delete 记为 input.delete，用于：
+   *   - 删除次数 D_r
+   *   - 有效字符/删除比率 D_r / ΔL_r
+   */
   input.addEventListener('keydown', (e)=>{
     // Enter 发送（Shift+Enter 换行）; 流式中按 Enter = 中断
     if (e.key === 'Enter' && !e.shiftKey && !e.isComposing){
       e.preventDefault();
       send();
+      return;
+    }
+
+    // 删除键行为：只记录 Backspace 和 Delete
+    if (e.key === 'Backspace' || e.key === 'Delete'){
+      logPush({
+        event: 'input.delete',
+        detail: { key: e.key },
+      });
     }
   });
 
+  // 其余 UI 行为维持不变
   qs('#send').addEventListener('click', ()=> send());
   qs('#paperclip').addEventListener('click', ()=> openPicker());
   qs('#close').addEventListener('click', ()=> closePicker());
   qs('#btn-current')?.addEventListener('click', startNewChat); // ← 绑定“新对话”按钮
 });
+
 

@@ -119,6 +119,9 @@ def ensure_fresh_session_after_restart():
         session["_boot_id"] = SERVER_BOOT_ID
         session["conf"] = DEFAULT_CONF.copy()
         session["trial_id"] = f"t_{int(time.time()*1000)}_{uuid.uuid4().hex[:4]}"
+        clear_history()  # 清空全局历史
+        # 不再需要 session["chat_history"] 这个字段了
+
 
 
 # ========= HTTP 头（SSE 低延迟 + 反代不缓冲）=========
@@ -135,6 +138,46 @@ def add_no_cache(resp):
 # ========= 会话与试次 =========
 DEFAULT_CONF = {"line": "松", "strategy": "B", "mode": "free"}  # 岚=A；松=B；雾=C（仅在冲突时启用）
 LINE2STR = {"岚": "A", "松": "B", "雾": "C"}
+
+
+# ========= 会话历史（多轮记忆）=========
+HISTORY_MAX_TURNS = 10  # 只保留最近 8 轮 user+assistant，对应 16 条 message
+# 全局历史存储：key = session_id(), value = [ {"role": "...", "content": "..."} , ... ]
+_GLOBAL_CHAT_HISTORY: Dict[str, List[Dict]] = {}
+def get_history() -> List[Dict]:
+    """
+    从全局字典中取出当前 session 的历史。
+    注意：不再依赖 session["chat_history"]。
+    """
+    sid = session_id()
+    h = _GLOBAL_CHAT_HISTORY.get(sid)
+    if not isinstance(h, list):
+        h = []
+        _GLOBAL_CHAT_HISTORY[sid] = h
+    return h
+
+def append_history_turn(user_text: str, assistant_text: str):
+    """
+    追加一轮 (user, assistant) 到历史，并进行截断。
+    历史只存在于 _GLOBAL_CHAT_HISTORY 中。
+    """
+    h = get_history()
+    h.append({"role": "user", "content": user_text or "(未填写)"})
+    h.append({"role": "assistant", "content": assistant_text or ""})
+
+    max_msgs = HISTORY_MAX_TURNS * 2  # 每轮两条
+    if len(h) > max_msgs:
+        # 就地截断，保留末尾 max_msgs 个
+        del h[:-max_msgs]
+
+    # 显式写回（虽然 h 是同一个 list，但语义更清晰）
+    _GLOBAL_CHAT_HISTORY[session_id()] = h
+
+def clear_history():
+    """
+    清空当前 session 的历史。
+    """
+    _GLOBAL_CHAT_HISTORY.pop(session_id(), None)
 
 def session_id() -> str:
     if "session_id" not in session:
@@ -173,7 +216,10 @@ def set_mode(mode: str) -> Dict:
     # 清理当轮附件
     session["picks_display"] = []
     session["picks_actual"]  = []
+    # ★ 新增：切换任务即视为新对话，清空多轮历史
+    clear_history()
     return c
+
 
 
 # ========= 日志 =========
@@ -556,8 +602,17 @@ def arbiter_decide(user_text: str, attach_msgs: List[Dict]) -> Dict:
 
 # ========= 提示词（仅在冲突时启用风格）=========
 NEUTRAL_PROMPT = (
-    "You are a helpful, concise assistant. Answer directly and helpfully based only on the current turn."
+    "You are a helpful, concise assistant. "
+    "You can use previous turns (both user and assistant messages) as context, "
+    "but you should primarily answer based on the user's latest question. "
+    "When the user later says that a previous image or statement was wrong "
+    "(for example: '传错图了', '刚才那个不对', '其实是xxx'), "
+    "you must treat the latest clarification as correct for future turns. "
+    "Do not keep referring back to the mistaken image or interpretation, "
+    "unless the user explicitly asks about that earlier wrong content "
+    "(for example: '之前那张传错的图是什么')."
 )
+
 
 PROMPT_A = (
     "你是主动、清晰、结构化的助手。"
@@ -582,13 +637,14 @@ def system_prompt_by_route(strategy: str, route: str) -> str:
     if route == "NORMAL":
         return NEUTRAL_PROMPT
     elif route == "TEXT_ONLY":
-        # 用户明确表示要按文本回答，但仍提供图片作为参考
         return (
             "You are a helpful, concise assistant. "
             "The user has indicated they want an answer based on their text description. "
             "Images are provided for reference, but prioritize the text description in your response. "
-            "Answer directly and helpfully based on what the user described in text."
+            "You may use previous turns as context, and if the user has corrected a previous mistake "
+            "(e.g. wrong image or wrong model), always follow the latest clarification."
         )
+
     elif route == "IMAGE_ONLY":
         return NEUTRAL_PROMPT
     elif strategy == "A":
@@ -672,28 +728,56 @@ def select_effective_attaches(route: str, attach_msgs: List[Dict], strategy: str
 
 # ========= 构造 messages =========
 def build_messages(system_text: str, user_text: str, effective_attaches: List[Dict]) -> List[Dict]:
+    """
+    构造发往上游 Qwen 的 messages：
+    messages = [system] + history + [current_user_with_optional_images]
+    其中 history 只包含纯文本的 user/assistant 轮次，不再重复图片。
+    """
     sys = {"role": "system", "content": system_text}
     is_vision = any(k in MODEL.lower() for k in ["vision", "vl", "qwen3-vl", "qwen3-vl-"])
 
+    # 1. 取出历史（只存 text），来源于全局字典
+    history = get_history()
+
+    # 2. 构造“当前轮”的 user message（可能是纯文本，也可能包含 image_url 块）
     if not effective_attaches:
-        return [sys, {"role": "user", "content": user_text or "(未填写)"}]
+        cur_user = {"role": "user", "content": user_text or "(未填写)"}
+    else:
+        parts = []
+        if user_text:
+            parts.append({"type": "text", "text": user_text})
+        for m in effective_attaches:
+            if m.get("type") == "image" and is_vision and m.get("b64"):
+                parts.append({
+                    "type": "image_url",
+                    "image_url": {"url": f"data:{m.get('mime','image/jpeg')};base64,{m['b64']}"}
+                })
+            elif m.get("type") == "text":
+                parts.append({"type": "text", "text": f"【附件文本摘录·{m.get('name','')}】\n{m.get('text','')}"})
+            else:
+                hint = f"【附件线索】名称：{m.get('name','')}；类型：{m.get('mime','')}；大小：{m.get('size','')}"
+                parts.append({"type": "text", "text": hint})
 
-    parts = []
-    if user_text:
-        parts.append({"type": "text", "text": user_text})
-    for m in effective_attaches:
-        if m.get("type") == "image" and is_vision and m.get("b64"):
-            parts.append({
-                "type": "image_url",
-                "image_url": {"url": f"data:{m.get('mime','image/jpeg')};base64,{m['b64']}"}
-            })
-        elif m.get("type") == "text":
-            parts.append({"type": "text", "text": f"【附件文本摘录·{m.get('name','')}】\n{m.get('text','')}"})
-        else:
-            hint = f"【附件线索】名称：{m.get('name','')}；类型：{m.get('mime','')}；大小：{m.get('size','')}"
-            parts.append({"type": "text", "text": hint})
 
-    return [sys, {"role": "user", "content": parts}]
+
+        cur_user = {"role": "user", "content": parts}
+
+    # 3. 拼接：system + history + 当前 user
+    msgs = [sys]
+    msgs.extend(history)
+    msgs.append(cur_user)
+
+    # ★★★ 就在这里加调试打印（只在 DEBUG_MODE == 1 时输出）★★★
+    if DEBUG_MODE == 1:
+        print("\n[DEBUG] ===== messages to Qwen =====")
+        try:
+            print(json.dumps(msgs, ensure_ascii=False, indent=2))
+        except Exception:
+            # 防止 json.dumps 出错时把程序搞挂，兜底直接 print 原对象
+            print(msgs)
+
+    return msgs
+
 
 
 # ========= 页面 =========
@@ -824,8 +908,10 @@ def api_new_chat():
     new_trial()
     session["picks_display"] = []
     session["picks_actual"] = []
+    clear_history()  # ★ 新增
     log_event("new_chat", {"reason": "user_click"})
     return jsonify(ok=True, trial_id=session["trial_id"])
+
 
 
 # ========= 上游连通性自检 =========
@@ -873,9 +959,20 @@ def api_send_stream():
     displays_snapshot = [d for d in all_disp if d.get("trial_id") == cur_tid]
     actuals_snapshot  = [a for a in all_act  if a.get("trial_id") == cur_tid]
 
+    # ★ 新增：记录一次“语义上的发送事件”
+    #    用于后续计算：
+    #    - 快速重发模式（和上一轮 llm_stream_end.ts 做差）
+    #    - 否定/澄清关键词频率（按轮统计 text 中关键词）
+    log_event("user_send", {
+        "text": text,
+        "has_attach": bool(actuals_snapshot),
+        "attach_count": len(actuals_snapshot),
+    })
+
     # 立刻清空（防止后续再叠加）
     session["picks_display"] = []
     session["picks_actual"]  = []
+
 
     if DEBUG_MODE == 1:
         print(f"\n[DEBUG] ========== 新消息 ==========")
@@ -888,6 +985,9 @@ def api_send_stream():
     # 仅附件默认文案
     if not text and actuals_snapshot:
         text = "请基于我刚刚附带的文件或图片，进行有用的解读、摘要与建议；如需明确目标，请先用一句话澄清后再回答。"
+
+    # ★ 新增：本轮要写入历史的 user 文本（包含上面的默认文案）
+    user_text_for_history = text or "(未填写)"
 
     strategy = get_conf()["strategy"]
     attach_msgs = build_attach_msgs(actuals_snapshot)
@@ -996,8 +1096,13 @@ def api_send_stream():
                 j = r2.json()
                 ans = (j.get("choices", [{}])[0].get("message", {}) or {}).get("content") \
                       or j.get("output") or "(空响应)"
+                # ★ 写入历史
+                append_history_turn(user_text_for_history, ans)
+
+
                 for i in range(0, len(ans), 28):
-                    yield sse("delta", {"t": ans[i:i + 28]}); time.sleep(0.02)
+                    yield sse("delta", {"t": ans[i:i + 28]});
+                    time.sleep(0.02)
                 yield sse("done", "")
                 log_event("llm_stream_end", {"ok": True, "text_len": len(ans), "mode": "non_stream_fallback"})
                 return
@@ -1022,9 +1127,14 @@ def api_send_stream():
                         continue
                     payload = line[6:].strip()
                     if payload == "[DONE]":
+                        # ★ 把本轮 (user, assistant) 写入历史
+                        append_history_turn(user_text_for_history, acc)
+
+
                         yield sse("done", "")
                         log_event("llm_stream_end", {"ok": True, "text_len": len(acc), "mode": "stream"})
                         return
+
 
                     delta_text = ""
                     try:
@@ -1041,6 +1151,9 @@ def api_send_stream():
                     if delta_text:
                         acc += delta_text
                         yield sse("delta", {"t": delta_text})
+
+            # ★ 也写入历史
+            append_history_turn(user_text_for_history, acc)
 
             yield sse("done", "")
             log_event("llm_stream_end", {"ok": True, "text_len": len(acc), "mode": "stream_no_done"})
@@ -1121,6 +1234,9 @@ def api_send_compat():
               or "(空响应)"
     except Exception as e:
         ans = f"（上游错误：{str(e)}）"
+
+    # ★ 把这轮对话写入历史（非流式兜底路径）
+    append_history_turn(text or "(未填写)", ans)
 
     return jsonify(ok=True, assistant_text=ans)
 
