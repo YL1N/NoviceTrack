@@ -970,9 +970,20 @@ def api_send_stream():
     })
 
     # 立刻清空（防止后续再叠加）
-    session["picks_display"] = []
-    session["picks_actual"]  = []
-
+    # 发送后清理：
+    # - 非任务II：全部清空（维持原行为）
+    # - 任务II：只保留“当前试次”的图片，其它类型清空（实现“图片跨轮有效”）
+    if get_conf()["mode"] == "task_ii":
+        keep_d, keep_a = [], []
+        for d, a in zip(all_disp, all_act):
+            if d.get("trial_id") == cur_tid and d.get("is_image"):
+                keep_d.append(d);
+                keep_a.append(a)
+        session["picks_display"] = keep_d
+        session["picks_actual"] = keep_a
+    else:
+        session["picks_display"] = []
+        session["picks_actual"] = []
 
     if DEBUG_MODE == 1:
         print(f"\n[DEBUG] ========== 新消息 ==========")
@@ -1178,14 +1189,25 @@ def api_send_compat():
     data = request.get_json(force=True)
     text = (data.get("text") or "").strip()
 
-    # —— 只取当前 trial 的 picks，再清空
+    # —— 只取当前 trial 的 picks
     cur_tid = ensure_trial_id()
     all_disp = session.get("picks_display") or []
-    all_act  = session.get("picks_actual")  or []
+    all_act = session.get("picks_actual") or []
     displays_snapshot = [d for d in all_disp if d.get("trial_id") == cur_tid]
-    actuals_snapshot  = [a for a in all_act  if a.get("trial_id") == cur_tid]
-    session["picks_display"] = []
-    session["picks_actual"]  = []
+    actuals_snapshot = [a for a in all_act if a.get("trial_id") == cur_tid]
+
+    # 发送后清理（逻辑同流式端点）
+    if get_conf()["mode"] == "task_ii":
+        keep_d, keep_a = [], []
+        for d, a in zip(all_disp, all_act):
+            if d.get("trial_id") == cur_tid and d.get("is_image"):
+                keep_d.append(d);
+                keep_a.append(a)
+        session["picks_display"] = keep_d
+        session["picks_actual"] = keep_a
+    else:
+        session["picks_display"] = []
+        session["picks_actual"] = []
 
     if not text and actuals_snapshot:
         text = "请基于我刚刚附带的文件或图片，进行有用的解读、摘要与建议；如需明确目标，请先用一句话澄清后再回答。"
