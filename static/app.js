@@ -337,9 +337,8 @@ function openPicker(){
       cell.dataset.index = it.index;
       cell.dataset.rel = it.rel || '';
 
-      const thumbSrc = it.is_image
-        ? `/thumb/${encodeURIComponent(it.rel || '')}?w=360`
-        : null;
+      const relPath = (it.rel || '').split('/').map(encodeURIComponent).join('/');
+      const thumbSrc = it.is_image ? `/thumb/${relPath}?w=360` : null;
 
       const imgHTML = it.is_image
         ? `<img class="thumb" loading="lazy" src="${thumbSrc}"
@@ -733,5 +732,3 @@ document.addEventListener('DOMContentLoaded', ()=>{
   qs('#close').addEventListener('click', ()=> closePicker());
   qs('#btn-current')?.addEventListener('click', startNewChat); // ← 绑定“新对话”按钮
 });
-
-

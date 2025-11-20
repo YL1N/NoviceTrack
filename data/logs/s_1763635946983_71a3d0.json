@@ -1,0 +1,15 @@
+[
+  {
+    "event": "input.snapshot",
+    "detail": {
+      "value": "",
+      "len": 0
+    },
+    "ts": 1763635946983,
+    "session_id": "s_1763635946983_71a3d0",
+    "trial_id": "t_1763635946983_44c3",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  }
+]

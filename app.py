@@ -80,6 +80,31 @@ PDF_EXTS = {".pdf"}
 DOCX_EXTS = {".docx"}
 INLINE_IMAGE_LIMIT = 350 * 1024  # 仅小图内联 base64
 
+# === [ADD] Tagging aliases / canonicalization ===
+BRAND_ALIASES = {
+    "比亚迪": "BYD", "byd": "BYD",
+    "特斯拉": "Tesla", "tesla": "Tesla",
+    "小米": "Xiaomi", "mi": "Xiaomi", "miui": "Xiaomi",
+    "华为": "Huawei", "huawei": "Huawei"
+}
+MODEL_ALIASES = {
+    "han": "Han", "汉": "Han",
+    "model3": "Model 3", "model 3": "Model 3", "特斯拉model3": "Model 3",
+    "14 ultra": "14 Ultra", "14untra": "14 Ultra", "14ultra": "14 Ultra",
+    "mate60pro": "Mate 60 Pro", "mate 60 pro": "Mate 60 Pro", "mate60 pro": "Mate 60 Pro", "mate 60pro": "Mate 60 Pro"
+}
+LANDMARK_ALIASES = {
+    "西湖": "West Lake", "杭州西湖": "West Lake",
+    "富士山": "Mount Fuji", "富岳": "Mount Fuji", "ふじさん": "Mount Fuji"
+}
+HERB_ALIASES = {
+    "枸杞": "goji", "goji": "goji",
+    "决明子": "cassia seed", "决明子茶": "cassia seed"
+}
+# 目标域枚举（仲裁器也会读到）
+DOMAINS = {"vehicle","smartphone","herb","landscape","fruit","appliance","worksheet","medicine"}
+
+
 SERVER_BOOT_ID = os.environ.get("SERVER_BOOT_ID") or f"boot_{int(time.time()*1000)}_{uuid.uuid4().hex[:6]}"
 
 app = Flask(__name__, static_url_path="/static", static_folder="static")
@@ -461,53 +486,226 @@ def qwen_chat(messages: List[Dict], stream: bool, temperature: float = 0.3,
 
     return last_resp
 
+# === [ADD] normalize a single tag dict ===
+def _canon(s: Optional[str]) -> Optional[str]:
+    if not s: return None
+    t = str(s).strip()
+    return t if t else None
+
+def _norm_brand(b: Optional[str]) -> Optional[str]:
+    if not b: return None
+    k = b.lower().strip()
+    return BRAND_ALIASES.get(b, BRAND_ALIASES.get(k, b))
+
+def _norm_model(m: Optional[str]) -> Optional[str]:
+    if not m: return None
+    k = m.lower().strip()
+    k = k.replace("　"," ").replace("_"," ").replace("-", " ")
+    return MODEL_ALIASES.get(k, MODEL_ALIASES.get(m, m))
+
+def _norm_landmark(x: Optional[str]) -> Optional[str]:
+    if not x: return None
+    return LANDMARK_ALIASES.get(x, LANDMARK_ALIASES.get(x.strip(), x))
+
+def _norm_herb(x: Optional[str]) -> Optional[str]:
+    if not x: return None
+    return HERB_ALIASES.get(x, HERB_ALIASES.get(x.strip(), x))
+
+def _coerce_float(x, default=0.0):
+    try: return float(x)
+    except Exception: return default
+
+def _upgrade_legacy_schema(item: Dict) -> Dict:
+    """
+    兼容老模型可能返回的 {brand, model, category, confidence}，升格到新版 schema。
+    """
+    brand = _norm_brand(item.get("brand"))
+    model = _norm_model(item.get("model"))
+    cat   = _canon(item.get("category"))
+    conf  = _coerce_float(item.get("confidence"), 0.0)
+
+    domain = None
+    label = None
+    landmark = None
+
+    if cat:
+        if "车" in cat or cat.lower() in ("car","vehicle","sedan","ev"):
+            domain = "vehicle"
+        elif cat in ("手机","smartphone","phone"):
+            domain = "smartphone"
+        elif cat in ("草本","中药","herb"):
+            domain = "herb"
+        elif cat in ("风景","landscape"):
+            domain = "landscape"
+        elif "水果" in cat or cat in ("fruit","fruit platter"):
+            domain = "fruit"
+        elif "烤箱" in cat or cat in ("appliance","oven"):
+            domain = "appliance"
+        elif "试卷" in cat or "作业" in cat or cat in ("worksheet","math worksheet","olympiad"):
+            domain = "worksheet"
+        elif "药" in cat or cat in ("medicine","pillbox"):
+            domain = "medicine"
+
+    return {
+        "domain": domain,
+        "label": cat,
+        "brand": brand,
+        "model": model,
+        "landmark": landmark,
+        "attributes": {},
+        "conf": {
+            "overall": conf,
+            "domain": conf, "label": conf, "brand": conf, "model": conf, "landmark": 0.0
+        }
+    }
 
 
 # ========= 仲裁：图像极简标注 =========
 def image_brief(attach_msgs: List[Dict]) -> List[Dict]:
-    """对本轮图片做极简结构化标注：brand/model/category。失败则返回空列表；命中限流窗口则直接空。"""
+    """
+    更细粒度图像打标：
+    - 为每张图输出一个对象：
+      {
+        "domain": "vehicle|smartphone|herb|landscape|fruit|appliance|worksheet|medicine",
+        "label":  规范化的细类/名称（如 "BYD Han", "Tesla Model 3", "goji", "Mount Fuji", "West Lake", "fruit platter", "oven control panel", "elementary olympiad worksheet", "pillbox"）
+        "brand":  车辆/手机等的品牌（BYD|Tesla|Xiaomi|Huawei|null）
+        "model":  具体型号（Han|Model 3|14 Ultra|Mate 60 Pro|null）
+        "landmark": 地标（West Lake|Mount Fuji|null）
+        "attributes": {  # 与任务相关的关键属性
+           "herb_kind": "goji|cassia seed|null",
+           "fruit_kinds": ["apple","orange",...],
+           "color_notes": ["red apple","green apple","white pills"],
+           "counts": {"apples": 5, "pills_big_white": 3, "pills_small_white": 12},
+           "knobs": {"function_selector": true, "temp_time_selector": true},
+           "worksheet_kind": "elementary_math_olympiad",
+           "panel_text": ["功能","烧烤","温度","时间"],  # OCR 级弱线索
+        },
+        "conf": {  # 分字段置信度
+          "overall": 0.0-1.0,
+          "domain": 0.0-1.0,
+          "label": 0.0-1.0,
+          "brand": 0.0-1.0,
+          "model": 0.0-1.0,
+          "landmark": 0.0-1.0
+        }
+      }
+    - 仅输出 JSON 数组；不得包含任何解释。
+    """
     if _rate_limited_now():
         return []
     imgs = [m for m in attach_msgs if m.get("type") == "image" and m.get("b64")]
     if not imgs:
         return []
 
-    parts = [
-        {"type": "text", "text":
-         "你是一个静默打标器。仅输出 JSON 数组：每张图一个对象"
-         ' {"brand":str or null, "model":str or null, "category":str, "confidence":0..1}。'
-         "不要解释，不要多余文字。"}]
+    # === 构造提示 ===
+    sys_prompt = "You are a silent vision tagger. Output ONLY a compact JSON array. No explanation."
+    user_parts = [
+        {"type": "text", "text": (
+            "任务：对每张图片进行细粒度分类，返回一个 JSON 数组（每张图一个对象）。\n"
+            "【域枚举】vehicle/smartphone/herb/landscape/fruit/appliance/worksheet/medicine\n"
+            "【要求】\n"
+            "- 如果是车辆：识别品牌与型号（BYD Han / Tesla Model 3）。\n"
+            "- 如果是手机：识别品牌与型号（Xiaomi 14 Ultra / Huawei Mate 60 Pro）。\n"
+            "- 如果是草本：区分枸杞(goji) 与 决明子(cassia seed)。\n"
+            "- 如果是风景：识别地标（West Lake / Mount Fuji）。\n"
+            "- 如果是水果：标记 fruit_kinds、颜色要点（red/green apple 等）。\n"
+            "- 如果是烤箱面板：识别是否同时存在 function_selector 与 temp_time_selector 两类旋钮；提取面板上常见中文词（如“功能/烧烤/温度/时间”）。\n"
+            "- 如果是小学奥数：label 写 'elementary olympiad worksheet'。\n"
+            "- 如果是药盒：标记白色药片大小差异与 approximate counts（pills_big_white / pills_small_white）。\n"
+            "【字段】严格输出：domain/label/brand/model/landmark/attributes/conf（见示例）。\n"
+            "【置信度】对每个字段给 0~1 浮点数；overall 为综合置信。\n"
+            "【只输出 JSON 数组，不要任何解释或多余文字】"
+        )}
+    ]
     for m in imgs:
-        parts.append({
+        user_parts.append({
             "type": "image_url",
             "image_url": {"url": f"data:{m.get('mime','image/jpeg')};base64,{m['b64']}"}
         })
 
     messages = [
-        {"role": "system", "content": "You are a silent vision tagger. Output ONLY compact JSON."},
-        {"role": "user", "content": parts}
+        {"role": "system", "content": sys_prompt},
+        {"role": "user", "content": user_parts}
     ]
+
+    # === 调用上游 ===
     try:
-        r = qwen_chat(messages, stream=False, temperature=0.0, max_retries=2, purpose="tagger")
+        r = qwen_chat(messages, stream=False, temperature=0.0, max_retries=2, purpose="tagger_v2")
         if r.status_code == 429:
             return []
         j = r.json()
+
+        # 兼容不同字段：choices/message.content 或 output
         text = (j.get("choices", [{}])[0].get("message", {}) or {}).get("content", "") or j.get("output", "")
-        data = json.loads(text.strip())
-        if isinstance(data, list):
-            out = []
-            for d in data:
-                if not isinstance(d, dict): continue
-                out.append({
-                    "brand": d.get("brand"),
-                    "model": d.get("model"),
-                    "category": d.get("category"),
-                    "confidence": float(d.get("confidence") or 0.0)
-                })
-            return out
+        raw = text.strip()
+
+        # 容错：去掉可能的 ```json 包裹
+        if raw.startswith("```"):
+            raw = raw.strip("`")
+            if raw.lower().startswith("json"):
+                raw = raw[4:].strip()
+
+        data = json.loads(raw)
+        if not isinstance(data, list):
+            # 若模型返回单对象，包一层
+            if isinstance(data, dict):
+                data = [data]
+            else:
+                return []
+
+        out = []
+        for d in data:
+            if not isinstance(d, dict):
+                continue
+
+            # 兼容老 schema：自动升级
+            if "domain" not in d and "label" not in d and "attributes" not in d and "conf" not in d:
+                d = _upgrade_legacy_schema(d)
+
+            domain   = d.get("domain")
+            label    = _canon(d.get("label"))
+            brand    = _norm_brand(d.get("brand"))
+            model    = _norm_model(d.get("model"))
+            landmark = _norm_landmark(d.get("landmark"))
+
+            # 草本/地标的再归一（模型可能把中文直接塞到 label）
+            if domain == "herb":
+                label = _norm_herb(label) or label
+
+            conf = d.get("conf") or {}
+            conf = {
+                "overall":  _coerce_float(conf.get("overall"), 0.0),
+                "domain":   _coerce_float(conf.get("domain"),  0.0),
+                "label":    _coerce_float(conf.get("label"),   0.0),
+                "brand":    _coerce_float(conf.get("brand"),   0.0),
+                "model":    _coerce_float(conf.get("model"),   0.0),
+                "landmark": _coerce_float(conf.get("landmark"),0.0),
+            }
+
+            attrs = d.get("attributes") or {}
+            # 轻容错：把常见键类型纠正
+            if "counts" in attrs and not isinstance(attrs["counts"], dict):
+                attrs["counts"] = {}
+            if "fruit_kinds" in attrs and isinstance(attrs["fruit_kinds"], str):
+                attrs["fruit_kinds"] = [attrs["fruit_kinds"]]
+            if "knobs" in attrs and not isinstance(attrs["knobs"], dict):
+                attrs["knobs"] = {}
+
+            # 归一后对象
+            out.append({
+                "domain": domain if domain in DOMAINS else None,
+                "label": label,
+                "brand": brand,
+                "model": model,
+                "landmark": landmark,
+                "attributes": attrs,
+                "conf": conf
+            })
+        return out
+
     except Exception:
-        pass
-    return []
+        return []
+
 
 
 # ========= 仲裁：本轮对齐/冲突判断 =========
@@ -550,16 +748,59 @@ def arbiter_decide(user_text: str, attach_msgs: List[Dict]) -> Dict:
 
     img_tags_json = json.dumps(img_tags, ensure_ascii=False)
 
-    prompt = (
-        "你是一个静默仲裁器，只看“本轮”文本与图像摘要，判断是否**实质冲突**。\n"
-        "规则：\n"
-        "1) 文本未明确指名实体，而图像指向实体 → aligned。\n"
-        "2) 文本点名实体与图像明显不同 → conflict。\n"
-        "3) 文本出现“按文字/按图片/传错图/不要按图”等 → 视为已有确认（text 或 image）。\n"
-        "4) 仅在“确有冲突且未确认”时才需澄清；否则不澄清。\n"
-        "输出严格 JSON："
-        '{"alignment":"aligned|conflict","confirmation":"text|image","likely_target":"text|image","confidence":0..1}'
-    )
+    prompt = r"""
+    你是一个静默仲裁器。只依据“本轮”的【用户文本】与【图像摘要】（JSON），判断二者是否就**同一目标**产生了实质冲突。
+    严格只输出紧凑 JSON，不要解释，不要多余文字。
+
+    【输出格式（仅此 JSON）】
+    {"alignment":"aligned|conflict","confirmation":"text|image","likely_target":"text|image","confidence":0..1}
+
+    【总原则】
+    - 仅看“本轮”文本与图像摘要；忽略历史轮的图片/文本，除非当前文本显式提及“刚才/上一次/前面那张”等。
+    - 优先服从“确认触发词”（见下）；存在确认时，不论是否冲突，直接给出对应 confirmation 与 likely_target。
+    - 无确认时，再基于实体/属性对齐性判断 alignment；若信息不足，默认 aligned、likely_target 取更可能的一侧。
+    - 如果上传的图片与文字完全不符，则认定为用户传错图片，返回conflict，likely_target=text
+
+    【确认触发词（有则直接确定 confirmation 与 likely_target）】
+    - 以文本为准（confirmation="text", likely_target="text"）："按文字(来/为准/为主)"、"按文本"、"以文字为准"、"别看图"、"忽略图片"、"传错图(了)"、"不要按图"、"按我说的"
+    - 以图片为准（confirmation="image", likely_target="image"）："按图片(来/为准/为主)"、"看图"、"以图为准"、"参考图片"、"和图一致"、"就按这张图"
+
+    【对齐/冲突判定（无确认时）】
+    - 定义“同一目标”：文本与图片都在谈论同一类对象（如同一手机、同一车型、同一水果/药品/器具），或文本用“这张图/图中/这台/这件”等指代图片内容。
+    - aligned（对齐）情形：
+      1) 文本是一般性任务/请求（如“写发言稿/做规划/总结”），未指名与图片同域实体；图片仅作为背景/无关参考。
+      2) 文本仅指向类别（如“手机/汽车/水果/药品/烤箱”），图片摘要与该类别一致，且无矛盾属性。
+      3) 文本未指名实体，图片摘要低置信（brand/model_confidence < 0.6）导致无法细分，不据此判冲突。
+    - conflict（冲突）情形（任一满足）：
+      A) **品牌/型号冲突**：文本明确点名品牌/型号，而图片摘要给出**不同品牌/型号**，且摘要该字段置信度≥0.6。
+         - 重点域：手机（例：文本“华为 Mate60”，图像摘要 brand/model=小米/14）；汽车（例：文本“特斯拉”，摘要为比亚迪）。
+      B) **类别冲突**：文本点名类别与图片摘要类别不同（如文本“药品A/枸杞/决明子/苹果”，摘要为“零食/其他植物/橙子”等），且不是上位词/包含关系。
+      C) **属性冲突**：文本给出关键属性而图片显示相反或不满足（如文本“红苹果”，摘要显式为“青/绿苹果”；文本“单台烤箱”，图片中多台可被解析为多个同类目标且无法唯一定位）。
+      D) **多实例指代不清**：文本用单数/特指（“这台/该药/这个水果”）但图片摘要显示同类对象**多个且等价**，无法唯一对应，视为需要澄清的冲突（触发问询流程）。
+
+    【likely_target 判定（无确认时）】
+    - 选择 image：文本出现“这张图/图中/这台/海报/照片/按图/看图/根据图片/这瓶/这盒/这辆”等指代图片的词。
+    - 选择 text：文本是独立的撰写/规划/总结类任务（“写/生成/规划/总结/发言稿/行程/提纲…”），且未指向图片对象。
+    - 两者皆可能时，取与文本任务导向更一致的一侧（通常为 text）。
+
+    【领域特例（在 A～D 规则上进一步明确）】
+    - 手机/汽车：品牌/型号冲突优先级最高；若 brand/model 置信度 < 0.6，仅按“类别对齐”处理（不据此判冲突）。
+    - 枸杞 vs 决明子：若文本点名其一，摘要为另一（或为“其他谷物/茶叶等”），判类别冲突。
+    - 水果：若文本指明颜色/品种（“红苹果/青苹果/富士苹果”）而摘要给出相反/不同品种，判属性/类别冲突；若图片同类水果多枚且文本特指，按“多实例指代不清”处理。
+    - 烤箱/药品：若文本使用单数/特指而图片同类对象出现多个、不可区分，判“多实例指代不清”。
+
+    【信心分级（confidence 建议）】
+    - 0.90–1.00：存在确认触发词；或品牌/型号强冲突（摘要置信≥0.8）。
+    - 0.70–0.85：类别/属性明确冲突；或多实例指代不清且文本为特指/单数。
+    - 0.50–0.65：弱冲突（信息不全但矛盾趋势明显）或摘要置信在 0.6 附近。
+    - 0.20–0.40：信息不足 / 仅类别粗对齐 / 摘要低置信（不据此判冲突）。
+
+    【容错】
+    - 图像摘要中 brand/model/attributes 缺失或低置信时，不据此构造冲突；可回退到类别层判断。
+    - 若无法可靠判断 likely_target，默认 "text"。
+
+    仅输出上述 JSON，不要包含任何其它字符。
+    """
 
     messages = [
         {"role": "system", "content": "You are a silent JSON classifier. Output ONLY compact JSON."},
@@ -588,14 +829,20 @@ def arbiter_decide(user_text: str, attach_msgs: List[Dict]) -> Dict:
             print(
                 f"Debug Info - Alignment: {alignment}, Confirmation: {confirmation}, Likely Target: {likely_target}, Confidence: {confd}")
 
-        if confirmation == "text":
-            return {"route": "TEXT_ONLY", "likely_target": "text", "alignment": alignment, "confidence": confd}
-        if confirmation == "image":
-            return {"route": "IMAGE_ONLY", "likely_target": "image", "alignment": alignment, "confidence": confd}
         if alignment == "conflict" and confd >= 0.5:
-            return {"route": "CONFLICT", "likely_target": likely_target, "alignment": alignment, "confidence": confd}
-        return {"route": "NORMAL", "likely_target": likely_target, "alignment": alignment, "confidence": confd}
+            return {"route": "CONFLICT", "likely_target": likely_target,
+                    "alignment": alignment, "confidence": confd}
 
+        if confirmation == "text":
+            return {"route": "TEXT_ONLY", "likely_target": "text",
+                    "alignment": alignment, "confidence": confd}
+
+        if confirmation == "image":
+            return {"route": "IMAGE_ONLY", "likely_target": "image",
+                    "alignment": alignment, "confidence": confd}
+
+        return {"route": "NORMAL", "likely_target": likely_target,
+                "alignment": alignment, "confidence": confd}
     except Exception:
         return {"route": "NORMAL", "likely_target": "text", "alignment": "aligned", "confidence": 0.0}
 
@@ -623,7 +870,7 @@ PROMPT_A = (
 PROMPT_B = (
     "你是透明、支持型助手。"
     "本轮已判定：图文存在冲突，其中某些词语或图像要素超出当前理解范围。"
-    "请用**一句话（≤20字）**指出你无法识别或无法匹配的关键部分，帮助用户知道需要改写什么；"
+    "请指出你无法识别或无法匹配的关键部分，帮助用户知道需要改写什么；"
     "不得给最终答案，不得要求用户详细解释，只点出你“不理解的词/元素”。"
 )
 PROMPT_C = (
@@ -970,20 +1217,9 @@ def api_send_stream():
     })
 
     # 立刻清空（防止后续再叠加）
-    # 发送后清理：
-    # - 非任务II：全部清空（维持原行为）
-    # - 任务II：只保留“当前试次”的图片，其它类型清空（实现“图片跨轮有效”）
-    if get_conf()["mode"] == "task_ii":
-        keep_d, keep_a = [], []
-        for d, a in zip(all_disp, all_act):
-            if d.get("trial_id") == cur_tid and d.get("is_image"):
-                keep_d.append(d);
-                keep_a.append(a)
-        session["picks_display"] = keep_d
-        session["picks_actual"] = keep_a
-    else:
-        session["picks_display"] = []
-        session["picks_actual"] = []
+    session["picks_display"] = []
+    session["picks_actual"]  = []
+
 
     if DEBUG_MODE == 1:
         print(f"\n[DEBUG] ========== 新消息 ==========")
@@ -1037,16 +1273,11 @@ def api_send_stream():
             pass
 
         route0, likely = plan0["route"], plan0.get("likely_target", "unknown")
-        if DEBUG_MODE == 1:
-            print(f"[DEBUG] Arbiter result - route: {route0}, likely_target: {likely}, confidence: {plan0.get('confidence', 0)}")
+        alignment = plan0.get("alignment", "aligned")
 
-        if route0 == "CONFLICT":
-            if strategy == "A":
-                route = "CONFLICT_FORCE"
-            elif strategy == "B":
-                route = "CONFLICT_ASK"
-            else:
-                route = "MERGE"
+        if alignment == "conflict":
+            route = "CONFLICT_FORCE" if strategy == "A" else \
+                ("CONFLICT_ASK" if strategy == "B" else "MERGE")
         else:
             route = route0
 
@@ -1189,25 +1420,14 @@ def api_send_compat():
     data = request.get_json(force=True)
     text = (data.get("text") or "").strip()
 
-    # —— 只取当前 trial 的 picks
+    # —— 只取当前 trial 的 picks，再清空
     cur_tid = ensure_trial_id()
     all_disp = session.get("picks_display") or []
-    all_act = session.get("picks_actual") or []
+    all_act  = session.get("picks_actual")  or []
     displays_snapshot = [d for d in all_disp if d.get("trial_id") == cur_tid]
-    actuals_snapshot = [a for a in all_act if a.get("trial_id") == cur_tid]
-
-    # 发送后清理（逻辑同流式端点）
-    if get_conf()["mode"] == "task_ii":
-        keep_d, keep_a = [], []
-        for d, a in zip(all_disp, all_act):
-            if d.get("trial_id") == cur_tid and d.get("is_image"):
-                keep_d.append(d);
-                keep_a.append(a)
-        session["picks_display"] = keep_d
-        session["picks_actual"] = keep_a
-    else:
-        session["picks_display"] = []
-        session["picks_actual"] = []
+    actuals_snapshot  = [a for a in all_act  if a.get("trial_id") == cur_tid]
+    session["picks_display"] = []
+    session["picks_actual"]  = []
 
     if not text and actuals_snapshot:
         text = "请基于我刚刚附带的文件或图片，进行有用的解读、摘要与建议；如需明确目标，请先用一句话澄清后再回答。"

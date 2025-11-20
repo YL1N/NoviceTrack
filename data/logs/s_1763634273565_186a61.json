@@ -1,0 +1,26 @@
+[
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "picker"
+    },
+    "ts": 1763634273565,
+    "session_id": "s_1763634273565_186a61",
+    "trial_id": "t_1763634273565_5e31",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "picker"
+    },
+    "ts": 1763634273565,
+    "session_id": "s_1763634273565_186a61",
+    "trial_id": "t_1763634273565_5e31",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  }
+]

@@ -1,0 +1,174 @@
+[
+  {
+    "ts": 1763635700639,
+    "session_id": "s_1763635695448_e7ac35",
+    "trial_id": "t_1763635700639_0b78",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B",
+    "event": "set_mode",
+    "payload": {
+      "line": "松",
+      "mode": "task_ii",
+      "strategy": "B"
+    }
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "mode_switch"
+    },
+    "ts": 1763635700765,
+    "session_id": "s_1763635695448_e7ac35",
+    "trial_id": "t_1763635700639_0b78",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "mode_switch"
+    },
+    "ts": 1763635700765,
+    "session_id": "s_1763635695448_e7ac35",
+    "trial_id": "t_1763635700639_0b78",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "input"
+    },
+    "ts": 1763635702120,
+    "session_id": "s_1763635695448_e7ac35",
+    "trial_id": "t_1763635700639_0b78",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "input.snapshot",
+    "detail": {
+      "value": "介绍一下这个di",
+      "len": 8
+    },
+    "ts": 1763635705042,
+    "session_id": "s_1763635695448_e7ac35",
+    "trial_id": "t_1763635700639_0b78",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "input.snapshot",
+    "detail": {
+      "value": "介绍一下这个di'f",
+      "len": 10
+    },
+    "ts": 1763635705042,
+    "session_id": "s_1763635695448_e7ac35",
+    "trial_id": "t_1763635700639_0b78",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "input.snapshot",
+    "detail": {
+      "value": "介绍一下这个地方",
+      "len": 8
+    },
+    "ts": 1763635705042,
+    "session_id": "s_1763635695448_e7ac35",
+    "trial_id": "t_1763635700639_0b78",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1763635710883,
+    "session_id": "s_1763635695448_e7ac35",
+    "trial_id": "t_1763635700639_0b78",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B",
+    "event": "pick",
+    "payload": {
+      "display": {
+        "id": "cand_4",
+        "index": 4,
+        "name": "日本富士山.jpg",
+        "rel": "日本富士山.jpg",
+        "is_image": true,
+        "mime": "image/jpeg",
+        "size": "66KB",
+        "src": "/thumb/日本富士山.jpg?w=360",
+        "trial_id": "t_1763635700639_0b78"
+      },
+      "actual": {
+        "id": "cand_4",
+        "index": 4,
+        "name": "日本富士山.jpg",
+        "rel": "日本富士山.jpg",
+        "is_image": true,
+        "mime": "image/jpeg",
+        "size": "66KB",
+        "src": "/thumb/日本富士山.jpg?w=360",
+        "trial_id": "t_1763635700639_0b78"
+      },
+      "deception": false
+    }
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "other"
+    },
+    "ts": 1763635736612,
+    "session_id": "s_1763635695448_e7ac35",
+    "trial_id": "t_1763635700639_0b78",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "picker"
+    },
+    "ts": 1763635736612,
+    "session_id": "s_1763635695448_e7ac35",
+    "trial_id": "t_1763635700639_0b78",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "picker"
+    },
+    "ts": 1763635736612,
+    "session_id": "s_1763635695448_e7ac35",
+    "trial_id": "t_1763635700639_0b78",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "input.snapshot",
+    "detail": {
+      "value": "现在我yao",
+      "len": 6
+    },
+    "ts": 1763635736620,
+    "session_id": "s_1763635695448_e7ac35",
+    "trial_id": "t_1763635700639_0b78",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  }
+]

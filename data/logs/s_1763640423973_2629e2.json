@@ -1,0 +1,16 @@
+[
+  {
+    "ts": 1763640423973,
+    "session_id": "s_1763640423973_2629e2",
+    "trial_id": "t_1763640423973_1600",
+    "mode": "free",
+    "line": "岚",
+    "strategy": "A",
+    "event": "set_line",
+    "payload": {
+      "line": "岚",
+      "strategy": "A",
+      "mode": "free"
+    }
+  }
+]

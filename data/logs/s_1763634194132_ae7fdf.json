@@ -1,0 +1,72 @@
+[
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "other"
+    },
+    "ts": 1763634200047,
+    "session_id": "s_1763634194132_ae7fdf",
+    "trial_id": "t_1763634194131_99ad",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "other"
+    },
+    "ts": 1763634201525,
+    "session_id": "s_1763634194132_ae7fdf",
+    "trial_id": "t_1763634194131_99ad",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "picker"
+    },
+    "ts": 1763634201525,
+    "session_id": "s_1763634194132_ae7fdf",
+    "trial_id": "t_1763634194131_99ad",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1763634201720,
+    "session_id": "s_1763634194132_ae7fdf",
+    "trial_id": "t_1763634194131_99ad",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "pick",
+    "payload": {
+      "display": {
+        "id": "cand_4",
+        "index": 4,
+        "name": "日本富士山.jpg",
+        "rel": "日本富士山.jpg",
+        "is_image": true,
+        "mime": "image/jpeg",
+        "size": "66KB",
+        "src": "/thumb/日本富士山.jpg?w=360",
+        "trial_id": "t_1763634194131_99ad"
+      },
+      "actual": {
+        "id": "cand_4",
+        "index": 4,
+        "name": "日本富士山.jpg",
+        "rel": "日本富士山.jpg",
+        "is_image": true,
+        "mime": "image/jpeg",
+        "size": "66KB",
+        "src": "/thumb/日本富士山.jpg?w=360",
+        "trial_id": "t_1763634194131_99ad"
+      },
+      "deception": false
+    }
+  }
+]
