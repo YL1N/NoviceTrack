@@ -1,0 +1,526 @@
+[
+  {
+    "ts": 1763722936647,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "pick",
+    "payload": {
+      "display": {
+        "id": "cand_10",
+        "index": 10,
+        "name": "xihu.jpg",
+        "rel": "xihu.jpg",
+        "is_image": true,
+        "mime": "image/jpeg",
+        "size": "151KB",
+        "src": "/thumb/xihu.jpg?w=360",
+        "trial_id": "t_1763722931135_a5fd"
+      },
+      "actual": {
+        "id": "cand_10",
+        "index": 10,
+        "name": "xihu.jpg",
+        "rel": "xihu.jpg",
+        "is_image": true,
+        "mime": "image/jpeg",
+        "size": "151KB",
+        "src": "/thumb/xihu.jpg?w=360",
+        "trial_id": "t_1763722931135_a5fd"
+      },
+      "deception": false
+    }
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "picker"
+    },
+    "ts": 1763722937218,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.select",
+    "detail": {
+      "length": 7
+    },
+    "ts": 1763722937218,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "picker"
+    },
+    "ts": 1763722937218,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "input"
+    },
+    "ts": 1763722937930,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "input.snapshot",
+    "detail": {
+      "value": "xie'yi'f",
+      "len": 8
+    },
+    "ts": 1763722939456,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "input.snapshot",
+    "detail": {
+      "value": "写一份在xi'hu",
+      "len": 9
+    },
+    "ts": 1763722940719,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "input.delete",
+    "detail": {
+      "key": "Backspace"
+    },
+    "ts": 1763722940719,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "input.delete",
+    "detail": {
+      "key": "Backspace"
+    },
+    "ts": 1763722940719,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "input.snapshot",
+    "detail": {
+      "value": "写一份在",
+      "len": 4
+    },
+    "ts": 1763722941519,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "input.delete",
+    "detail": {
+      "key": "Backspace"
+    },
+    "ts": 1763722941519,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "input.snapshot",
+    "detail": {
+      "value": "写一份",
+      "len": 3
+    },
+    "ts": 1763722941519,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "input.snapshot",
+    "detail": {
+      "value": "写一份neng",
+      "len": 7
+    },
+    "ts": 1763722942764,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "input.snapshot",
+    "detail": {
+      "value": "写一份能发朋友圈的",
+      "len": 9
+    },
+    "ts": 1763722944713,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "input.snapshot",
+    "detail": {
+      "value": "写一份能发朋友圈的wen'yi",
+      "len": 15
+    },
+    "ts": 1763722945766,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1763722946133,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "user_send",
+    "payload": {
+      "text": "写一份能发朋友圈的文艺文案",
+      "has_attach": true,
+      "attach_count": 1
+    }
+  },
+  {
+    "event": "input.snapshot",
+    "detail": {
+      "value": "写一份能发朋友圈的文艺wen'an",
+      "len": 17
+    },
+    "ts": 1763722946594,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "input.snapshot",
+    "detail": {
+      "value": "",
+      "len": 0
+    },
+    "ts": 1763722946594,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1763722954025,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "llm_stream_begin",
+    "payload": {
+      "text": "写一份能发朋友圈的文艺文案",
+      "attach_count": 1,
+      "plan": {
+        "route": "TEXT_ONLY",
+        "likely": "text"
+      }
+    }
+  },
+  {
+    "ts": 1763722956913,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "llm_stream_end",
+    "payload": {
+      "ok": true,
+      "text_len": 84,
+      "mode": "stream"
+    }
+  },
+  {
+    "event": "input.snapshot",
+    "detail": {
+      "value": "写一段简短的发言稿，用于公司周会上总结您上周的工作，并请在发言稿的开头明确提到，这是关于您在‘上海分公司’出差成果的汇报",
+      "len": 60
+    },
+    "ts": 1763722966586,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "input"
+    },
+    "ts": 1763722967877,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "input.delete",
+    "detail": {
+      "key": "Backspace"
+    },
+    "ts": 1763722967877,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "input.snapshot",
+    "detail": {
+      "value": "写一段简短的发言稿，用于公司周会上总结我上周的工作，并请在发言稿的开头明确提到，这是关于您在‘上海分公司’出差成果的汇报",
+      "len": 60
+    },
+    "ts": 1763722969112,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "input"
+    },
+    "ts": 1763722969967,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "input.delete",
+    "detail": {
+      "key": "Backspace"
+    },
+    "ts": 1763722969967,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1763722970476,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "user_send",
+    "payload": {
+      "text": "写一段简短的发言稿，用于公司周会上总结我上周的工作，并请在发言稿的开头明确提到，这是关于我在‘上海分公司’出差成果的汇报",
+      "has_attach": false,
+      "attach_count": 0
+    }
+  },
+  {
+    "ts": 1763722970480,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "llm_stream_begin",
+    "payload": {
+      "text": "写一段简短的发言稿，用于公司周会上总结我上周的工作，并请在发言稿的开头明确提到，这是关于我在‘上海分公司’出差成果的汇报",
+      "attach_count": 0,
+      "plan": {
+        "route": "NORMAL",
+        "likely": "both"
+      }
+    }
+  },
+  {
+    "event": "input.snapshot",
+    "detail": {
+      "value": "写一段简短的发言稿，用于公司周会上总结我上周的工作，并请在发言稿的开头明确提到，这是关于我在‘上海分公司’出差成果的汇报",
+      "len": 60
+    },
+    "ts": 1763722970888,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "feed.scroll",
+    "detail": {
+      "scrollTop": 2,
+      "scrollHeight": 978,
+      "clientHeight": 976
+    },
+    "ts": 1763722971698,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "feed.scroll",
+    "detail": {
+      "scrollTop": 27.33333396911621,
+      "scrollHeight": 1004,
+      "clientHeight": 976
+    },
+    "ts": 1763722971698,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "feed.scroll",
+    "detail": {
+      "scrollTop": 53.33333206176758,
+      "scrollHeight": 1029,
+      "clientHeight": 976
+    },
+    "ts": 1763722971698,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "feed.scroll",
+    "detail": {
+      "scrollTop": 78.66666412353516,
+      "scrollHeight": 1055,
+      "clientHeight": 976
+    },
+    "ts": 1763722972597,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "feed.scroll",
+    "detail": {
+      "scrollTop": 104.66666412353516,
+      "scrollHeight": 1080,
+      "clientHeight": 976
+    },
+    "ts": 1763722974363,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "feed.scroll",
+    "detail": {
+      "scrollTop": 130,
+      "scrollHeight": 1106,
+      "clientHeight": 976
+    },
+    "ts": 1763722974363,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "feed.scroll",
+    "detail": {
+      "scrollTop": 155.3333282470703,
+      "scrollHeight": 1132,
+      "clientHeight": 976
+    },
+    "ts": 1763722974363,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1763722974633,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "llm_stream_end",
+    "payload": {
+      "ok": true,
+      "text_len": 196,
+      "mode": "stream"
+    }
+  },
+  {
+    "event": "feed.scroll",
+    "detail": {
+      "scrollTop": 206.6666717529297,
+      "scrollHeight": 1183,
+      "clientHeight": 976
+    },
+    "ts": 1763722975213,
+    "session_id": "s_1763722931135_9e0254",
+    "trial_id": "t_1763722931135_a5fd",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  }
+]

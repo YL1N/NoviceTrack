@@ -1,0 +1,557 @@
+[
+  {
+    "ts": 1763722403318,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B",
+    "event": "set_mode",
+    "payload": {
+      "line": "松",
+      "mode": "task_ii",
+      "strategy": "B"
+    }
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "mode_switch"
+    },
+    "ts": 1763722403485,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "mode_switch"
+    },
+    "ts": 1763722403485,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1763722407437,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B",
+    "event": "pick",
+    "payload": {
+      "display": {
+        "id": "cand_3",
+        "index": 3,
+        "name": "huawei.jpg",
+        "rel": "huawei.jpg",
+        "is_image": true,
+        "mime": "image/jpeg",
+        "size": "32KB",
+        "src": "/thumb/huawei.jpg?w=360",
+        "trial_id": "t_1763722403318_a57e"
+      },
+      "actual": {
+        "id": "cand_3",
+        "index": 3,
+        "name": "huawei.jpg",
+        "rel": "huawei.jpg",
+        "is_image": true,
+        "mime": "image/jpeg",
+        "size": "32KB",
+        "src": "/thumb/huawei.jpg?w=360",
+        "trial_id": "t_1763722403318_a57e"
+      },
+      "deception": false
+    }
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "picker"
+    },
+    "ts": 1763722407980,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "picker"
+    },
+    "ts": 1763722407980,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "input"
+    },
+    "ts": 1763722408984,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1763722410808,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B",
+    "event": "remove_pick",
+    "payload": {
+      "remove_display_index": 3
+    }
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "other"
+    },
+    "ts": 1763722411507,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "other"
+    },
+    "ts": 1763722411507,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "picker"
+    },
+    "ts": 1763722419438,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "picker"
+    },
+    "ts": 1763722419438,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1763722420303,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B",
+    "event": "pick",
+    "payload": {
+      "display": {
+        "id": "cand_10",
+        "index": 10,
+        "name": "xihu.jpg",
+        "rel": "xihu.jpg",
+        "is_image": true,
+        "mime": "image/jpeg",
+        "size": "151KB",
+        "src": "/thumb/xihu.jpg?w=360",
+        "trial_id": "t_1763722403318_a57e"
+      },
+      "actual": {
+        "id": "cand_10",
+        "index": 10,
+        "name": "xihu.jpg",
+        "rel": "xihu.jpg",
+        "is_image": true,
+        "mime": "image/jpeg",
+        "size": "151KB",
+        "src": "/thumb/xihu.jpg?w=360",
+        "trial_id": "t_1763722403318_a57e"
+      },
+      "deception": false
+    }
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "picker"
+    },
+    "ts": 1763722420857,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "dom.select",
+    "detail": {
+      "length": 7
+    },
+    "ts": 1763722420857,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "picker"
+    },
+    "ts": 1763722420857,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "feed"
+    },
+    "ts": 1763722421771,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "input"
+    },
+    "ts": 1763722438922,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "input.snapshot",
+    "detail": {
+      "value": "生成一段适合发在‘微信朋友圈’的文艺配文。",
+      "len": 21
+    },
+    "ts": 1763722438922,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1763722439220,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B",
+    "event": "user_send",
+    "payload": {
+      "text": "生成一段适合发在‘微信朋友圈’的文艺配文。",
+      "has_attach": true,
+      "attach_count": 1
+    }
+  },
+  {
+    "ts": 1763722446550,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B",
+    "event": "llm_stream_begin",
+    "payload": {
+      "text": "生成一段适合发在‘微信朋友圈’的文艺配文。",
+      "attach_count": 1,
+      "plan": {
+        "route": "TEXT_ONLY",
+        "likely": "text"
+      }
+    }
+  },
+  {
+    "ts": 1763722449130,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B",
+    "event": "llm_stream_end",
+    "payload": {
+      "ok": true,
+      "text_len": 80,
+      "mode": "stream"
+    }
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "input"
+    },
+    "ts": 1763722482135,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "input.snapshot",
+    "detail": {
+      "value": "■帮您写一段简短的发言稿，用于公司周会上总结您上周的工作，并请在发言稿的开头明确提到，这是关于您在‘上海分公司’出差成果的汇报。”",
+      "len": 65
+    },
+    "ts": 1763722482135,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "input"
+    },
+    "ts": 1763722483663,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "input.delete",
+    "detail": {
+      "key": "Backspace"
+    },
+    "ts": 1763722483663,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "input.delete",
+    "detail": {
+      "key": "Backspace"
+    },
+    "ts": 1763722484420,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "input.snapshot",
+    "detail": {
+      "value": "■写一段简短的发言稿，用于公司周会上总结您上周的工作，并请在发言稿的开头明确提到，这是关于您在‘上海分公司’出差成果的汇报。”",
+      "len": 63
+    },
+    "ts": 1763722484420,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "input"
+    },
+    "ts": 1763722485835,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "input.delete",
+    "detail": {
+      "key": "Backspace"
+    },
+    "ts": 1763722485835,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "input.snapshot",
+    "detail": {
+      "value": "■写一段简短的发言稿，用于公司周会上总结我上周的工作，并请在发言稿的开头明确提到，这是关于您在‘上海分公司’出差成果的汇报。”",
+      "len": 63
+    },
+    "ts": 1763722486764,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "input"
+    },
+    "ts": 1763722488363,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "input.delete",
+    "detail": {
+      "key": "Backspace"
+    },
+    "ts": 1763722488363,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "input.snapshot",
+    "detail": {
+      "value": "■写一段简短的发言稿，用于公司周会上总结我上周的工作，并请在发言稿的开头明确提到，这是关于我在‘上海分公司’出差成果的汇报。”",
+      "len": 63
+    },
+    "ts": 1763722489584,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1763722489762,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B",
+    "event": "user_send",
+    "payload": {
+      "text": "■写一段简短的发言稿，用于公司周会上总结我上周的工作，并请在发言稿的开头明确提到，这是关于我在‘上海分公司’出差成果的汇报。”",
+      "has_attach": false,
+      "attach_count": 0
+    }
+  },
+  {
+    "ts": 1763722489766,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B",
+    "event": "llm_stream_begin",
+    "payload": {
+      "text": "■写一段简短的发言稿，用于公司周会上总结我上周的工作，并请在发言稿的开头明确提到，这是关于我在‘上海分公司’出差成果的汇报。”",
+      "attach_count": 0,
+      "plan": {
+        "route": "NORMAL",
+        "likely": "both"
+      }
+    }
+  },
+  {
+    "ts": 1763722494404,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B",
+    "event": "llm_stream_end",
+    "payload": {
+      "ok": true,
+      "text_len": 164,
+      "mode": "stream"
+    }
+  },
+  {
+    "event": "feed.scroll",
+    "detail": {
+      "scrollTop": 2,
+      "scrollHeight": 978,
+      "clientHeight": 976
+    },
+    "ts": 1763722494741,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "feed.scroll",
+    "detail": {
+      "scrollTop": 27.33333396911621,
+      "scrollHeight": 1004,
+      "clientHeight": 976
+    },
+    "ts": 1763722494741,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "feed.scroll",
+    "detail": {
+      "scrollTop": 53.33333206176758,
+      "scrollHeight": 1029,
+      "clientHeight": 976
+    },
+    "ts": 1763722494741,
+    "session_id": "s_1763722400324_b4b2ac",
+    "trial_id": "t_1763722403318_a57e",
+    "mode": "task_ii",
+    "line": "松",
+    "strategy": "B"
+  }
+]

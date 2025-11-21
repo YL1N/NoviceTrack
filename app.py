@@ -107,6 +107,8 @@ DOMAINS = {"vehicle","smartphone","herb","landscape","fruit","appliance","worksh
 
 SERVER_BOOT_ID = os.environ.get("SERVER_BOOT_ID") or f"boot_{int(time.time()*1000)}_{uuid.uuid4().hex[:6]}"
 
+
+
 app = Flask(__name__, static_url_path="/static", static_folder="static")
 app.secret_key = os.environ.get("SECRET_KEY", "novicetrack-secret")
 
@@ -145,7 +147,11 @@ def ensure_fresh_session_after_restart():
         session["conf"] = DEFAULT_CONF.copy()
         session["trial_id"] = f"t_{int(time.time()*1000)}_{uuid.uuid4().hex[:4]}"
         clear_history()  # 清空全局历史
+        # Task II 一次性状态清理
+        session.pop("t2_last_ctx", None)
+        session.pop("t2_forced_once", None)
         # 不再需要 session["chat_history"] 这个字段了
+
 
 
 
@@ -243,7 +249,11 @@ def set_mode(mode: str) -> Dict:
     session["picks_actual"]  = []
     # ★ 新增：切换任务即视为新对话，清空多轮历史
     clear_history()
+    # Task II 一次性状态清理（切换任务就清）
+    session.pop("t2_last_ctx", None)
+    session.pop("t2_forced_once", None)
     return c
+
 
 
 
@@ -558,7 +568,102 @@ def _upgrade_legacy_schema(item: Dict) -> Dict:
             "domain": conf, "label": conf, "brand": conf, "model": conf, "landmark": 0.0
         }
     }
+def _t2_context_capsule(ctx: Dict) -> str:
+    """
+    生成 Task II 上一轮图像的“上下文胶囊”，以 system 消息注入：
+    仅包含域与细类标签（例：landscape / West Lake）。
+    """
+    dom = (ctx or {}).get("domain") or "(unknown)"
+    label = (ctx or {}).get("label") or "(unknown)"
+    # 简短、可对比、去解释：只是把上一轮主题点名给模型
+    return f"【Task II · 上一轮图像摘要】domain={dom}; label={label}。该摘要来自上一轮用户上传的图片。"
 
+# ========= Task II 外部信息干扰：一次性上下文与触发 =========
+# 针对 2.1 / 2.2 / 2.3 的 B 阶段关键词（与 A 阶段主题“无关”的新任务）
+TASK2_B_PHASE_KEYWORDS = {
+    # 2.1 A=西湖(landscape) → B=职场汇报
+    "landscape": [
+        re.compile(r"(发言稿|周会|汇报|上海分公司)"),
+        re.compile(r"(工作总结|述职|周报)")
+    ],
+    # 2.2 A=富士山(landscape, Mount Fuji) → B=瑞士阿尔卑斯/少女峰 行程
+    "landscape:Mount Fuji": [
+        re.compile(r"(阿尔卑斯山|瑞士|少女峰)"),
+        re.compile(r"(徒步|登山|五天|5天|行程|日程)")
+    ],
+    # 2.3 A=小学奥数(worksheet) → B=家庭教育/用机
+    "worksheet": [
+        re.compile(r"(小升初|上网|手机游戏|游戏时间)"),
+        re.compile(r"(管控|家长控制|使用时长|沉迷)")
+    ]
+}
+
+def _t2_key_by_ctx(domain: str, label: str) -> str:
+    """把 (domain,label) 组合成更细的 key，用于更精确的 2.2 触发。"""
+    if (domain or "") == "landscape":
+        if (label or "").lower() in ("mount fuji", "富士山", "ふじさん"):
+            return "landscape:Mount Fuji"
+        return "landscape"
+    return domain or ""
+
+def _t2_store_phaseA_context(attach_msgs: List[Dict], trial_id: str):
+    """
+    A 阶段：有图就调用打标器，存入 domain/label（纯文本，不落盘，不持久）。
+    """
+    imgs = [m for m in attach_msgs if m.get("type") == "image" and m.get("b64")]
+    if not imgs:
+        return
+    tags = image_brief(attach_msgs)
+    if not tags:
+        return
+    t = tags[0]
+    session["t2_last_ctx"] = {
+        "trial_id": trial_id,
+        "domain": t.get("domain"),
+        "label": t.get("label"),
+        "ts": int(time.time() * 1000)
+    }
+    # 允许本 trial 的后续某一轮触发一次
+    session["t2_forced_once"] = False
+    if DEBUG_MODE == 1:
+        print(f"[DEBUG][T2] A-ctx saved: domain={t.get('domain')} label={t.get('label')} (trial={trial_id})")
+
+def _t2_hit_b_keywords(user_text: str, ctx: Dict) -> bool:
+    """
+    B 阶段关键词匹配：根据 A 阶段 domain/label 选择对应正则组。
+    """
+    if not user_text or not ctx:
+        return False
+    key = _t2_key_by_ctx(ctx.get("domain"), ctx.get("label"))
+    patterns = TASK2_B_PHASE_KEYWORDS.get(key) or TASK2_B_PHASE_KEYWORDS.get(ctx.get("domain") or "", [])
+    if not patterns:
+        return False
+    for p in patterns:
+        if p.search(user_text):
+            return True
+    return False
+
+def _t2_should_force_conflict(user_text: str, trial_id: str) -> bool:
+    """
+    B 阶段：仅当 task_ii、纯文本、命中“与 A 阶段不相干”的关键词时，强制判冲突（同一 trial 只一次）。
+    """
+    if get_conf().get("mode") != "task_ii":
+        return False
+    if session.get("t2_forced_once") is True:
+        return False
+    ctx = session.get("t2_last_ctx") or {}
+    if not ctx or ctx.get("trial_id") != trial_id:
+        return False
+    if not user_text or len(user_text.strip()) < 3:
+        return False
+    # 命中 B 阶段关键词 → 触发一次
+    if _t2_hit_b_keywords(user_text.strip(), ctx):
+        session["t2_forced_once"] = True   # 本 trial 只触发一轮
+        session.pop("t2_last_ctx", None)   # 触发后清掉 A 阶段上下文
+        if DEBUG_MODE == 1:
+            print(f"[DEBUG][T2] force conflict by B-phase keywords (trial={trial_id}) ctx={ctx}")
+        return True
+    return False
 
 # ========= 仲裁：图像极简标注 =========
 def image_brief(attach_msgs: List[Dict]) -> List[Dict]:
@@ -863,22 +968,28 @@ NEUTRAL_PROMPT = (
 
 PROMPT_A = (
     "你是主动、清晰、结构化的助手。"
-    "本轮已判定：用户的文本与图片信息存在冲突。你的目标是主动协助用户修复任务。"
-    "请明确指出冲突，并基于你识别到的两类可能意图，提供2-3 个可选行动项（A/B/C 格式）；"
+    "本轮已判定：用户的文本与图片信息存在冲突，你需要主动协助用户修复任务。"
+    "若系统消息提供了“上一轮图像摘要”（如：West Lake/杭州西湖），请首先将图片信息也直接融入到回复中，制造上下文混淆的效果，然后指出冲突，在指出冲突时点名这一主题，"
+    "并与本轮文本中的主题词进行对照（例如：上海分公司/周会/发言稿）。"
+    "请先用一句话指出冲突来源，再基于你识别到的两类可能意图，提供 2–3 个可选行动项（A/B/C 格式）；"
     "选项需互斥、简短、可执行，不输出最终答案，由用户选择下一步。"
 )
+
 PROMPT_B = (
     "你是透明、支持型助手。"
-    "本轮已判定：图文存在冲突，其中某些词语或图像要素超出当前理解范围。"
-    "请指出你无法识别或无法匹配的关键部分，帮助用户知道需要改写什么；"
-    "不得给最终答案，不得要求用户详细解释，只点出你“不理解的词/元素”。"
+    "本轮已判定：图文存在冲突，某些词语或图像要素超出当前匹配范围。"
+    "若系统消息提供了“上一轮图像摘要”，请首先将图片信息也直接融入到回复中，制造上下文混淆的效果，然后请点名该主题（如：West Lake/杭州西湖）与本轮文本主题（如：上海分公司/周会）不一致，"
+    "只指出你“不理解/无法匹配”的关键部分，帮助用户知道要改写哪里；"
+    "不得给最终答案，不要求用户做冗长解释。"
 )
+
 PROMPT_C = (
     "你是解释型、自然对话风格的助手。"
-    "本轮已判定：图文存在冲突。你的任务是用自然语言解释你当前的理解依据——"
-    "即你是根据文本或图片中的哪些关键词/要素做出当前推断的；"
-    "请用简短一句话描述你的理解逻辑，并向用户确认是否正确；本轮不输出最终答案。"
+    "本轮已判定：图文存在冲突。你的任务是用自然语言说明你的理解依据："
+    "若系统消息提供了“上一轮图像摘要”（如：West Lake/杭州西湖），请首先将图片信息也直接融入到回复中，制造上下文混淆的效果，然后请说明你如何根据该主题与本轮文本关键词（如：上海分公司/周会）做出当前推断，"
+    "并用一句话向用户确认是否需要改写方向；本轮不输出最终答案。"
 )
+
 
 def system_prompt_by_route(strategy: str, route: str) -> str:
     if route == "NORMAL":
@@ -1125,6 +1236,19 @@ def api_pick():
         print(f"[DEBUG] 当前附件总数: {len(actuals)} (trial={cur_tid})")
 
     log_event("pick", {"display": disp_rec, "actual": act_rec, "deception": get_conf()["mode"] == "task_i"})
+        # ===== Task II：在“选图”时就预存一次 A 阶段上下文（不依赖发送）=====
+    try:
+        if get_conf().get("mode") == "task_ii":
+            # 仅当选中的是真图片，且本 trial 还未存过或 trial 变化时才存
+            temp_attach = build_attach_msgs([act_rec])
+            has_img = any(m.get("type") == "image" and m.get("b64") for m in temp_attach)
+            need_store = (session.get("t2_last_ctx", {}).get("trial_id") != cur_tid)
+            if has_img and need_store:
+                _t2_store_phaseA_context(temp_attach, cur_tid)
+    except Exception as e:
+        if DEBUG_MODE == 1:
+            print(f"[DEBUG][T2] pre-store ctx on pick error: {e}")
+
     return jsonify(ok=True, display=disp_rec, actual=act_rec, dup=False)
 
 
@@ -1157,7 +1281,11 @@ def api_new_chat():
     session["picks_actual"] = []
     clear_history()  # ★ 新增
     log_event("new_chat", {"reason": "user_click"})
+    # Task II 一次性状态清理（新对话就清）
+    session.pop("t2_last_ctx", None)
+    session.pop("t2_forced_once", None)
     return jsonify(ok=True, trial_id=session["trial_id"])
+
 
 
 
@@ -1238,6 +1366,10 @@ def api_send_stream():
 
     strategy = get_conf()["strategy"]
     attach_msgs = build_attach_msgs(actuals_snapshot)
+        # Task II：A 阶段带图就存 domain/label（文本级上下文，不存图）
+    if get_conf().get("mode") == "task_ii" and attach_msgs:
+        _t2_store_phaseA_context(attach_msgs, cur_tid)
+
 
     if DEBUG_MODE == 1:
         print(f"[DEBUG] 构建的附件消息数: {len(attach_msgs)}")
@@ -1264,6 +1396,10 @@ def api_send_stream():
             previews.append(pv)
         yield sse("meta", {"toast": "已接收，开始处理...", "previews": previews})
 
+                # [T2 DEBUG] 观测一次性上下文（仅在 task_ii 有意义）
+        if DEBUG_MODE == 1 and get_conf().get("mode") == "task_ii":
+            print(f"[DEBUG][T2] mode=task_ii, ctx={session.get('t2_last_ctx')}, forced_once={session.get('t2_forced_once')}")
+
         # 仲裁
         plan0 = {"route": "NORMAL", "likely_target": "both", "alignment": "aligned", "confidence": 0.0}
         try:
@@ -1271,6 +1407,15 @@ def api_send_stream():
                 plan0 = arbiter_decide(text, attach_msgs)
         except Exception:
             pass
+
+        # ---------------- Task II：B 阶段一次性强制冲突（仅当本轮为纯文本） ----------------
+        if get_conf().get("mode") == "task_ii" and (not attach_msgs) and _t2_should_force_conflict(text, cur_tid):
+            plan0 = dict(plan0)
+            plan0["alignment"] = "conflict"
+            plan0["likely_target"] = "text"
+            plan0["confidence"] = max(plan0.get("confidence", 0.0), 0.85)
+            log_event("task2_forced_conflict", {"by": "b-phase-keywords", "text": text})
+        # --------------------------------------------------------------------------
 
         route0, likely = plan0["route"], plan0.get("likely_target", "unknown")
         alignment = plan0.get("alignment", "aligned")
@@ -1281,12 +1426,30 @@ def api_send_stream():
         else:
             route = route0
 
+
         eff_attaches, used_side = select_effective_attaches(route, attach_msgs, strategy, likely)
         if DEBUG_MODE == 1:
             print(f"[DEBUG] 有效附件数: {len(eff_attaches)}, 使用侧重: {used_side}")
 
         sys_text = system_prompt_by_route(strategy, route)
+
+        # [T2] 若处于 Task II 且本轮为冲突相关路由，则把上一轮图像主题以“上下文胶囊”注入
+        t2_capsule = None
+        if get_conf().get("mode") == "task_ii":
+            t2_ctx = session.get("t2_last_ctx")
+            if t2_ctx and route in ("CONFLICT_FORCE", "CONFLICT_ASK", "MERGE"):
+                t2_capsule = _t2_context_capsule(t2_ctx)
+                if DEBUG_MODE == 1:
+                    print(f"[DEBUG][T2] inject capsule: {t2_capsule}")
+
         messages = build_messages(sys_text, text, eff_attaches)
+        if t2_capsule:
+            # 紧跟在 system 之后，确保模型“先看到上一轮主题”，再读到本轮用户文本
+            messages.insert(1, {"role": "system", "content": t2_capsule})
+            # 用过即焚：同一 trial 仅触发一轮
+            session["t2_forced_once"] = True
+            session["t2_last_ctx"] = None
+
 
         log_event("llm_stream_begin", {"text": text, "attach_count": len(attach_msgs),
                                        "plan": {"route": route, "likely": likely}})
@@ -1434,10 +1597,24 @@ def api_send_compat():
 
     strategy = get_conf()["strategy"]
     attach_msgs = build_attach_msgs(actuals_snapshot)
+        # Task II：A 阶段带图就存 domain/label（文本级上下文，不存图）
+    if get_conf().get("mode") == "task_ii" and attach_msgs:
+        _t2_store_phaseA_context(attach_msgs, cur_tid)
 
-    USE_ARBITER = True
+
+        USE_ARBITER = True
     if USE_ARBITER and (not _rate_limited_now()):
         plan0 = arbiter_decide(text, attach_msgs)
+
+        # ---------------- Task II：B 阶段一次性强制冲突（仅当本轮为纯文本） ----------------
+        if get_conf().get("mode") == "task_ii" and (not attach_msgs) and _t2_should_force_conflict(text, cur_tid):
+            plan0 = dict(plan0)
+            plan0["alignment"] = "conflict"
+            plan0["likely_target"] = "text"
+            plan0["confidence"] = max(plan0.get("confidence", 0.0), 0.85)
+            log_event("task2_forced_conflict", {"by": "b-phase-keywords", "text": text})
+        # --------------------------------------------------------------------------
+
         route0, likely = plan0["route"], plan0.get("likely_target", "unknown")
         if route0 == "CONFLICT":
             if strategy == "A":
@@ -1451,6 +1628,7 @@ def api_send_compat():
     else:
         route = "NORMAL"
         likely = "both"
+
 
     eff_attaches, used_side = select_effective_attaches(route, attach_msgs, strategy, likely)
     sys_text = system_prompt_by_route(strategy, route)

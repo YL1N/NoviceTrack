@@ -1,0 +1,312 @@
+[
+  {
+    "ts": 1763700394497,
+    "session_id": "s_1763700387947_fde6ef",
+    "trial_id": "t_1763700387947_56ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "pick",
+    "payload": {
+      "display": {
+        "id": "cand_4",
+        "index": 4,
+        "name": "juemingzi.jpg",
+        "rel": "juemingzi.jpg",
+        "is_image": true,
+        "mime": "image/jpeg",
+        "size": "29KB",
+        "src": "/thumb/juemingzi.jpg?w=360",
+        "trial_id": "t_1763700387947_56ca"
+      },
+      "actual": {
+        "id": "cand_4",
+        "index": 4,
+        "name": "juemingzi.jpg",
+        "rel": "juemingzi.jpg",
+        "is_image": true,
+        "mime": "image/jpeg",
+        "size": "29KB",
+        "src": "/thumb/juemingzi.jpg?w=360",
+        "trial_id": "t_1763700387947_56ca"
+      },
+      "deception": false
+    }
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "picker"
+    },
+    "ts": 1763700395043,
+    "session_id": "s_1763700387947_fde6ef",
+    "trial_id": "t_1763700387947_56ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "picker"
+    },
+    "ts": 1763700395043,
+    "session_id": "s_1763700387947_fde6ef",
+    "trial_id": "t_1763700387947_56ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "input"
+    },
+    "ts": 1763700396239,
+    "session_id": "s_1763700387947_fde6ef",
+    "trial_id": "t_1763700387947_56ca",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1763700397332,
+    "session_id": "s_1763700387947_fde6ef",
+    "trial_id": "t_1763700397332_0a39",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "new_chat",
+    "payload": {
+      "reason": "user_click"
+    }
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "other"
+    },
+    "ts": 1763700397768,
+    "session_id": "s_1763700387947_fde6ef",
+    "trial_id": "t_1763700397332_0a39",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "new_chat"
+    },
+    "ts": 1763700397768,
+    "session_id": "s_1763700387947_fde6ef",
+    "trial_id": "t_1763700397332_0a39",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1763700424709,
+    "session_id": "s_1763700387947_fde6ef",
+    "trial_id": "t_1763700424708_8e38",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "new_chat",
+    "payload": {
+      "reason": "user_click"
+    }
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "new_chat"
+    },
+    "ts": 1763700425419,
+    "session_id": "s_1763700387947_fde6ef",
+    "trial_id": "t_1763700424708_8e38",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "other"
+    },
+    "ts": 1763700428761,
+    "session_id": "s_1763700387947_fde6ef",
+    "trial_id": "t_1763700424708_8e38",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "other"
+    },
+    "ts": 1763700428761,
+    "session_id": "s_1763700387947_fde6ef",
+    "trial_id": "t_1763700424708_8e38",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1763700429609,
+    "session_id": "s_1763700387947_fde6ef",
+    "trial_id": "t_1763700424708_8e38",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "pick",
+    "payload": {
+      "display": {
+        "id": "cand_4",
+        "index": 4,
+        "name": "juemingzi.jpg",
+        "rel": "juemingzi.jpg",
+        "is_image": true,
+        "mime": "image/jpeg",
+        "size": "29KB",
+        "src": "/thumb/juemingzi.jpg?w=360",
+        "trial_id": "t_1763700424708_8e38"
+      },
+      "actual": {
+        "id": "cand_4",
+        "index": 4,
+        "name": "juemingzi.jpg",
+        "rel": "juemingzi.jpg",
+        "is_image": true,
+        "mime": "image/jpeg",
+        "size": "29KB",
+        "src": "/thumb/juemingzi.jpg?w=360",
+        "trial_id": "t_1763700424708_8e38"
+      },
+      "deception": false
+    }
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "picker"
+    },
+    "ts": 1763700430149,
+    "session_id": "s_1763700387947_fde6ef",
+    "trial_id": "t_1763700424708_8e38",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "picker"
+    },
+    "ts": 1763700430149,
+    "session_id": "s_1763700387947_fde6ef",
+    "trial_id": "t_1763700424708_8e38",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "ui.click",
+    "detail": {
+      "zone": "input"
+    },
+    "ts": 1763700431216,
+    "session_id": "s_1763700387947_fde6ef",
+    "trial_id": "t_1763700424708_8e38",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1763700432261,
+    "session_id": "s_1763700387947_fde6ef",
+    "trial_id": "t_1763700424708_8e38",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "user_send",
+    "payload": {
+      "text": "这是什么",
+      "has_attach": true,
+      "attach_count": 1
+    }
+  },
+  {
+    "event": "input.snapshot",
+    "detail": {
+      "value": "",
+      "len": 0
+    },
+    "ts": 1763700433046,
+    "session_id": "s_1763700387947_fde6ef",
+    "trial_id": "t_1763700424708_8e38",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "ts": 1763700437080,
+    "session_id": "s_1763700387947_fde6ef",
+    "trial_id": "t_1763700424708_8e38",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "llm_stream_begin",
+    "payload": {
+      "text": "这是什么",
+      "attach_count": 1,
+      "plan": {
+        "route": "TEXT_ONLY",
+        "likely": "text"
+      }
+    }
+  },
+  {
+    "ts": 1763700445109,
+    "session_id": "s_1763700387947_fde6ef",
+    "trial_id": "t_1763700424708_8e38",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B",
+    "event": "llm_stream_end",
+    "payload": {
+      "ok": true,
+      "text_len": 328,
+      "mode": "stream"
+    }
+  },
+  {
+    "event": "feed.scroll",
+    "detail": {
+      "scrollTop": 7.333333492279053,
+      "scrollHeight": 983,
+      "clientHeight": 976
+    },
+    "ts": 1763700445312,
+    "session_id": "s_1763700387947_fde6ef",
+    "trial_id": "t_1763700424708_8e38",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  },
+  {
+    "event": "feed.scroll",
+    "detail": {
+      "scrollTop": 32.66666793823242,
+      "scrollHeight": 1009,
+      "clientHeight": 976
+    },
+    "ts": 1763700445312,
+    "session_id": "s_1763700387947_fde6ef",
+    "trial_id": "t_1763700424708_8e38",
+    "mode": "free",
+    "line": "松",
+    "strategy": "B"
+  }
+]
