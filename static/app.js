@@ -318,38 +318,18 @@ function bindMode(){
 
 
 /* ========== 选择器（固定大小 + 5列 + 懒加载 + 多选） ========== */
-let PICKER_INITIALIZED = false;
-
 function openPicker(){
-  const mask = qs('#mask');
-  const grid = qs('#picker-grid');
-
-  // 无论何时打开选择器，都先清空网格并隐藏模态框
-  if (grid) {
-    grid.innerHTML = '';
-  }
-  mask.classList.remove('show');
-
-  // 设置标记，防止重复初始化
-  if (PICKER_INITIALIZED) {
-    // 如果已经初始化过，直接显示
-    setTimeout(() => {
-      mask.classList.add('show');
-
-      // 重新绑定双击事件（防止事件丢失）
-      reattachCellClickHandlers();
-    }, 0);
-    return;
-  }
-
-  PICKER_INITIALIZED = true;
-
+  qs('#mask').classList.add('show');
   fetch('/api/picker_list').then(r=>r.json()).then(j=>{
     STATE.picker_items = j.items || [];
-
-    if (!grid) return;
-
+    const grid = qs('#picker-grid');
     grid.innerHTML='';
+
+    // 打开前清理旧的“已选择”视觉状态
+    // （避免新对话后仍然显示已选择）
+    // 这里直接重建 DOM 已经会清，但保险起见再清一次：
+    // （如果外部自定义样式有残留）
+    // 无需处理
 
     STATE.picker_items.forEach(it=>{
       const cell = document.createElement('div');
@@ -363,7 +343,7 @@ function openPicker(){
       const imgHTML = it.is_image
         ? `<img class="thumb" loading="lazy" src="${thumbSrc}"
              alt="${it.name}"
-             onerror="this.onerror=null;this.closest('.thumb-wrap').innerHTML='<div class="file-icon">📄</div>';">`
+             onerror="this.onerror=null;this.closest('.thumb-wrap').innerHTML='<div class=&quot;file-icon&quot;>📄</div>';">`
         : `<div class="file-icon">📄</div>`;
 
       cell.innerHTML = `
@@ -376,26 +356,12 @@ function openPicker(){
       cell.ondblclick = ()=> selectCandidate(it);
       grid.appendChild(cell);
     });
-
-    // 延迟显示，确保DOM已渲染
-    setTimeout(() => {
-      mask.classList.add('show');
-      reattachCellClickHandlers();
-    }, 0);
   });
 }
 
-// 重新绑定所有单元格的双击事件（防止事件丢失）
-function reattachCellClickHandlers() {
-  const cells = qsa('.cell');
-  cells.forEach(cell => {
-    const index = parseInt(cell.dataset.index);
-    const item = STATE.picker_items.find(it => it.index === index);
-    if (item) {
-      cell.ondblclick = () => selectCandidate(item);
-    }
-  });
-}  qs('#mask').classList.remove('show');
+
+function closePicker(){
+  qs('#mask').classList.remove('show');
 }
 
 /* 修复点：双击后
